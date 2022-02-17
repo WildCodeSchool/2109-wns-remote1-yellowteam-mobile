@@ -10,16 +10,10 @@ import {
 } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 import { ProfileAvatar } from './extra/profile-avatar.component';
-import {
-  EmailIcon,
-  EyeIcon,
-  EyeOffIcon,
-  PersonIcon,
-  PlusIcon,
-} from './extra/icons';
-import { KeyboardAvoidingView } from './extra/3rd-party';
+import { PlusIcon } from './extra/icons';
+import KeyboardAvoidingView from './extra/3rd-party';
 
-export default function (): React.ReactElement {
+export default function SignUp(): React.ReactElement {
   const navigation = useNavigation();
 
   const [userName, setUserName] = React.useState<string>();
@@ -60,7 +54,6 @@ export default function (): React.ReactElement {
         <Input
           autoCapitalize="none"
           placeholder="User Name"
-          icon={PersonIcon}
           value={userName}
           onChangeText={setUserName}
         />
@@ -68,7 +61,6 @@ export default function (): React.ReactElement {
           style={styles.emailInput}
           autoCapitalize="none"
           placeholder="Email"
-          icon={EmailIcon}
           value={email}
           onChangeText={setEmail}
         />
@@ -77,15 +69,11 @@ export default function (): React.ReactElement {
           autoCapitalize="none"
           secureTextEntry={!passwordVisible}
           placeholder="Password"
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
           value={password}
           onChangeText={setPassword}
-          onIconPress={onPasswordIconPress}
         />
         <CheckBox
           style={styles.termsCheckBox}
-          textStyle={styles.termsCheckBoxText}
-          text="I read and agree to Terms & Conditions"
           checked={termsAccepted}
           onChange={(checked: boolean) => setTermsAccepted(checked)}
         />

@@ -4,7 +4,6 @@ import HomeScreen from '../../screens/Auth/Home';
 import SignIn from '../../screens/Auth/SignIn2';
 import SignIn3 from '../../screens/Auth/SignIn3';
 import SignUp from '../../screens/Auth/SignUp';
-import SignUp2 from '../../screens/Auth/SignUp2';
 import ForgotPassword from '../../screens/Auth/ForgotPassword';
 
 const Stack = createStackNavigator<AuthTabParamList>();

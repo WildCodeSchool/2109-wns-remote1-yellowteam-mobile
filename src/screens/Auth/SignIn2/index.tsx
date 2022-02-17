@@ -9,11 +9,9 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import { gql, useMutation } from '@apollo/client';
-
-import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
-import { KeyboardAvoidingView } from './extra/3rd-party';
+import KeyboardAvoidingView from './extra/3rd-party';
 import useReduxUserState from '../../../hooks/useUserState';
-import { ISigngleNavigationProps } from '../../../..';
+import { ISigngleNavigationProps } from '../../../../index';
 
 const LOGIN = gql`
   mutation ($data: LoginInput!) {
@@ -31,35 +29,26 @@ export default function SignIn2({
 }: ISigngleNavigationProps): React.ReactElement {
   const [email, setEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
-  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
+  const [passwordVisible] = React.useState<boolean>(false);
 
   const { dispatchLogin } = useReduxUserState();
 
-  const [mutate, { loading, data }] = useMutation(LOGIN, {
+  const [mutate] = useMutation(LOGIN, {
     onCompleted: (e) => dispatchLogin(e.login),
-    onError: (e) => console.log('fail', e),
   });
   const styles = useStyleSheet(themedStyles);
 
   const onSignInButtonPress = async (): Promise<void> => {
-    console.log(email, password);
-
-    mutate({
+    await mutate({
       variables: { data: { email, password } },
     });
   };
 
-  const onSignUpButtonPress = (): void => {
+  const onSignUpButtonPress = (): void =>
     navigation && navigation.navigate('SignUp2');
-  };
 
-  const onForgotPasswordButtonPress = (): void => {
+  const onForgotPasswordButtonPress = (): void =>
     navigation && navigation.navigate('ForgotPassword');
-  };
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -73,20 +62,13 @@ export default function SignIn2({
       </View>
 
       <Layout style={styles.formContainer} level="1">
-        <Input
-          placeholder="Email"
-          icon={PersonIcon}
-          value={email}
-          onChangeText={setEmail}
-        />
+        <Input placeholder="Email" value={email} onChangeText={setEmail} />
         <Input
           style={styles.passwordInput}
           placeholder="Password"
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
           value={password}
           secureTextEntry={!passwordVisible}
           onChangeText={setPassword}
-          onIconPress={onPasswordIconPress}
         />
         <View style={styles.forgotPasswordContainer}>
           <Button

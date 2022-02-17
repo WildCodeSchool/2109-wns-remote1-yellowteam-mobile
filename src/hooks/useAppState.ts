@@ -6,7 +6,6 @@ const useReduxAppState = () => {
   const { isMenu } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   const toggleIsMenuState = () => dispatch(toggleMenu());
-  console.log(isMenu);
   return { isMenu, toggleIsMenuState };
 };
 export default useReduxAppState;

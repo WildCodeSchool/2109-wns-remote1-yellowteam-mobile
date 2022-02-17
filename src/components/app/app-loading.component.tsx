@@ -1,4 +1,7 @@
-import { useFonts } from 'expo-font';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
 type TaskResult = [string, any];
@@ -25,7 +28,9 @@ export const LoadFontsTask = (fonts: {
   return Promise.resolve(null);
 };
 
-export const LoadAssetsTask = (assets: number[]): Promise<TaskResult> => {
+export const LoadAssetsTask = (
+  assets: number[],
+): Promise<TaskResult | null> => {
   const message: string = [
     'There is no need to use this task in Bare RN Project.',
     'Use `react-native.config.js',

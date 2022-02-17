@@ -1,3 +1,10 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {
   Appearance,
@@ -101,7 +108,7 @@ export class Theming {
    *
    * @param {Record<Mapping, Record<Theme, any>>} themes - set of themes available in app.
    * @param {Mapping} mapping - mapping name to use. Could be `Eva` or `Material`.
-   * @param {Theme} theme - name of theme that will be applied if there is no preferred appearance set.
+   * @param {Theme} theme - name of theme that will be applied if there is no appearance set.
    *
    * @returns {[ThemeContextValue, any]} - array of two values:
    * - value to be set in `ThemeContext.Provider`

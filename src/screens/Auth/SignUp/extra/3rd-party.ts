@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React from 'react';
 import { ScrollViewProps } from 'react-native';
-import { lib } from 'react-native-keyboard-aware-scroll-view';
+import lib from 'react-native-keyboard-aware-scroll-view';
 /**
  * https://github.com/APSL/react-native-keyboard-aware-scroll-view
  */

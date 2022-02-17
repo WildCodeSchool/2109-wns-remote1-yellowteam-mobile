@@ -27,23 +27,18 @@ export default function SignIp2(): React.ReactElement {
   const [password, setPassword] = React.useState<string>();
   const [termsAccepted, setTermsAccepted] = React.useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
-  console.log('signup2');
   const styles = useStyleSheet(themedStyles);
 
-  const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp2');
-  };
+  const onSignUpButtonPress = (): void => navigation && navigation.navigate('SignUp2');
 
-  const onSignInButtonPress = (): void => {
-    navigation && navigation.navigate('SignIn3');
-  };
+  const onSignInButtonPress = (): void => navigation && navigation.navigate('SignIn3');
 
   const onPasswordIconPress = (): void => {
     setPasswordVisible(!passwordVisible);
   };
 
   const renderEditAvatarButton = (): React.ReactElement => (
-    <Button style={styles.editAvatarButton} status="basic" icon={PlusIcon} />
+    <Button style={styles.editAvatarButton} status="basic" />
   );
 
   return (

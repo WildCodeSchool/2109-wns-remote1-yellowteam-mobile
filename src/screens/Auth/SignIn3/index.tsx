@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from '@ui-kitten/components';
@@ -6,7 +7,7 @@ import { ImageOverlay } from './extra/image-overlay.component';
 import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
 import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default function (): React.ReactElement {
+export default function SignIn3(): React.ReactElement {
   const navigation = useNavigation();
 
   const [email, setEmail] = React.useState<string>();
@@ -15,12 +16,9 @@ export default function (): React.ReactElement {
 
   const onSignInButtonPress = (): void => navigation && navigation.goBack();
 
-  const onSignUpButtonPress = (): void =>
-    navigation && navigation.navigate('SignIn2');
+  const onSignUpButtonPress = (): void => navigation && navigation.navigate('SignIn2');
 
-  const onForgotPasswordButtonPress = (): void => {
-    navigation && navigation.navigate('ForgotPassword');
-  };
+  const onForgotPasswordButtonPress = (): void => navigation && navigation.navigate('ForgotPassword');
 
   const onPasswordIconPress = (): void => {
     setPasswordVisible(!passwordVisible);
@@ -44,7 +42,6 @@ export default function (): React.ReactElement {
           <Input
             status="control"
             placeholder="Email"
-            icon={PersonIcon}
             value={email}
             onChangeText={setEmail}
           />
@@ -52,11 +49,9 @@ export default function (): React.ReactElement {
             style={styles.passwordInput}
             status="control"
             placeholder="Password"
-            icon={passwordVisible ? EyeIcon : EyeOffIcon}
             value={password}
             secureTextEntry={!passwordVisible}
             onChangeText={setPassword}
-            onIconPress={onPasswordIconPress}
           />
           <View style={styles.forgotPasswordContainer}>
             <Button

@@ -20,9 +20,6 @@
     "jest": {
         "preset": "jest-expo"
     },
-    "resolutions": {
-        "graphql": "4.2.1"
-    },
     "dependencies": {
         "@apollo/client": "^3.5.9",
         "@eva-design/eva": "^2.1.1",

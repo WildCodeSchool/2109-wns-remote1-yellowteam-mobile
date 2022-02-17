@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserState } from '../../../../index';
 
 const initialState: UserState = {
   user: {
@@ -17,8 +18,7 @@ const appSlice = createSlice({
   name: 'userState',
   initialState,
   reducers: {
-    login: (state, action) => {
-      console.log(action.payload);
+    login: (state, action: PayloadAction<UserState['user']>) => {
       state.user = action.payload;
       state.isAuth = true;
     },

@@ -1,11 +1,12 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Button, Input, Text } from '@ui-kitten/components';
+import { Button, Text } from '@ui-kitten/components';
 import { ImageOverlay } from './extra/image-overlay.component';
-import { ISigngleNavigationProps } from '../../../..';
+import { ISigngleNavigationProps } from '../../../../index';
 
-export default function ({ navigation }: ISigngleNavigationProps) {
+export default function LoginHome({ navigation }: ISigngleNavigationProps) {
   const onSignInButtonPress = async (): Promise<void> => {
     navigation && navigation.navigate('SignIn');
   };

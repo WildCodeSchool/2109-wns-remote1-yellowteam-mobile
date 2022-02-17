@@ -5,7 +5,7 @@ import { ImageOverlay } from './extra/image-overlay.component';
 import { EmailIcon } from './extra/icons';
 import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default function ({ navigation }): React.ReactElement {
+export default function ForgotPassword({ navigation }): React.ReactElement {
   const [email, setEmail] = React.useState<string>();
 
   const onResetPasswordButtonPress = (): void => {
