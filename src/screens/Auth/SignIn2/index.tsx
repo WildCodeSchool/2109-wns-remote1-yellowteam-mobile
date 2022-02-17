@@ -8,8 +8,8 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import { gql, useMutation, useQuery } from '@apollo/client';
-import { StatusBar } from '../../../status-bar.component';
+import { gql, useMutation } from '@apollo/client';
+
 import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
 import { KeyboardAvoidingView } from './extra/3rd-party';
 import useReduxUserState from '../../../hooks/useUserState';
@@ -26,20 +26,17 @@ const LOGIN = gql`
     }
   }
 `;
-export default function ({
+export default function SignIn2({
   navigation,
 }: ISigngleNavigationProps): React.ReactElement {
   const [email, setEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
-  console.log('signin2');
+
   const { dispatchLogin } = useReduxUserState();
 
   const [mutate, { loading, data }] = useMutation(LOGIN, {
-    onCompleted: (e) => {
-      console.log(e);
-      dispatchLogin(e.login);
-    },
+    onCompleted: (e) => dispatchLogin(e.login),
     onError: (e) => console.log('fail', e),
   });
   const styles = useStyleSheet(themedStyles);

@@ -16,3 +16,4 @@ export const AppIconsPack = {
     logo: IconProvider(require('../../../assets/images/icon.png')),
   },
 };
+export default AppIconsPack;

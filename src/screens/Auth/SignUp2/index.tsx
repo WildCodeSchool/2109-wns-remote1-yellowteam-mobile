@@ -19,7 +19,7 @@ import {
 } from './extra/icons';
 import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default function (): React.ReactElement {
+export default function SignIp2(): React.ReactElement {
   const navigation = useNavigation();
 
   const [userName, setUserName] = React.useState<string>();

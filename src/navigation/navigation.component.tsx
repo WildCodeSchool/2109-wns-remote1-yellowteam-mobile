@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { AuthNavigator } from './auth/auth.navigator';
+import AuthNavigator from './auth/auth.navigator';
 import useReduxUserState from '../hooks/useUserState';
 import TabNavigator from './root';
 

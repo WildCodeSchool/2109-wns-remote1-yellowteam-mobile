@@ -24,6 +24,8 @@ module.exports = {
     rules: {
         quotes: ['error', 'single', { avoidEscape: true }],
         'no-empty-function': 'off',
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["off"],
         '@typescript-eslint/no-empty-function': 'off',
         'react/display-name': 'off',
         'react/prop-types': 'off',

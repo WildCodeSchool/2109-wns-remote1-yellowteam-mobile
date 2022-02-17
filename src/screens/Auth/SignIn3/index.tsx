@@ -13,13 +13,10 @@ export default function (): React.ReactElement {
   const [password, setPassword] = React.useState<string>();
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
 
-  const onSignInButtonPress = (): void => {
-    navigation && navigation.goBack();
-  };
-  console.log('signin3');
-  const onSignUpButtonPress = (): void => {
+  const onSignInButtonPress = (): void => navigation && navigation.goBack();
+
+  const onSignUpButtonPress = (): void =>
     navigation && navigation.navigate('SignIn2');
-  };
 
   const onForgotPasswordButtonPress = (): void => {
     navigation && navigation.navigate('ForgotPassword');

@@ -1,0 +1,16 @@
+query GetSelfNotifications($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    notifications {
+      id
+      title
+      content
+      status
+      created_at
+      is_disabled
+      sender {
+        first_name
+        last_name
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query GetAllAssignedUserProjects($where: ProjectWhereInput) {
+  projects(where: $where) {
+    id
+    title
+    description
+    owner {
+      first_name
+      avatar
+      last_name
+    }
+  }
+}

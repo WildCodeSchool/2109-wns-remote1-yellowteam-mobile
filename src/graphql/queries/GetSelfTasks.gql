@@ -1,0 +1,11 @@
+query GetSelfTasks($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    tasks {
+      id
+      title
+      status_task
+      description
+      start_date
+    }
+  }
+}

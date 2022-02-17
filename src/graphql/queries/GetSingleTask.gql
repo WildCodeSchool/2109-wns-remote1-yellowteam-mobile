@@ -1,0 +1,27 @@
+query GetSingleSelfTasks($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    title
+    description
+    id
+    status_task
+    total_time_spent
+    start_date
+    end_date
+    created_at
+    user {
+      first_name
+      id
+      last_name
+      email
+      role
+    }
+    comments {
+      id
+      content
+      user_task_comments {
+        first_name
+        last_name
+      }
+    }
+  }
+}
