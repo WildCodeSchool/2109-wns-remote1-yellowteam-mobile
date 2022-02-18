@@ -9,11 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppearanceProvider } from 'react-native-appearance';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
-import {
-  ApplicationProvider,
-  Button,
-  IconRegistry,
-} from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import * as Notifications from 'expo-notifications';
 import { useFonts } from 'expo-font';
 import { ApolloProvider } from '@apollo/client';
@@ -29,9 +25,9 @@ import {
   Task,
 } from './src/components/app/app-loading.component';
 import AppNavigator from './src/navigation/navigation.component';
-import { Theming } from './src/services/theme.service';
+import { Mapping, Theming } from './src/services/theme.service';
 import store from './src/redux/store';
-import client from './src/services/apollo-client';
+import { client } from './src/services/apollo-client';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -42,24 +38,24 @@ Notifications.setNotificationHandler({
 });
 
 const loadingTasks: Task[] = [
-  () =>
-    LoadFontsTask({
-      'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
-      'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
-    }),
-  () =>
-    AppStorage.getMapping(defaultConfig.mapping).then((result) => [
-      'mapping',
-      result,
-    ]),
-  () =>
-    AppStorage.getTheme(defaultConfig.theme).then((result) => [
-      'theme',
-      result,
-    ]),
+  // () =>
+  //   LoadFontsTask({
+  //     'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
+  //     'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
+  //   }),
+  // () =>
+  //   AppStorage.getMapping(defaultConfig.mapping).then((result) => [
+  //     'mapping',
+  //     result,
+  //   ]),
+  // () =>
+  //   AppStorage.getTheme(defaultConfig.theme).then((result) => [
+  //     'theme',
+  //     result,
+  //   ]),
 ];
 
-const defaultConfig: { mapping: Mapping; theme: Theme } = {
+const defaultConfig: { mapping: Mapping; theme: string } = {
   mapping: 'eva',
   theme: 'light',
 };
