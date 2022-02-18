@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 /* eslint-disable no-console */
 import { AsyncStorage } from 'react-native';
-import { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthTabParamList } from '../../../types';
 import HomeScreen from '../../screens/Auth/Home';
@@ -15,7 +16,6 @@ const Stack = createStackNavigator<AuthTabParamList>();
 
 export default function AuthNavigator() {
   const { dispatchLogin } = useReduxUserState();
-
   const [me] = useMutateMeMutation({
     onCompleted: (data) => dispatchLogin(data.me),
     onError: (e) => {
@@ -26,7 +26,9 @@ export default function AuthNavigator() {
     },
   });
 
-  me().catch((err) => console.log(err));
+  useEffect(() => {
+    me().catch((err) => console.log(err));
+  }, []);
 
   return (
     <Stack.Navigator>

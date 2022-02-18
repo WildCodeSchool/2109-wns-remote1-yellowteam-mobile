@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from '@ui-kitten/components';
 import { ImageOverlay } from './extra/image-overlay.component';
-import { EmailIcon } from './extra/icons';
+import EmailIcon from './extra/icons';
 import KeyboardAvoidingView from './extra/3rd-party';
 import { ISigngleNavigationProps } from '../../../../interfaces/global';
 

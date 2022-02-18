@@ -12,7 +12,7 @@ import {
   AppearancePreferences,
   ColorSchemeName,
 } from 'react-native-appearance';
-import { AppStorage } from './app-storage.service';
+import AppStorage from './app-storage.service';
 
 export type Mapping = 'eva' | 'material';
 export type Theme = 'light' | 'dark' | 'brand';
