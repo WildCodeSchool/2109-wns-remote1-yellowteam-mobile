@@ -1,0 +1,10 @@
+mutation MutateMe {
+  me {
+    email
+    id
+    first_name
+    last_name
+    avatar
+    role
+  }
+}

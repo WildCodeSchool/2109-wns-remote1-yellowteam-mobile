@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable consistent-return */
 /* eslint-disable no-alert */
@@ -11,7 +12,7 @@ import Constants from 'expo-constants';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import * as Notifications from 'expo-notifications';
 import { useFonts } from 'expo-font';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { Provider } from 'react-redux';
 import { appMappings, appThemes } from './assets/style/app-theming';
@@ -24,8 +25,9 @@ import {
   Task,
 } from './src/components/app/app-loading.component';
 import AppNavigator from './src/navigation/navigation.component';
-import { Theming } from './src/services/theme.service';
+import { Mapping, Theming } from './src/services/theme.service';
 import store from './src/redux/store';
+import { client } from './src/services/apollo-client';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -36,33 +38,27 @@ Notifications.setNotificationHandler({
 });
 
 const loadingTasks: Task[] = [
-  () =>
-    LoadFontsTask({
-      'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
-      'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
-    }),
-  () =>
-    AppStorage.getMapping(defaultConfig.mapping).then((result) => [
-      'mapping',
-      result,
-    ]),
-  () =>
-    AppStorage.getTheme(defaultConfig.theme).then((result) => [
-      'theme',
-      result,
-    ]),
+  // () =>
+  //   LoadFontsTask({
+  //     'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
+  //     'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
+  //   }),
+  // () =>
+  //   AppStorage.getMapping(defaultConfig.mapping).then((result) => [
+  //     'mapping',
+  //     result,
+  //   ]),
+  // () =>
+  //   AppStorage.getTheme(defaultConfig.theme).then((result) => [
+  //     'theme',
+  //     result,
+  //   ]),
 ];
 
-const defaultConfig: { mapping: Mapping; theme: Theme } = {
+const defaultConfig: { mapping: Mapping; theme: string } = {
   mapping: 'eva',
   theme: 'light',
 };
-
-export const client = new ApolloClient({
-  uri: 'https://ytask.digitalcopilote.re/graphql',
-  cache: new InMemoryCache(),
-  credentials: 'include',
-});
 
 function App({ mapping, theme }) {
   const [, setExpoPushToken] = useState('');
@@ -70,7 +66,12 @@ function App({ mapping, theme }) {
   const notificationListener = useRef();
   const responseListener = useRef();
   const isLoadingComplete = useCachedResources();
-
+  // const data = async () =>
+  //   axios
+  //     .get('http://192.168.1.12:5000/')
+  //     .then((r) => console.log(r.data))
+  //     .catch((r) => console.warn('error', r));
+  // console.log(data());
   const [mappingContext, currentMapping] = Theming.useMapping(
     appMappings,
     mapping,

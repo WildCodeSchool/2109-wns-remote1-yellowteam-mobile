@@ -20,7 +20,6 @@ export default function SignIn2({
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
   const [passwordVisible] = React.useState<boolean>(false);
-
   const { dispatchLogin } = useReduxUserState();
 
   const [mutate] = useSignInMutation({
@@ -35,10 +34,14 @@ export default function SignIn2({
   const styles = useStyleSheet(themedStyles);
 
   const onSignInButtonPress = async (): Promise<void> => {
+    console.log('signin');
+
     await mutate({
       variables: { data: { email, password } },
-      onCompleted: (data) => dispatchLogin(data.login),
-      onError: (e) => console.log(e),
+      onCompleted: (data) => {
+        dispatchLogin(data.login);
+      },
+      onError: (e) => console.log('error', e),
     });
   };
 

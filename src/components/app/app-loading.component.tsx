@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable max-len */
