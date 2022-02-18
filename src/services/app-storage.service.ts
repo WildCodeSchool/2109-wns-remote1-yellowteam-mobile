@@ -17,6 +17,11 @@ export default class AppStorage {
   static setMapping = (mapping: Mapping): Promise<void> =>
     AsyncStorage.setItem(MAPPING_KEY, mapping);
 
+  static getToken = (fallback: string): Promise<void | string> =>
+    AsyncStorage.getItem('Authorization').then(
+      (header: string | null) => header || fallback,
+    );
+
   static setTheme = (theme: Theme): Promise<void> =>
     AsyncStorage.setItem(THEME_KEY, theme);
 }

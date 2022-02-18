@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable consistent-return */
 /* eslint-disable no-alert */
@@ -8,10 +9,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppearanceProvider } from 'react-native-appearance';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import {
+  ApplicationProvider,
+  Button,
+  IconRegistry,
+} from '@ui-kitten/components';
 import * as Notifications from 'expo-notifications';
 import { useFonts } from 'expo-font';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { Provider } from 'react-redux';
 import { appMappings, appThemes } from './assets/style/app-theming';
@@ -26,6 +31,7 @@ import {
 import AppNavigator from './src/navigation/navigation.component';
 import { Theming } from './src/services/theme.service';
 import store from './src/redux/store';
+import client from './src/services/apollo-client';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -58,19 +64,18 @@ const defaultConfig: { mapping: Mapping; theme: Theme } = {
   theme: 'light',
 };
 
-export const client = new ApolloClient({
-  uri: 'https://ytask.digitalcopilote.re/graphql',
-  cache: new InMemoryCache(),
-  credentials: 'include',
-});
-
 function App({ mapping, theme }) {
   const [, setExpoPushToken] = useState('');
   const [, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
   const isLoadingComplete = useCachedResources();
-
+  // const data = async () =>
+  //   axios
+  //     .get('http://192.168.1.12:5000/')
+  //     .then((r) => console.log(r.data))
+  //     .catch((r) => console.warn('error', r));
+  // console.log(data());
   const [mappingContext, currentMapping] = Theming.useMapping(
     appMappings,
     mapping,

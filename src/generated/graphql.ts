@@ -5902,6 +5902,11 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
+export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', email: string, id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> } };
+
 export type SignInMutationVariables = Exact<{
   data: LoginInput;
 }>;
@@ -5942,6 +5947,13 @@ export type GetSelfTasksQueryVariables = Exact<{
 
 export type GetSelfTasksQuery = { __typename?: 'Query', user: { __typename?: 'User', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, description: string, start_date: any }> } };
 
+export type GetSelfTasksStatusQueryVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type GetSelfTasksStatusQuery = { __typename?: 'Query', user: { __typename?: 'User', tasks: Array<{ __typename?: 'Task', status_task: Status }> } };
+
 export type GetSingleSelfTasksQueryVariables = Exact<{
   where: TaskWhereUniqueInput;
 }>;
@@ -5950,6 +5962,43 @@ export type GetSingleSelfTasksQueryVariables = Exact<{
 export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', first_name: string, id: string, last_name: string, email: string, role: Array<Role> }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', first_name: string, last_name: string } }> } };
 
 
+export const MutateMeDocument = gql`
+    mutation MutateMe {
+  me {
+    email
+    id
+    first_name
+    last_name
+    avatar
+    role
+  }
+}
+    `;
+export type MutateMeMutationFn = Apollo.MutationFunction<MutateMeMutation, MutateMeMutationVariables>;
+
+/**
+ * __useMutateMeMutation__
+ *
+ * To run a mutation, you first call `useMutateMeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMutateMeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [mutateMeMutation, { data, loading, error }] = useMutateMeMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMutateMeMutation(baseOptions?: Apollo.MutationHookOptions<MutateMeMutation, MutateMeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<MutateMeMutation, MutateMeMutationVariables>(MutateMeDocument, options);
+      }
+export type MutateMeMutationHookResult = ReturnType<typeof useMutateMeMutation>;
+export type MutateMeMutationResult = Apollo.MutationResult<MutateMeMutation>;
+export type MutateMeMutationOptions = Apollo.BaseMutationOptions<MutateMeMutation, MutateMeMutationVariables>;
 export const SignInDocument = gql`
     mutation SignIn($data: LoginInput!) {
   login(data: $data) {
@@ -6196,6 +6245,43 @@ export function useGetSelfTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetSelfTasksQueryHookResult = ReturnType<typeof useGetSelfTasksQuery>;
 export type GetSelfTasksLazyQueryHookResult = ReturnType<typeof useGetSelfTasksLazyQuery>;
 export type GetSelfTasksQueryResult = Apollo.QueryResult<GetSelfTasksQuery, GetSelfTasksQueryVariables>;
+export const GetSelfTasksStatusDocument = gql`
+    query GetSelfTasksStatus($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    tasks {
+      status_task
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetSelfTasksStatusQuery__
+ *
+ * To run a query within a React component, call `useGetSelfTasksStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSelfTasksStatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSelfTasksStatusQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetSelfTasksStatusQuery(baseOptions: Apollo.QueryHookOptions<GetSelfTasksStatusQuery, GetSelfTasksStatusQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelfTasksStatusQuery, GetSelfTasksStatusQueryVariables>(GetSelfTasksStatusDocument, options);
+      }
+export function useGetSelfTasksStatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelfTasksStatusQuery, GetSelfTasksStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelfTasksStatusQuery, GetSelfTasksStatusQueryVariables>(GetSelfTasksStatusDocument, options);
+        }
+export type GetSelfTasksStatusQueryHookResult = ReturnType<typeof useGetSelfTasksStatusQuery>;
+export type GetSelfTasksStatusLazyQueryHookResult = ReturnType<typeof useGetSelfTasksStatusLazyQuery>;
+export type GetSelfTasksStatusQueryResult = Apollo.QueryResult<GetSelfTasksStatusQuery, GetSelfTasksStatusQueryVariables>;
 export const GetSingleSelfTasksDocument = gql`
     query GetSingleSelfTasks($where: TaskWhereUniqueInput!) {
   task(where: $where) {

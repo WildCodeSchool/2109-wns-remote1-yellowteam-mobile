@@ -1,0 +1,7 @@
+query GetSelfTasksStatus($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    tasks {
+      status_task
+    }
+  }
+}
