@@ -1,6 +1,6 @@
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable global-require */
-import { Button } from '@ui-kitten/components';
+import { Button, Card } from '@ui-kitten/components';
 import React from 'react';
 import {
   AsyncStorage,
@@ -9,6 +9,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import useReduxUserState from '../../hooks/useUserState';
 
 export default function ProfileScreen() {
@@ -30,20 +31,21 @@ export default function ProfileScreen() {
       </View>
       <View
         style={{
-          height: '60%',
+          height: '70%',
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50,
-          padding: 30,
+          overflow: 'hidden',
           bottom: 0,
           zIndex: 10,
           position: 'absolute',
-          display: 'flex',
-          justifyContent: 'space-between',
           width: '100%',
           backgroundColor: 'white',
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
         }}
       >
-        <View>
+        <View style={{ width: '100%', padding: 30 }}>
           <View
             style={{ display: 'flex', flexDirection: 'row', width: '100%' }}
           >
@@ -61,6 +63,8 @@ export default function ProfileScreen() {
           </Text>
         </View>
         <Button
+          style={{ width: '100%' }}
+          size="tiny"
           onPress={() => {
             AsyncStorage.setItem('x-authorization', '').catch((err) =>
               console.log(err),
@@ -70,6 +74,50 @@ export default function ProfileScreen() {
         >
           Disconect
         </Button>
+        <ScrollView
+          style={{
+            zIndex: 10,
+            width: '100%',
+            backgroundColor: 'white',
+          }}
+        >
+          <Card style={{ marginVertical: 2, zIndex: 5, width: '100%' }}>
+            <Text style={{ width: '100%' }}>Change personnal informations</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change Password</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Support</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change personnal informations</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change Password</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Support</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change personnal informations</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change Password</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Support</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change personnal informations</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Change Password</Text>
+          </Card>
+          <Card style={{ marginVertical: 2 }}>
+            <Text>Support</Text>
+          </Card>
+        </ScrollView>
       </View>
     </View>
   );
