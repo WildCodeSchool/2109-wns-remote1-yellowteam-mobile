@@ -6,7 +6,7 @@ const useReduxUserState = () => {
   const { isAuth, user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
-  const dispatchLogin = (user: IUser) => dispatch(login(user));
+  const dispatchLogin = (userPayload: IUser) => dispatch(login(userPayload));
   const dispatchLogout = () => dispatch(logout());
 
   return {

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { View } from 'react-native';
 import {
@@ -8,47 +9,45 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import { gql, useMutation } from '@apollo/client';
 import KeyboardAvoidingView from './extra/3rd-party';
 import useReduxUserState from '../../../hooks/useUserState';
-import { ISigngleNavigationProps } from '../../../../index';
+import { ISigngleNavigationProps } from '../../../../interfaces/global';
+import { useSignInMutation } from '../../../generated/graphql';
 
-const LOGIN = gql`
-  mutation ($data: LoginInput!) {
-    login(data: $data) {
-      id
-      first_name
-      last_name
-      email
-      avatar
-    }
-  }
-`;
 export default function SignIn2({
   navigation,
 }: ISigngleNavigationProps): React.ReactElement {
-  const [email, setEmail] = React.useState<string>();
-  const [password, setPassword] = React.useState<string>();
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
   const [passwordVisible] = React.useState<boolean>(false);
 
   const { dispatchLogin } = useReduxUserState();
 
-  const [mutate] = useMutation(LOGIN, {
-    onCompleted: (e) => dispatchLogin(e.login),
+  const [mutate] = useSignInMutation({
+    variables: {
+      data: {
+        email,
+        password,
+      },
+    },
   });
+
   const styles = useStyleSheet(themedStyles);
 
   const onSignInButtonPress = async (): Promise<void> => {
     await mutate({
       variables: { data: { email, password } },
+      onCompleted: (data) => dispatchLogin(data.login),
+      onError: (e) => console.log(e),
     });
   };
 
-  const onSignUpButtonPress = (): void =>
-    navigation && navigation.navigate('SignUp2');
-
-  const onForgotPasswordButtonPress = (): void =>
-    navigation && navigation.navigate('ForgotPassword');
+  const onSignUpButtonPress = (): void => {
+    navigation.navigate('SignUp2');
+  };
+  const onForgotPasswordButtonPress = (): void => {
+    navigation.navigate('ForgotPassword');
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -94,7 +93,7 @@ export default function SignIn2({
         status="basic"
         onPress={onSignUpButtonPress}
       >
-        Don't have an account? Create
+        Don&apos;t have an account? Create
       </Button>
     </KeyboardAvoidingView>
   );

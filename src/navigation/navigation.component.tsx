@@ -4,7 +4,7 @@ import AuthNavigator from './auth/auth.navigator';
 import useReduxUserState from '../hooks/useUserState';
 import TabNavigator from './root';
 
-export function AppNavigator() {
+export default function AppNavigator() {
   const { isAuth } = useReduxUserState();
   return (
     <NavigationContainer>

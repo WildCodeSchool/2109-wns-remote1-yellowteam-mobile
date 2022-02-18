@@ -2,27 +2,22 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/native';
 import { ImageOverlay } from './extra/image-overlay.component';
-import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
-import { KeyboardAvoidingView } from './extra/3rd-party';
+import KeyboardAvoidingView from './extra/3rd-party';
+import { ISigngleNavigationProps } from '../../../../interfaces/global';
 
-export default function SignIn3(): React.ReactElement {
-  const navigation = useNavigation();
-
+export default function SignIn3({
+  navigation,
+}: ISigngleNavigationProps): React.ReactElement {
   const [email, setEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
-  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
+  const [passwordVisible] = React.useState<boolean>(false);
 
-  const onSignInButtonPress = (): void => navigation && navigation.goBack();
+  const onSignInButtonPress = () => navigation.goBack();
 
-  const onSignUpButtonPress = (): void => navigation && navigation.navigate('SignIn2');
+  const onSignUpButtonPress = () => navigation.navigate('SignIn2');
 
-  const onForgotPasswordButtonPress = (): void => navigation && navigation.navigate('ForgotPassword');
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
+  const onForgotPasswordButtonPress = () => navigation.navigate('ForgotPassword');
 
   return (
     <KeyboardAvoidingView>
@@ -78,7 +73,7 @@ export default function SignIn3(): React.ReactElement {
           status="control"
           onPress={onSignUpButtonPress}
         >
-          Don't have an account? Sign Up
+          Don&apos;t have an account? Sign Up
         </Button>
       </ImageOverlay>
     </KeyboardAvoidingView>

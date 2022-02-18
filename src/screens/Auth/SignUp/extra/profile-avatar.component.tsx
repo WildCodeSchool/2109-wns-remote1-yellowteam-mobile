@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { StyleSheet, View, ViewProps } from 'react-native';
 import {
@@ -11,7 +13,9 @@ export interface ProfileAvatarProps extends AvatarProps {
   editButton?: () => ButtonElement;
 }
 
-export function ProfileAvatar(props: ProfileAvatarProps): React.ReactElement<ViewProps> {
+export function ProfileAvatar(
+  props: ProfileAvatarProps,
+): React.ReactElement<ViewProps> {
   const renderEditButtonElement = (): ButtonElement => {
     const buttonElement: React.ReactElement<ButtonProps> = props.editButton();
 

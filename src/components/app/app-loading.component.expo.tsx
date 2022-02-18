@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from 'react';
@@ -23,7 +24,8 @@ export const LoadAssetsTask = (
   assets: number[],
 ): Promise<TaskResult | null> => {
   const tasks: Promise<Asset>[] = assets.map(
-    (source: number): Promise<Asset> => Asset.fromModule(source).downloadAsync(),
+    (source: number): Promise<Asset> =>
+      Asset.fromModule(source).downloadAsync(),
   );
 
   return Promise.all(tasks).then(() => null);
@@ -59,12 +61,13 @@ export function AppLoading(props: ApplicationLoaderProps): React.ReactElement {
   };
 
   const saveTaskResult = (result: [string, unknown] | null): void => {
-    if (result) {
+    if (result && loadingResult) {
       loadingResult[result[0]] = result[1];
     }
   };
 
-  const createRunnableTask = (task: Task): Promise<void> => task().then(saveTaskResult);
+  const createRunnableTask = (task: Task): Promise<void> =>
+    task().then(saveTaskResult);
 
   const startTasks = (): Promise<unknown> => {
     if (tasks) {

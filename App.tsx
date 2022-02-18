@@ -1,35 +1,31 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { AppearanceProvider } from "react-native-appearance";
-import { default as theme } from "./assets/style/custom-theme.json"; // <-- Import app theme
-import { appMappings, appThemes } from "./assets/style/app-theming";
-import Constants from "expo-constants";
-
-import {
-  ApplicationProvider,
-  IconRegistry,
-  Layout,
-  Text,
-} from "@ui-kitten/components";
-import useCachedResources from "./src/hooks/useCachedResources";
-import { EvaIconsPack } from "@ui-kitten/eva-icons";
-import * as eva from "@eva-design/eva";
-import useColorScheme from "./src/hooks/useColorScheme";
-import { AppIconsPack } from "./src/components/app/app-icons-pack";
-import * as Notifications from "expo-notifications";
-import { AppStorage } from "./src/services/app-storage.service";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { useFonts } from "expo-font";
-import { Platform } from "react-native";
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable consistent-return */
+/* eslint-disable no-alert */
+/* eslint-disable global-require */
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useEffect, useRef, useState } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppearanceProvider } from 'react-native-appearance';
+import { Platform } from 'react-native';
+import Constants from 'expo-constants';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import * as Notifications from 'expo-notifications';
+import { useFonts } from 'expo-font';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { Provider } from 'react-redux';
+import { appMappings, appThemes } from './assets/style/app-theming';
+import useCachedResources from './src/hooks/useCachedResources';
+import { AppIconsPack } from './src/components/app/app-icons-pack';
+import AppStorage from './src/services/app-storage.service';
 import {
   AppLoading,
   LoadFontsTask,
-} from "./src/components/app/app-loading.component";
-import { AppNavigator } from "./src/navigation/navigation.component";
-import React, { useEffect, useRef, useState } from "react";
-import { Theming } from "./src/services/theme.service";
-import { Provider } from "react-redux";
-import store from "./src/redux/store";
+  Task,
+} from './src/components/app/app-loading.component';
+import AppNavigator from './src/navigation/navigation.component';
+import { Theming } from './src/services/theme.service';
+import store from './src/redux/store';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -42,53 +38,52 @@ Notifications.setNotificationHandler({
 const loadingTasks: Task[] = [
   () =>
     LoadFontsTask({
-      "opensans-regular": require("./assets/fonts/opensans-regular.ttf"),
-      "roboto-regular": require("./assets/fonts/roboto-regular.ttf"),
+      'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
+      'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
     }),
   () =>
     AppStorage.getMapping(defaultConfig.mapping).then((result) => [
-      "mapping",
+      'mapping',
       result,
     ]),
   () =>
     AppStorage.getTheme(defaultConfig.theme).then((result) => [
-      "theme",
+      'theme',
       result,
     ]),
 ];
 
 const defaultConfig: { mapping: Mapping; theme: Theme } = {
-  mapping: "eva",
-  theme: "light",
+  mapping: 'eva',
+  theme: 'light',
 };
 
 export const client = new ApolloClient({
-  uri: "https://ytask.digitalcopilote.re/graphql",
+  uri: 'https://ytask.digitalcopilote.re/graphql',
   cache: new InMemoryCache(),
-  credentials: "include",
+  credentials: 'include',
 });
 
 function App({ mapping, theme }) {
-  const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState(false);
+  const [, setExpoPushToken] = useState('');
+  const [, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   const [mappingContext, currentMapping] = Theming.useMapping(
     appMappings,
-    mapping
+    mapping,
   );
   const [themeContext, currentTheme] = Theming.useTheming(
     appThemes,
     mapping,
-    theme
+    theme,
   );
 
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) =>
-      setExpoPushToken(token)
+      setExpoPushToken(token),
     );
 
     notificationListener.current =
@@ -104,94 +99,87 @@ function App({ mapping, theme }) {
     schedulePushNotification("C'est ok ca marche !");
     return () => {
       Notifications.removeNotificationSubscription(
-        notificationListener.current
+        notificationListener.current,
       );
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <React.Fragment>
-        <ApolloProvider client={client}>
-          <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
-          <AppearanceProvider>
-            <Provider store={store}>
-              <ApplicationProvider {...currentMapping} theme={currentTheme}>
-                <Theming.MappingContext.Provider value={mappingContext}>
-                  <Theming.ThemeContext.Provider value={themeContext}>
-                    <SafeAreaProvider>
-                      {/* <StatusBar /> */}
-                      <AppNavigator />
-                    </SafeAreaProvider>
-                  </Theming.ThemeContext.Provider>
-                </Theming.MappingContext.Provider>
-              </ApplicationProvider>
-            </Provider>
-          </AppearanceProvider>
-        </ApolloProvider>
-      </React.Fragment>
-    );
-  }
+  if (!isLoadingComplete) return null;
+
+  return (
+    <ApolloProvider client={client}>
+      <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
+      <AppearanceProvider>
+        <Provider store={store}>
+          <ApplicationProvider {...currentMapping} theme={currentTheme}>
+            <Theming.MappingContext.Provider value={mappingContext}>
+              <Theming.ThemeContext.Provider value={themeContext}>
+                <SafeAreaProvider>
+                  {/* <StatusBar /> */}
+                  <AppNavigator />
+                </SafeAreaProvider>
+              </Theming.ThemeContext.Provider>
+            </Theming.MappingContext.Provider>
+          </ApplicationProvider>
+        </Provider>
+      </AppearanceProvider>
+    </ApolloProvider>
+  );
 }
 
-export default (): React.ReactElement => {
-  const [loaded] = useFonts({
-    "opensans-regular": require("./assets/fonts/opensans-regular.ttf"),
-    "roboto-regular": require("./assets/fonts/roboto-regular.ttf"),
+export default function Loader(): React.ReactElement {
+  useFonts({
+    'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
+    'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
   });
   return (
-    <AppLoading
-      tasks={loadingTasks}
-      initialConfig={defaultConfig}
-      // placeholder={Splash}
-    >
+    <AppLoading tasks={loadingTasks} initialConfig={defaultConfig}>
       {(props) => <App {...props} />}
     </AppLoading>
   );
-};
+}
 
 export async function schedulePushNotification(content: string) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "Hey welbome back here ! 📬",
+      title: 'Hey welbome back here ! 📬',
       body: content,
-      data: { data: "goes here" },
+      data: { data: 'goes here' },
     },
     trigger: { seconds: 2 },
   });
 }
 
-async function registerForPushNotificationsAsync() {
+const registerForPushNotificationsAsync = async (): Promise<
+  string | undefined
+> => {
   let token;
   if (Constants.isDevice) {
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
-    if (existingStatus !== "granted") {
+    if (existingStatus !== 'granted') {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!");
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
   } else {
-    alert("Must use physical device for Push Notifications");
+    alert('Must use physical device for Push Notifications');
   }
 
-  if (Platform.OS === "android") {
-    Notifications.setNotificationChannelAsync("default", {
-      name: "default",
+  if (Platform.OS === 'android') {
+    await Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
+      lightColor: '#FF231F7C',
     });
   }
 
   return token;
-}
+};

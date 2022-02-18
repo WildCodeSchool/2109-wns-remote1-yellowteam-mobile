@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { combineReducers } from 'redux';
 import user from './slices/user';
 import app from './slices/app';

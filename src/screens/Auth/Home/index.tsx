@@ -1,18 +1,17 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-
 import { Button, Text } from '@ui-kitten/components';
 import { ImageOverlay } from './extra/image-overlay.component';
-import { ISigngleNavigationProps } from '../../../../index';
+import { ISigngleNavigationProps } from '../../../../interfaces/global';
 
 export default function LoginHome({ navigation }: ISigngleNavigationProps) {
-  const onSignInButtonPress = async (): Promise<void> => {
-    navigation && navigation.navigate('SignIn');
+  const onSignInButtonPress = (): void => {
+    navigation.navigate('SignIn');
   };
 
   const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp');
+    navigation.navigate('SignUp');
   };
   return (
     <ImageOverlay
@@ -42,7 +41,7 @@ export default function LoginHome({ navigation }: ISigngleNavigationProps) {
           status="control"
           onPress={onSignUpButtonPress}
         >
-          Don't have an account? Sign Up
+          Don&apos;t have an account? Sign Up
         </Button>
       </View>
     </ImageOverlay>

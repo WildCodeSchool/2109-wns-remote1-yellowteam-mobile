@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { View } from 'react-native';
 import {
@@ -8,34 +9,23 @@ import {
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/native';
 import { ProfileAvatar } from './extra/profile-avatar.component';
-import {
-  EmailIcon,
-  EyeIcon,
-  EyeOffIcon,
-  PersonIcon,
-  PlusIcon,
-} from './extra/icons';
-import { KeyboardAvoidingView } from './extra/3rd-party';
+import KeyboardAvoidingView from './extra/3rd-party';
+import { ISigngleNavigationProps } from '../../../../interfaces/global';
 
-export default function SignIp2(): React.ReactElement {
-  const navigation = useNavigation();
-
+export default function SignIp2({
+  navigation,
+}: ISigngleNavigationProps): React.ReactElement {
   const [userName, setUserName] = React.useState<string>();
   const [email, setEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
   const [termsAccepted, setTermsAccepted] = React.useState<boolean>(false);
-  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
+  const [passwordVisible] = React.useState<boolean>(false);
   const styles = useStyleSheet(themedStyles);
 
-  const onSignUpButtonPress = (): void => navigation && navigation.navigate('SignUp2');
+  const onSignUpButtonPress = () => navigation.navigate('SignUp2');
 
-  const onSignInButtonPress = (): void => navigation && navigation.navigate('SignIn3');
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
+  const onSignInButtonPress = () => navigation.navigate('SignIn3');
 
   const renderEditAvatarButton = (): React.ReactElement => (
     <Button style={styles.editAvatarButton} status="basic" />
@@ -55,7 +45,6 @@ export default function SignIp2(): React.ReactElement {
         <Input
           autoCapitalize="none"
           placeholder="User Name"
-          icon={PersonIcon}
           value={userName}
           onChangeText={setUserName}
         />
@@ -63,7 +52,6 @@ export default function SignIp2(): React.ReactElement {
           style={styles.emailInput}
           autoCapitalize="none"
           placeholder="Email"
-          icon={EmailIcon}
           value={email}
           onChangeText={setEmail}
         />
@@ -72,10 +60,8 @@ export default function SignIp2(): React.ReactElement {
           autoCapitalize="none"
           secureTextEntry={!passwordVisible}
           placeholder="Password"
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
           value={password}
           onChangeText={setPassword}
-          onIconPress={onPasswordIconPress}
         />
         <CheckBox
           style={styles.termsCheckBox}

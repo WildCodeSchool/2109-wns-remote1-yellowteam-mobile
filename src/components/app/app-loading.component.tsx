@@ -1,3 +1,6 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
@@ -16,7 +19,7 @@ export interface ApplicationLoaderProps {
 
 export const LoadFontsTask = (fonts: {
   [key: string]: number;
-}): Promise<TaskResult> => {
+}): Promise<TaskResult | null> => {
   const message: string = [
     'There is no need to use this task in Bare RN Project.',
     'Use `react-native.config.js',
@@ -58,7 +61,7 @@ export const LoadAssetsTask = (
  */
 export function AppLoading(props: ApplicationLoaderProps): React.ReactElement {
   const [loading, setLoading] = React.useState<boolean>(true);
-  const loadingResult = props.initialConfig || {};
+  const { initialConfig, placeholder, tasks, children } = props || {};
 
   const onTasksFinish = (): void => {
     setLoading(false);
@@ -66,29 +69,32 @@ export function AppLoading(props: ApplicationLoaderProps): React.ReactElement {
 
   React.useEffect(() => {
     if (loading) {
-      startTasks().then(onTasksFinish);
+      startTasks()
+        .then(onTasksFinish)
+        .catch((er) => console.log(er));
     }
   }, [loading]);
 
   const saveTaskResult = (result: [string, any] | null): void => {
-    if (result) {
-      loadingResult[result[0]] = result[1];
+    if (result && initialConfig) {
+      initialConfig[result[0]] = result[1];
     }
   };
 
-  const createRunnableTask = (task: Task): Promise<void> => task().then(saveTaskResult);
+  const createRunnableTask = (task: Task): Promise<void> =>
+    task().then(saveTaskResult);
 
   const startTasks = async (): Promise<any> => {
-    if (props.tasks) {
-      return Promise.all(props.tasks.map(createRunnableTask));
+    if (tasks) {
+      return Promise.all(tasks.map(createRunnableTask));
     }
     return Promise.resolve();
   };
 
   return (
     <>
-      {!loading && props.children(loadingResult)}
-      {props.placeholder && props.placeholder({ loading })}
+      {!loading && children(initialConfig)}
+      {placeholder && placeholder({ loading })}
     </>
   );
 }

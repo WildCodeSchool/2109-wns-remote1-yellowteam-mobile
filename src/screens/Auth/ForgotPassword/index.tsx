@@ -1,16 +1,18 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from '@ui-kitten/components';
 import { ImageOverlay } from './extra/image-overlay.component';
 import { EmailIcon } from './extra/icons';
-import { KeyboardAvoidingView } from './extra/3rd-party';
+import KeyboardAvoidingView from './extra/3rd-party';
+import { ISigngleNavigationProps } from '../../../../interfaces/global';
 
-export default function ForgotPassword({ navigation }): React.ReactElement {
+export default function ForgotPassword({
+  navigation,
+}: ISigngleNavigationProps): React.ReactElement {
   const [email, setEmail] = React.useState<string>();
 
-  const onResetPasswordButtonPress = (): void => {
-    navigation && navigation.goBack();
-  };
+  const onResetPasswordButtonPress = () => navigation.goBack();
 
   return (
     <ImageOverlay

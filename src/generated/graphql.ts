@@ -1,17 +1,10 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -236,9 +229,7 @@ export type CommentCreateManyUser_Task_CommentsInputEnvelope = {
 
 export type CommentCreateNestedManyWithoutProjectInput = {
   connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<CommentCreateOrConnectWithoutProjectInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutProjectInput>>;
   create?: InputMaybe<Array<CommentCreateWithoutProjectInput>>;
   createMany?: InputMaybe<CommentCreateManyProjectInputEnvelope>;
 };
@@ -252,18 +243,14 @@ export type CommentCreateNestedManyWithoutTaskInput = {
 
 export type CommentCreateNestedManyWithoutUser_Project_CommentsInput = {
   connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<CommentCreateOrConnectWithoutUser_Project_CommentsInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Project_CommentsInput>>;
   create?: InputMaybe<Array<CommentCreateWithoutUser_Project_CommentsInput>>;
   createMany?: InputMaybe<CommentCreateManyUser_Project_CommentsInputEnvelope>;
 };
 
 export type CommentCreateNestedManyWithoutUser_Task_CommentsInput = {
   connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<CommentCreateOrConnectWithoutUser_Task_CommentsInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Task_CommentsInput>>;
   create?: InputMaybe<Array<CommentCreateWithoutUser_Task_CommentsInput>>;
   createMany?: InputMaybe<CommentCreateManyUser_Task_CommentsInputEnvelope>;
 };
@@ -448,7 +435,7 @@ export enum CommentScalarFieldEnum {
   ProjectId = 'project_id',
   TaskCommentUserId = 'task_comment_user_id',
   TaskId = 'task_id',
-  UpdatedAt = 'updated_at',
+  UpdatedAt = 'updated_at'
 }
 
 export type CommentScalarWhereInput = {
@@ -523,9 +510,7 @@ export type CommentUpdateManyWithWhereWithoutUser_Task_CommentsInput = {
 
 export type CommentUpdateManyWithoutProjectInput = {
   connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<CommentCreateOrConnectWithoutProjectInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutProjectInput>>;
   create?: InputMaybe<Array<CommentCreateWithoutProjectInput>>;
   createMany?: InputMaybe<CommentCreateManyProjectInputEnvelope>;
   delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
@@ -553,46 +538,30 @@ export type CommentUpdateManyWithoutTaskInput = {
 
 export type CommentUpdateManyWithoutUser_Project_CommentsInput = {
   connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<CommentCreateOrConnectWithoutUser_Project_CommentsInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Project_CommentsInput>>;
   create?: InputMaybe<Array<CommentCreateWithoutUser_Project_CommentsInput>>;
   createMany?: InputMaybe<CommentCreateManyUser_Project_CommentsInputEnvelope>;
   delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
   deleteMany?: InputMaybe<Array<CommentScalarWhereInput>>;
   disconnect?: InputMaybe<Array<CommentWhereUniqueInput>>;
   set?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  update?: InputMaybe<
-  Array<CommentUpdateWithWhereUniqueWithoutUser_Project_CommentsInput>
-  >;
-  updateMany?: InputMaybe<
-  Array<CommentUpdateManyWithWhereWithoutUser_Project_CommentsInput>
-  >;
-  upsert?: InputMaybe<
-  Array<CommentUpsertWithWhereUniqueWithoutUser_Project_CommentsInput>
-  >;
+  update?: InputMaybe<Array<CommentUpdateWithWhereUniqueWithoutUser_Project_CommentsInput>>;
+  updateMany?: InputMaybe<Array<CommentUpdateManyWithWhereWithoutUser_Project_CommentsInput>>;
+  upsert?: InputMaybe<Array<CommentUpsertWithWhereUniqueWithoutUser_Project_CommentsInput>>;
 };
 
 export type CommentUpdateManyWithoutUser_Task_CommentsInput = {
   connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<CommentCreateOrConnectWithoutUser_Task_CommentsInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Task_CommentsInput>>;
   create?: InputMaybe<Array<CommentCreateWithoutUser_Task_CommentsInput>>;
   createMany?: InputMaybe<CommentCreateManyUser_Task_CommentsInputEnvelope>;
   delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
   deleteMany?: InputMaybe<Array<CommentScalarWhereInput>>;
   disconnect?: InputMaybe<Array<CommentWhereUniqueInput>>;
   set?: InputMaybe<Array<CommentWhereUniqueInput>>;
-  update?: InputMaybe<
-  Array<CommentUpdateWithWhereUniqueWithoutUser_Task_CommentsInput>
-  >;
-  updateMany?: InputMaybe<
-  Array<CommentUpdateManyWithWhereWithoutUser_Task_CommentsInput>
-  >;
-  upsert?: InputMaybe<
-  Array<CommentUpsertWithWhereUniqueWithoutUser_Task_CommentsInput>
-  >;
+  update?: InputMaybe<Array<CommentUpdateWithWhereUniqueWithoutUser_Task_CommentsInput>>;
+  updateMany?: InputMaybe<Array<CommentUpdateManyWithWhereWithoutUser_Task_CommentsInput>>;
+  upsert?: InputMaybe<Array<CommentUpsertWithWhereUniqueWithoutUser_Task_CommentsInput>>;
 };
 
 export type CommentUpdateWithWhereUniqueWithoutProjectInput = {
@@ -1176,7 +1145,7 @@ export enum FileScalarFieldEnum {
   TaskId = 'task_id',
   Type = 'type',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 export type FileScalarWhereInput = {
@@ -1520,18 +1489,14 @@ export type InvitationCreateManyUserInputEnvelope = {
 
 export type InvitationCreateNestedManyWithoutProjectInput = {
   connect?: InputMaybe<Array<InvitationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<InvitationCreateOrConnectWithoutProjectInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<InvitationCreateOrConnectWithoutProjectInput>>;
   create?: InputMaybe<Array<InvitationCreateWithoutProjectInput>>;
   createMany?: InputMaybe<InvitationCreateManyProjectInputEnvelope>;
 };
 
 export type InvitationCreateNestedManyWithoutUserInput = {
   connect?: InputMaybe<Array<InvitationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<InvitationCreateOrConnectWithoutUserInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<InvitationCreateOrConnectWithoutUserInput>>;
   create?: InputMaybe<Array<InvitationCreateWithoutUserInput>>;
   createMany?: InputMaybe<InvitationCreateManyUserInputEnvelope>;
 };
@@ -1662,7 +1627,7 @@ export enum InvitationScalarFieldEnum {
   ProjectId = 'project_id',
   Status = 'status',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 export type InvitationScalarWhereInput = {
@@ -1721,31 +1686,21 @@ export type InvitationUpdateManyWithWhereWithoutUserInput = {
 
 export type InvitationUpdateManyWithoutProjectInput = {
   connect?: InputMaybe<Array<InvitationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<InvitationCreateOrConnectWithoutProjectInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<InvitationCreateOrConnectWithoutProjectInput>>;
   create?: InputMaybe<Array<InvitationCreateWithoutProjectInput>>;
   createMany?: InputMaybe<InvitationCreateManyProjectInputEnvelope>;
   delete?: InputMaybe<Array<InvitationWhereUniqueInput>>;
   deleteMany?: InputMaybe<Array<InvitationScalarWhereInput>>;
   disconnect?: InputMaybe<Array<InvitationWhereUniqueInput>>;
   set?: InputMaybe<Array<InvitationWhereUniqueInput>>;
-  update?: InputMaybe<
-  Array<InvitationUpdateWithWhereUniqueWithoutProjectInput>
-  >;
-  updateMany?: InputMaybe<
-  Array<InvitationUpdateManyWithWhereWithoutProjectInput>
-  >;
-  upsert?: InputMaybe<
-  Array<InvitationUpsertWithWhereUniqueWithoutProjectInput>
-  >;
+  update?: InputMaybe<Array<InvitationUpdateWithWhereUniqueWithoutProjectInput>>;
+  updateMany?: InputMaybe<Array<InvitationUpdateManyWithWhereWithoutProjectInput>>;
+  upsert?: InputMaybe<Array<InvitationUpsertWithWhereUniqueWithoutProjectInput>>;
 };
 
 export type InvitationUpdateManyWithoutUserInput = {
   connect?: InputMaybe<Array<InvitationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<InvitationCreateOrConnectWithoutUserInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<InvitationCreateOrConnectWithoutUserInput>>;
   create?: InputMaybe<Array<InvitationCreateWithoutUserInput>>;
   createMany?: InputMaybe<InvitationCreateManyUserInputEnvelope>;
   delete?: InputMaybe<Array<InvitationWhereUniqueInput>>;
@@ -1878,206 +1833,252 @@ export type Mutation = {
   upsertUser: User;
 };
 
+
 export type MutationCreateCommentArgs = {
   data: CommentCreateInput;
 };
+
 
 export type MutationCreateFileArgs = {
   data: FileCreateInput;
 };
 
+
 export type MutationCreateInvitationArgs = {
   data: InvitationCreateInput;
 };
+
 
 export type MutationCreateManyCommentArgs = {
   data: Array<CommentCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
 
+
 export type MutationCreateManyFileArgs = {
   data: Array<FileCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type MutationCreateManyInvitationArgs = {
   data: Array<InvitationCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
 
+
 export type MutationCreateManyNotificationArgs = {
   data: Array<NotificationCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type MutationCreateManyProjectArgs = {
   data: Array<ProjectCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
 
+
 export type MutationCreateManyTaskArgs = {
   data: Array<TaskCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type MutationCreateManyUserArgs = {
   data: Array<UserCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
 
+
 export type MutationCreateNotificationArgs = {
   data: NotificationCreateInput;
 };
+
 
 export type MutationCreateProjectArgs = {
   data: ProjectCreateInput;
 };
 
+
 export type MutationCreateTaskArgs = {
   data: TaskCreateInput;
 };
+
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
+
 export type MutationDeleteCommentArgs = {
   where: CommentWhereUniqueInput;
 };
+
 
 export type MutationDeleteFileArgs = {
   where: FileWhereUniqueInput;
 };
 
+
 export type MutationDeleteInvitationArgs = {
   where: InvitationWhereUniqueInput;
 };
+
 
 export type MutationDeleteManyCommentArgs = {
   where: InputMaybe<CommentWhereInput>;
 };
 
+
 export type MutationDeleteManyFileArgs = {
   where: InputMaybe<FileWhereInput>;
 };
+
 
 export type MutationDeleteManyInvitationArgs = {
   where: InputMaybe<InvitationWhereInput>;
 };
 
+
 export type MutationDeleteManyNotificationArgs = {
   where: InputMaybe<NotificationWhereInput>;
 };
+
 
 export type MutationDeleteManyProjectArgs = {
   where: InputMaybe<ProjectWhereInput>;
 };
 
+
 export type MutationDeleteManyTaskArgs = {
   where: InputMaybe<TaskWhereInput>;
 };
+
 
 export type MutationDeleteManyUserArgs = {
   where: InputMaybe<UserWhereInput>;
 };
 
+
 export type MutationDeleteNotificationArgs = {
   where: NotificationWhereUniqueInput;
 };
+
 
 export type MutationDeleteProjectArgs = {
   where: ProjectWhereUniqueInput;
 };
 
+
 export type MutationDeleteTaskArgs = {
   where: TaskWhereUniqueInput;
 };
+
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
+
 export type MutationLoginArgs = {
   data: LoginInput;
 };
 
+
 export type MutationRegisterArgs = {
   data: RegisterInput;
 };
+
 
 export type MutationUpdateCommentArgs = {
   data: CommentUpdateInput;
   where: CommentWhereUniqueInput;
 };
 
+
 export type MutationUpdateFileArgs = {
   data: FileUpdateInput;
   where: FileWhereUniqueInput;
 };
+
 
 export type MutationUpdateInvitationArgs = {
   data: InvitationUpdateInput;
   where: InvitationWhereUniqueInput;
 };
 
+
 export type MutationUpdateManyCommentArgs = {
   data: CommentUpdateManyMutationInput;
   where: InputMaybe<CommentWhereInput>;
 };
+
 
 export type MutationUpdateManyFileArgs = {
   data: FileUpdateManyMutationInput;
   where: InputMaybe<FileWhereInput>;
 };
 
+
 export type MutationUpdateManyInvitationArgs = {
   data: InvitationUpdateManyMutationInput;
   where: InputMaybe<InvitationWhereInput>;
 };
+
 
 export type MutationUpdateManyNotificationArgs = {
   data: NotificationUpdateManyMutationInput;
   where: InputMaybe<NotificationWhereInput>;
 };
 
+
 export type MutationUpdateManyProjectArgs = {
   data: ProjectUpdateManyMutationInput;
   where: InputMaybe<ProjectWhereInput>;
 };
+
 
 export type MutationUpdateManyTaskArgs = {
   data: TaskUpdateManyMutationInput;
   where: InputMaybe<TaskWhereInput>;
 };
 
+
 export type MutationUpdateManyUserArgs = {
   data: UserUpdateManyMutationInput;
   where: InputMaybe<UserWhereInput>;
 };
+
 
 export type MutationUpdateNotificationArgs = {
   data: NotificationUpdateInput;
   where: NotificationWhereUniqueInput;
 };
 
+
 export type MutationUpdateProjectArgs = {
   data: ProjectUpdateInput;
   where: ProjectWhereUniqueInput;
 };
+
 
 export type MutationUpdateTaskArgs = {
   data: TaskUpdateInput;
   where: TaskWhereUniqueInput;
 };
 
+
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
 
+
 export type MutationUploadFileArgs = {
   file: Scalars['Upload'];
 };
+
 
 export type MutationUpsertCommentArgs = {
   create: CommentCreateInput;
@@ -2085,11 +2086,13 @@ export type MutationUpsertCommentArgs = {
   where: CommentWhereUniqueInput;
 };
 
+
 export type MutationUpsertFileArgs = {
   create: FileCreateInput;
   update: FileUpdateInput;
   where: FileWhereUniqueInput;
 };
+
 
 export type MutationUpsertInvitationArgs = {
   create: InvitationCreateInput;
@@ -2097,11 +2100,13 @@ export type MutationUpsertInvitationArgs = {
   where: InvitationWhereUniqueInput;
 };
 
+
 export type MutationUpsertNotificationArgs = {
   create: NotificationCreateInput;
   update: NotificationUpdateInput;
   where: NotificationWhereUniqueInput;
 };
+
 
 export type MutationUpsertProjectArgs = {
   create: ProjectCreateInput;
@@ -2109,11 +2114,13 @@ export type MutationUpsertProjectArgs = {
   where: ProjectWhereUniqueInput;
 };
 
+
 export type MutationUpsertTaskArgs = {
   create: TaskCreateInput;
   update: TaskUpdateInput;
   where: TaskWhereUniqueInput;
 };
+
 
 export type MutationUpsertUserArgs = {
   create: UserCreateInput;
@@ -2451,18 +2458,14 @@ export type NotificationCreateManyUserInputEnvelope = {
 
 export type NotificationCreateNestedManyWithoutSenderInput = {
   connect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<NotificationCreateOrConnectWithoutSenderInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<NotificationCreateOrConnectWithoutSenderInput>>;
   create?: InputMaybe<Array<NotificationCreateWithoutSenderInput>>;
   createMany?: InputMaybe<NotificationCreateManySenderInputEnvelope>;
 };
 
 export type NotificationCreateNestedManyWithoutUserInput = {
   connect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<NotificationCreateOrConnectWithoutUserInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<NotificationCreateOrConnectWithoutUserInput>>;
   create?: InputMaybe<Array<NotificationCreateWithoutUserInput>>;
   createMany?: InputMaybe<NotificationCreateManyUserInputEnvelope>;
 };
@@ -2633,7 +2636,7 @@ export enum NotificationScalarFieldEnum {
   Title = 'title',
   Type = 'type',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 export type NotificationScalarWhereInput = {
@@ -2708,31 +2711,21 @@ export type NotificationUpdateManyWithWhereWithoutUserInput = {
 
 export type NotificationUpdateManyWithoutSenderInput = {
   connect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<NotificationCreateOrConnectWithoutSenderInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<NotificationCreateOrConnectWithoutSenderInput>>;
   create?: InputMaybe<Array<NotificationCreateWithoutSenderInput>>;
   createMany?: InputMaybe<NotificationCreateManySenderInputEnvelope>;
   delete?: InputMaybe<Array<NotificationWhereUniqueInput>>;
   deleteMany?: InputMaybe<Array<NotificationScalarWhereInput>>;
   disconnect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
   set?: InputMaybe<Array<NotificationWhereUniqueInput>>;
-  update?: InputMaybe<
-  Array<NotificationUpdateWithWhereUniqueWithoutSenderInput>
-  >;
-  updateMany?: InputMaybe<
-  Array<NotificationUpdateManyWithWhereWithoutSenderInput>
-  >;
-  upsert?: InputMaybe<
-  Array<NotificationUpsertWithWhereUniqueWithoutSenderInput>
-  >;
+  update?: InputMaybe<Array<NotificationUpdateWithWhereUniqueWithoutSenderInput>>;
+  updateMany?: InputMaybe<Array<NotificationUpdateManyWithWhereWithoutSenderInput>>;
+  upsert?: InputMaybe<Array<NotificationUpsertWithWhereUniqueWithoutSenderInput>>;
 };
 
 export type NotificationUpdateManyWithoutUserInput = {
   connect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<
-  Array<NotificationCreateOrConnectWithoutUserInput>
-  >;
+  connectOrCreate?: InputMaybe<Array<NotificationCreateOrConnectWithoutUserInput>>;
   create?: InputMaybe<Array<NotificationCreateWithoutUserInput>>;
   createMany?: InputMaybe<NotificationCreateManyUserInputEnvelope>;
   delete?: InputMaybe<Array<NotificationWhereUniqueInput>>;
@@ -2740,9 +2733,7 @@ export type NotificationUpdateManyWithoutUserInput = {
   disconnect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
   set?: InputMaybe<Array<NotificationWhereUniqueInput>>;
   update?: InputMaybe<Array<NotificationUpdateWithWhereUniqueWithoutUserInput>>;
-  updateMany?: InputMaybe<
-  Array<NotificationUpdateManyWithWhereWithoutUserInput>
-  >;
+  updateMany?: InputMaybe<Array<NotificationUpdateManyWithWhereWithoutUserInput>>;
   upsert?: InputMaybe<Array<NotificationUpsertWithWhereUniqueWithoutUserInput>>;
 };
 
@@ -2845,6 +2836,7 @@ export type Project = {
   users: Array<User>;
 };
 
+
 export type ProjectCommentsArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
   distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
@@ -2853,6 +2845,7 @@ export type ProjectCommentsArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<CommentWhereInput>;
 };
+
 
 export type ProjectFilesArgs = {
   cursor: InputMaybe<FileWhereUniqueInput>;
@@ -2863,6 +2856,7 @@ export type ProjectFilesArgs = {
   where: InputMaybe<FileWhereInput>;
 };
 
+
 export type ProjectInvitationsArgs = {
   cursor: InputMaybe<InvitationWhereUniqueInput>;
   distinct: InputMaybe<Array<InvitationScalarFieldEnum>>;
@@ -2872,6 +2866,7 @@ export type ProjectInvitationsArgs = {
   where: InputMaybe<InvitationWhereInput>;
 };
 
+
 export type ProjectTasksArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
   distinct: InputMaybe<Array<TaskScalarFieldEnum>>;
@@ -2880,6 +2875,7 @@ export type ProjectTasksArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<TaskWhereInput>;
 };
+
 
 export type ProjectUsersArgs = {
   cursor: InputMaybe<UserWhereUniqueInput>;
@@ -3345,7 +3341,7 @@ export enum ProjectScalarFieldEnum {
   StatusProject = 'status_project',
   Title = 'title',
   TotalTimeSpent = 'total_time_spent',
-  UpdatedAt = 'updated_at',
+  UpdatedAt = 'updated_at'
 }
 
 export type ProjectScalarWhereInput = {
@@ -3732,6 +3728,7 @@ export type Query = {
   users: Array<User>;
 };
 
+
 export type QueryAggregateCommentArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
   orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
@@ -3739,6 +3736,7 @@ export type QueryAggregateCommentArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<CommentWhereInput>;
 };
+
 
 export type QueryAggregateFileArgs = {
   cursor: InputMaybe<FileWhereUniqueInput>;
@@ -3748,6 +3746,7 @@ export type QueryAggregateFileArgs = {
   where: InputMaybe<FileWhereInput>;
 };
 
+
 export type QueryAggregateInvitationArgs = {
   cursor: InputMaybe<InvitationWhereUniqueInput>;
   orderBy: InputMaybe<Array<InvitationOrderByWithRelationInput>>;
@@ -3755,6 +3754,7 @@ export type QueryAggregateInvitationArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<InvitationWhereInput>;
 };
+
 
 export type QueryAggregateNotificationArgs = {
   cursor: InputMaybe<NotificationWhereUniqueInput>;
@@ -3764,6 +3764,7 @@ export type QueryAggregateNotificationArgs = {
   where: InputMaybe<NotificationWhereInput>;
 };
 
+
 export type QueryAggregateProjectArgs = {
   cursor: InputMaybe<ProjectWhereUniqueInput>;
   orderBy: InputMaybe<Array<ProjectOrderByWithRelationInput>>;
@@ -3771,6 +3772,7 @@ export type QueryAggregateProjectArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<ProjectWhereInput>;
 };
+
 
 export type QueryAggregateTaskArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
@@ -3780,6 +3782,7 @@ export type QueryAggregateTaskArgs = {
   where: InputMaybe<TaskWhereInput>;
 };
 
+
 export type QueryAggregateUserArgs = {
   cursor: InputMaybe<UserWhereUniqueInput>;
   orderBy: InputMaybe<Array<UserOrderByWithRelationInput>>;
@@ -3788,9 +3791,11 @@ export type QueryAggregateUserArgs = {
   where: InputMaybe<UserWhereInput>;
 };
 
+
 export type QueryCommentArgs = {
   where: CommentWhereUniqueInput;
 };
+
 
 export type QueryCommentsArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
@@ -3801,9 +3806,11 @@ export type QueryCommentsArgs = {
   where: InputMaybe<CommentWhereInput>;
 };
 
+
 export type QueryFileArgs = {
   where: FileWhereUniqueInput;
 };
+
 
 export type QueryFilesArgs = {
   cursor: InputMaybe<FileWhereUniqueInput>;
@@ -3814,6 +3821,7 @@ export type QueryFilesArgs = {
   where: InputMaybe<FileWhereInput>;
 };
 
+
 export type QueryFindFirstCommentArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
   distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
@@ -3822,6 +3830,7 @@ export type QueryFindFirstCommentArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<CommentWhereInput>;
 };
+
 
 export type QueryFindFirstFileArgs = {
   cursor: InputMaybe<FileWhereUniqueInput>;
@@ -3832,6 +3841,7 @@ export type QueryFindFirstFileArgs = {
   where: InputMaybe<FileWhereInput>;
 };
 
+
 export type QueryFindFirstInvitationArgs = {
   cursor: InputMaybe<InvitationWhereUniqueInput>;
   distinct: InputMaybe<Array<InvitationScalarFieldEnum>>;
@@ -3840,6 +3850,7 @@ export type QueryFindFirstInvitationArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<InvitationWhereInput>;
 };
+
 
 export type QueryFindFirstNotificationArgs = {
   cursor: InputMaybe<NotificationWhereUniqueInput>;
@@ -3850,6 +3861,7 @@ export type QueryFindFirstNotificationArgs = {
   where: InputMaybe<NotificationWhereInput>;
 };
 
+
 export type QueryFindFirstProjectArgs = {
   cursor: InputMaybe<ProjectWhereUniqueInput>;
   distinct: InputMaybe<Array<ProjectScalarFieldEnum>>;
@@ -3858,6 +3870,7 @@ export type QueryFindFirstProjectArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<ProjectWhereInput>;
 };
+
 
 export type QueryFindFirstTaskArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
@@ -3868,6 +3881,7 @@ export type QueryFindFirstTaskArgs = {
   where: InputMaybe<TaskWhereInput>;
 };
 
+
 export type QueryFindFirstUserArgs = {
   cursor: InputMaybe<UserWhereUniqueInput>;
   distinct: InputMaybe<Array<UserScalarFieldEnum>>;
@@ -3876,6 +3890,7 @@ export type QueryFindFirstUserArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<UserWhereInput>;
 };
+
 
 export type QueryGroupByCommentArgs = {
   by: Array<CommentScalarFieldEnum>;
@@ -3886,6 +3901,7 @@ export type QueryGroupByCommentArgs = {
   where: InputMaybe<CommentWhereInput>;
 };
 
+
 export type QueryGroupByFileArgs = {
   by: Array<FileScalarFieldEnum>;
   having: InputMaybe<FileScalarWhereWithAggregatesInput>;
@@ -3894,6 +3910,7 @@ export type QueryGroupByFileArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<FileWhereInput>;
 };
+
 
 export type QueryGroupByInvitationArgs = {
   by: Array<InvitationScalarFieldEnum>;
@@ -3904,6 +3921,7 @@ export type QueryGroupByInvitationArgs = {
   where: InputMaybe<InvitationWhereInput>;
 };
 
+
 export type QueryGroupByNotificationArgs = {
   by: Array<NotificationScalarFieldEnum>;
   having: InputMaybe<NotificationScalarWhereWithAggregatesInput>;
@@ -3912,6 +3930,7 @@ export type QueryGroupByNotificationArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<NotificationWhereInput>;
 };
+
 
 export type QueryGroupByProjectArgs = {
   by: Array<ProjectScalarFieldEnum>;
@@ -3922,6 +3941,7 @@ export type QueryGroupByProjectArgs = {
   where: InputMaybe<ProjectWhereInput>;
 };
 
+
 export type QueryGroupByTaskArgs = {
   by: Array<TaskScalarFieldEnum>;
   having: InputMaybe<TaskScalarWhereWithAggregatesInput>;
@@ -3930,6 +3950,7 @@ export type QueryGroupByTaskArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<TaskWhereInput>;
 };
+
 
 export type QueryGroupByUserArgs = {
   by: Array<UserScalarFieldEnum>;
@@ -3940,9 +3961,11 @@ export type QueryGroupByUserArgs = {
   where: InputMaybe<UserWhereInput>;
 };
 
+
 export type QueryInvitationArgs = {
   where: InvitationWhereUniqueInput;
 };
+
 
 export type QueryInvitationsArgs = {
   cursor: InputMaybe<InvitationWhereUniqueInput>;
@@ -3953,9 +3976,11 @@ export type QueryInvitationsArgs = {
   where: InputMaybe<InvitationWhereInput>;
 };
 
+
 export type QueryNotificationArgs = {
   where: NotificationWhereUniqueInput;
 };
+
 
 export type QueryNotificationsArgs = {
   cursor: InputMaybe<NotificationWhereUniqueInput>;
@@ -3966,9 +3991,11 @@ export type QueryNotificationsArgs = {
   where: InputMaybe<NotificationWhereInput>;
 };
 
+
 export type QueryProjectArgs = {
   where: ProjectWhereUniqueInput;
 };
+
 
 export type QueryProjectsArgs = {
   cursor: InputMaybe<ProjectWhereUniqueInput>;
@@ -3979,9 +4006,11 @@ export type QueryProjectsArgs = {
   where: InputMaybe<ProjectWhereInput>;
 };
 
+
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
 };
+
 
 export type QueryTasksArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
@@ -3992,9 +4021,11 @@ export type QueryTasksArgs = {
   where: InputMaybe<TaskWhereInput>;
 };
 
+
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
+
 
 export type QueryUsersArgs = {
   cursor: InputMaybe<UserWhereUniqueInput>;
@@ -4007,7 +4038,7 @@ export type QueryUsersArgs = {
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive',
+  Insensitive = 'insensitive'
 }
 
 export type RegisterInput = {
@@ -4021,29 +4052,29 @@ export enum Role {
   Admin = 'ADMIN',
   Manager = 'MANAGER',
   SuperAdmin = 'SUPER_ADMIN',
-  User = 'USER',
+  User = 'USER'
 }
 
 export enum SortOrder {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = 'desc'
 }
 
 export enum Status {
   Fihished = 'FIHISHED',
   InProgress = 'IN_PROGRESS',
-  NotStarted = 'NOT_STARTED',
+  NotStarted = 'NOT_STARTED'
 }
 
 export enum Status_Invitation {
   Accepted = 'ACCEPTED',
   Pending = 'PENDING',
-  Rejected = 'REJECTED',
+  Rejected = 'REJECTED'
 }
 
 export enum Status_Notification {
   Read = 'READ',
-  Unread = 'UNREAD',
+  Unread = 'UNREAD'
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -4138,6 +4169,7 @@ export type Task = {
   user_id: Scalars['String'];
 };
 
+
 export type TaskCommentsArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
   distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
@@ -4146,6 +4178,7 @@ export type TaskCommentsArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<CommentWhereInput>;
 };
+
 
 export type TaskFilesArgs = {
   cursor: InputMaybe<FileWhereUniqueInput>;
@@ -4550,7 +4583,7 @@ export enum TaskScalarFieldEnum {
   Title = 'title',
   TotalTimeSpent = 'total_time_spent',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id',
+  UserId = 'user_id'
 }
 
 export type TaskScalarWhereInput = {
@@ -4819,7 +4852,7 @@ export type TaskWhereUniqueInput = {
 
 export enum Type_Notification {
   Project = 'PROJECT',
-  Task = 'TASK',
+  Task = 'TASK'
 }
 
 export type User = {
@@ -4846,6 +4879,7 @@ export type User = {
   updated_at: Scalars['DateTime'];
 };
 
+
 export type UserFilesArgs = {
   cursor: InputMaybe<FileWhereUniqueInput>;
   distinct: InputMaybe<Array<FileScalarFieldEnum>>;
@@ -4854,6 +4888,7 @@ export type UserFilesArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<FileWhereInput>;
 };
+
 
 export type UserInvitationsArgs = {
   cursor: InputMaybe<InvitationWhereUniqueInput>;
@@ -4864,6 +4899,7 @@ export type UserInvitationsArgs = {
   where: InputMaybe<InvitationWhereInput>;
 };
 
+
 export type UserNotificationsArgs = {
   cursor: InputMaybe<NotificationWhereUniqueInput>;
   distinct: InputMaybe<Array<NotificationScalarFieldEnum>>;
@@ -4872,6 +4908,7 @@ export type UserNotificationsArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<NotificationWhereInput>;
 };
+
 
 export type UserNotifications_SentArgs = {
   cursor: InputMaybe<NotificationWhereUniqueInput>;
@@ -4882,6 +4919,7 @@ export type UserNotifications_SentArgs = {
   where: InputMaybe<NotificationWhereInput>;
 };
 
+
 export type UserOwned_ProjectsArgs = {
   cursor: InputMaybe<ProjectWhereUniqueInput>;
   distinct: InputMaybe<Array<ProjectScalarFieldEnum>>;
@@ -4890,6 +4928,7 @@ export type UserOwned_ProjectsArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<ProjectWhereInput>;
 };
+
 
 export type UserProject_CommentsArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
@@ -4900,6 +4939,7 @@ export type UserProject_CommentsArgs = {
   where: InputMaybe<CommentWhereInput>;
 };
 
+
 export type UserProjectsArgs = {
   cursor: InputMaybe<ProjectWhereUniqueInput>;
   distinct: InputMaybe<Array<ProjectScalarFieldEnum>>;
@@ -4909,6 +4949,7 @@ export type UserProjectsArgs = {
   where: InputMaybe<ProjectWhereInput>;
 };
 
+
 export type UserTask_CommentsArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
   distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
@@ -4917,6 +4958,7 @@ export type UserTask_CommentsArgs = {
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<CommentWhereInput>;
 };
+
 
 export type UserTasksArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
@@ -5429,7 +5471,7 @@ export enum UserScalarFieldEnum {
   LastName = 'last_name',
   Password = 'password',
   Role = 'role',
-  UpdatedAt = 'updated_at',
+  UpdatedAt = 'updated_at'
 }
 
 export type UserScalarWhereInput = {
@@ -5860,152 +5902,110 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
+export type SignInMutationVariables = Exact<{
+  data: LoginInput;
+}>;
+
+
+export type SignInMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
 export type GetSelfNotificationsQueryVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
-export type GetSelfNotificationsQuery = {
-  __typename?: 'Query';
-  user: {
-    __typename?: 'User';
-    notifications: Array<{
-      __typename?: 'Notification';
-      id: string;
-      title: string;
-      content: string;
-      status: Status_Notification;
-      created_at: any;
-      is_disabled: boolean;
-      sender: { __typename?: 'User'; first_name: string; last_name: string };
-    }>;
-  };
-};
+
+export type GetSelfNotificationsQuery = { __typename?: 'Query', user: { __typename?: 'User', notifications: Array<{ __typename?: 'Notification', id: string, title: string, content: string, status: Status_Notification, created_at: any, is_disabled: boolean, sender: { __typename?: 'User', first_name: string, last_name: string } }> } };
 
 export type GetAllAssignedUserProjectsQueryVariables = Exact<{
   where: InputMaybe<ProjectWhereInput>;
 }>;
 
-export type GetAllAssignedUserProjectsQuery = {
-  __typename?: 'Query';
-  projects: Array<{
-    __typename?: 'Project';
-    id: string;
-    title: string;
-    description: string;
-    owner: {
-      __typename?: 'User';
-      first_name: string;
-      avatar: string;
-      last_name: string;
-    };
-  }>;
-};
 
-export type GetAllUsersQueryVariables = Exact<{ [key: string]: never }>;
+export type GetAllAssignedUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description: string, owner: { __typename?: 'User', first_name: string, avatar: string, last_name: string } }> };
 
-export type GetAllUsersQuery = {
-  __typename?: 'Query';
-  users: Array<{
-    __typename?: 'User';
-    id: string;
-    projects: Array<{ __typename?: 'Project'; id: string }>;
-  }>;
-};
+export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, projects: Array<{ __typename?: 'Project', id: string }> }> };
 
 export type GetSelfProjectsQueryVariables = Exact<{
   where: InputMaybe<ProjectWhereInput>;
 }>;
 
-export type GetSelfProjectsQuery = {
-  __typename?: 'Query';
-  projects: Array<{
-    __typename?: 'Project';
-    id: string;
-    title: string;
-    description: string;
-    owner: {
-      __typename?: 'User';
-      first_name: string;
-      avatar: string;
-      last_name: string;
-    };
-  }>;
-};
+
+export type GetSelfProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description: string, owner: { __typename?: 'User', first_name: string, avatar: string, last_name: string } }> };
 
 export type GetSelfTasksQueryVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
-export type GetSelfTasksQuery = {
-  __typename?: 'Query';
-  user: {
-    __typename?: 'User';
-    tasks: Array<{
-      __typename?: 'Task';
-      id: string;
-      title: string;
-      status_task: Status;
-      description: string;
-      start_date: any;
-    }>;
-  };
-};
+
+export type GetSelfTasksQuery = { __typename?: 'Query', user: { __typename?: 'User', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, description: string, start_date: any }> } };
 
 export type GetSingleSelfTasksQueryVariables = Exact<{
   where: TaskWhereUniqueInput;
 }>;
 
-export type GetSingleSelfTasksQuery = {
-  __typename?: 'Query';
-  task: {
-    __typename?: 'Task';
-    title: string;
-    description: string;
-    id: string;
-    status_task: Status;
-    total_time_spent: number;
-    start_date: any;
-    end_date: any;
-    created_at: any;
-    user: {
-      __typename?: 'User';
-      first_name: string;
-      id: string;
-      last_name: string;
-      email: string;
-      role: Array<Role>;
-    };
-    comments: Array<{
-      __typename?: 'Comment';
-      id: string;
-      content: string;
-      user_task_comments: {
-        __typename?: 'User';
-        first_name: string;
-        last_name: string;
-      };
-    }>;
-  };
-};
 
+export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', first_name: string, id: string, last_name: string, email: string, role: Array<Role> }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', first_name: string, last_name: string } }> } };
+
+
+export const SignInDocument = gql`
+    mutation SignIn($data: LoginInput!) {
+  login(data: $data) {
+    id
+    first_name
+    last_name
+    email
+    avatar
+    role
+  }
+}
+    `;
+export type SignInMutationFn = Apollo.MutationFunction<SignInMutation, SignInMutationVariables>;
+
+/**
+ * __useSignInMutation__
+ *
+ * To run a mutation, you first call `useSignInMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignInMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signInMutation, { data, loading, error }] = useSignInMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSignInMutation(baseOptions?: Apollo.MutationHookOptions<SignInMutation, SignInMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignInMutation, SignInMutationVariables>(SignInDocument, options);
+      }
+export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
+export type SignInMutationResult = Apollo.MutationResult<SignInMutation>;
+export type SignInMutationOptions = Apollo.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
 export const GetSelfNotificationsDocument = gql`
-  query GetSelfNotifications($where: UserWhereUniqueInput!) {
-    user(where: $where) {
-      notifications {
-        id
-        title
-        content
-        status
-        created_at
-        is_disabled
-        sender {
-          first_name
-          last_name
-        }
+    query GetSelfNotifications($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    notifications {
+      id
+      title
+      content
+      status
+      created_at
+      is_disabled
+      sender {
+        first_name
+        last_name
       }
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetSelfNotificationsQuery__
@@ -6023,54 +6023,31 @@ export const GetSelfNotificationsDocument = gql`
  *   },
  * });
  */
-export function useGetSelfNotificationsQuery(
-  baseOptions: Apollo.QueryHookOptions<
-  GetSelfNotificationsQuery,
-  GetSelfNotificationsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-  GetSelfNotificationsQuery,
-  GetSelfNotificationsQueryVariables
-  >(GetSelfNotificationsDocument, options);
-}
-export function useGetSelfNotificationsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-  GetSelfNotificationsQuery,
-  GetSelfNotificationsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-  GetSelfNotificationsQuery,
-  GetSelfNotificationsQueryVariables
-  >(GetSelfNotificationsDocument, options);
-}
-export type GetSelfNotificationsQueryHookResult = ReturnType<
-  typeof useGetSelfNotificationsQuery
->;
-export type GetSelfNotificationsLazyQueryHookResult = ReturnType<
-  typeof useGetSelfNotificationsLazyQuery
->;
-export type GetSelfNotificationsQueryResult = Apollo.QueryResult<
-GetSelfNotificationsQuery,
-GetSelfNotificationsQueryVariables
->;
-export const GetAllAssignedUserProjectsDocument = gql`
-  query GetAllAssignedUserProjects($where: ProjectWhereInput) {
-    projects(where: $where) {
-      id
-      title
-      description
-      owner {
-        first_name
-        avatar
-        last_name
+export function useGetSelfNotificationsQuery(baseOptions: Apollo.QueryHookOptions<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>(GetSelfNotificationsDocument, options);
       }
+export function useGetSelfNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>(GetSelfNotificationsDocument, options);
+        }
+export type GetSelfNotificationsQueryHookResult = ReturnType<typeof useGetSelfNotificationsQuery>;
+export type GetSelfNotificationsLazyQueryHookResult = ReturnType<typeof useGetSelfNotificationsLazyQuery>;
+export type GetSelfNotificationsQueryResult = Apollo.QueryResult<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>;
+export const GetAllAssignedUserProjectsDocument = gql`
+    query GetAllAssignedUserProjects($where: ProjectWhereInput) {
+  projects(where: $where) {
+    id
+    title
+    description
+    owner {
+      first_name
+      avatar
+      last_name
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetAllAssignedUserProjectsQuery__
@@ -6088,50 +6065,27 @@ export const GetAllAssignedUserProjectsDocument = gql`
  *   },
  * });
  */
-export function useGetAllAssignedUserProjectsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-  GetAllAssignedUserProjectsQuery,
-  GetAllAssignedUserProjectsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-  GetAllAssignedUserProjectsQuery,
-  GetAllAssignedUserProjectsQueryVariables
-  >(GetAllAssignedUserProjectsDocument, options);
-}
-export function useGetAllAssignedUserProjectsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-  GetAllAssignedUserProjectsQuery,
-  GetAllAssignedUserProjectsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-  GetAllAssignedUserProjectsQuery,
-  GetAllAssignedUserProjectsQueryVariables
-  >(GetAllAssignedUserProjectsDocument, options);
-}
-export type GetAllAssignedUserProjectsQueryHookResult = ReturnType<
-  typeof useGetAllAssignedUserProjectsQuery
->;
-export type GetAllAssignedUserProjectsLazyQueryHookResult = ReturnType<
-  typeof useGetAllAssignedUserProjectsLazyQuery
->;
-export type GetAllAssignedUserProjectsQueryResult = Apollo.QueryResult<
-GetAllAssignedUserProjectsQuery,
-GetAllAssignedUserProjectsQueryVariables
->;
-export const GetAllUsersDocument = gql`
-  query GetAllUsers {
-    users {
-      id
-      projects {
-        id
+export function useGetAllAssignedUserProjectsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllAssignedUserProjectsQuery, GetAllAssignedUserProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllAssignedUserProjectsQuery, GetAllAssignedUserProjectsQueryVariables>(GetAllAssignedUserProjectsDocument, options);
       }
+export function useGetAllAssignedUserProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllAssignedUserProjectsQuery, GetAllAssignedUserProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllAssignedUserProjectsQuery, GetAllAssignedUserProjectsQueryVariables>(GetAllAssignedUserProjectsDocument, options);
+        }
+export type GetAllAssignedUserProjectsQueryHookResult = ReturnType<typeof useGetAllAssignedUserProjectsQuery>;
+export type GetAllAssignedUserProjectsLazyQueryHookResult = ReturnType<typeof useGetAllAssignedUserProjectsLazyQuery>;
+export type GetAllAssignedUserProjectsQueryResult = Apollo.QueryResult<GetAllAssignedUserProjectsQuery, GetAllAssignedUserProjectsQueryVariables>;
+export const GetAllUsersDocument = gql`
+    query GetAllUsers {
+  users {
+    id
+    projects {
+      id
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetAllUsersQuery__
@@ -6148,52 +6102,31 @@ export const GetAllUsersDocument = gql`
  *   },
  * });
  */
-export function useGetAllUsersQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-  GetAllUsersQuery,
-  GetAllUsersQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(
-    GetAllUsersDocument,
-    options,
-  );
-}
-export function useGetAllUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-  GetAllUsersQuery,
-  GetAllUsersQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(
-    GetAllUsersDocument,
-    options,
-  );
-}
-export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
-export type GetAllUsersLazyQueryHookResult = ReturnType<
-  typeof useGetAllUsersLazyQuery
->;
-export type GetAllUsersQueryResult = Apollo.QueryResult<
-GetAllUsersQuery,
-GetAllUsersQueryVariables
->;
-export const GetSelfProjectsDocument = gql`
-  query GetSelfProjects($where: ProjectWhereInput) {
-    projects(where: $where) {
-      id
-      title
-      description
-      owner {
-        first_name
-        avatar
-        last_name
+export function useGetAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
       }
+export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
+        }
+export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
+export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
+export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAllUsersQueryVariables>;
+export const GetSelfProjectsDocument = gql`
+    query GetSelfProjects($where: ProjectWhereInput) {
+  projects(where: $where) {
+    id
+    title
+    description
+    owner {
+      first_name
+      avatar
+      last_name
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetSelfProjectsQuery__
@@ -6211,53 +6144,30 @@ export const GetSelfProjectsDocument = gql`
  *   },
  * });
  */
-export function useGetSelfProjectsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-  GetSelfProjectsQuery,
-  GetSelfProjectsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetSelfProjectsQuery, GetSelfProjectsQueryVariables>(
-    GetSelfProjectsDocument,
-    options,
-  );
-}
-export function useGetSelfProjectsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-  GetSelfProjectsQuery,
-  GetSelfProjectsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-  GetSelfProjectsQuery,
-  GetSelfProjectsQueryVariables
-  >(GetSelfProjectsDocument, options);
-}
-export type GetSelfProjectsQueryHookResult = ReturnType<
-  typeof useGetSelfProjectsQuery
->;
-export type GetSelfProjectsLazyQueryHookResult = ReturnType<
-  typeof useGetSelfProjectsLazyQuery
->;
-export type GetSelfProjectsQueryResult = Apollo.QueryResult<
-GetSelfProjectsQuery,
-GetSelfProjectsQueryVariables
->;
-export const GetSelfTasksDocument = gql`
-  query GetSelfTasks($where: UserWhereUniqueInput!) {
-    user(where: $where) {
-      tasks {
-        id
-        title
-        status_task
-        description
-        start_date
+export function useGetSelfProjectsQuery(baseOptions?: Apollo.QueryHookOptions<GetSelfProjectsQuery, GetSelfProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelfProjectsQuery, GetSelfProjectsQueryVariables>(GetSelfProjectsDocument, options);
       }
+export function useGetSelfProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelfProjectsQuery, GetSelfProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelfProjectsQuery, GetSelfProjectsQueryVariables>(GetSelfProjectsDocument, options);
+        }
+export type GetSelfProjectsQueryHookResult = ReturnType<typeof useGetSelfProjectsQuery>;
+export type GetSelfProjectsLazyQueryHookResult = ReturnType<typeof useGetSelfProjectsLazyQuery>;
+export type GetSelfProjectsQueryResult = Apollo.QueryResult<GetSelfProjectsQuery, GetSelfProjectsQueryVariables>;
+export const GetSelfTasksDocument = gql`
+    query GetSelfTasks($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    tasks {
+      id
+      title
+      status_task
+      description
+      start_date
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetSelfTasksQuery__
@@ -6275,69 +6185,46 @@ export const GetSelfTasksDocument = gql`
  *   },
  * });
  */
-export function useGetSelfTasksQuery(
-  baseOptions: Apollo.QueryHookOptions<
-  GetSelfTasksQuery,
-  GetSelfTasksQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetSelfTasksQuery, GetSelfTasksQueryVariables>(
-    GetSelfTasksDocument,
-    options,
-  );
-}
-export function useGetSelfTasksLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-  GetSelfTasksQuery,
-  GetSelfTasksQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetSelfTasksQuery, GetSelfTasksQueryVariables>(
-    GetSelfTasksDocument,
-    options,
-  );
-}
-export type GetSelfTasksQueryHookResult = ReturnType<
-  typeof useGetSelfTasksQuery
->;
-export type GetSelfTasksLazyQueryHookResult = ReturnType<
-  typeof useGetSelfTasksLazyQuery
->;
-export type GetSelfTasksQueryResult = Apollo.QueryResult<
-GetSelfTasksQuery,
-GetSelfTasksQueryVariables
->;
-export const GetSingleSelfTasksDocument = gql`
-  query GetSingleSelfTasks($where: TaskWhereUniqueInput!) {
-    task(where: $where) {
-      title
-      description
-      id
-      status_task
-      total_time_spent
-      start_date
-      end_date
-      created_at
-      user {
-        first_name
-        id
-        last_name
-        email
-        role
+export function useGetSelfTasksQuery(baseOptions: Apollo.QueryHookOptions<GetSelfTasksQuery, GetSelfTasksQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelfTasksQuery, GetSelfTasksQueryVariables>(GetSelfTasksDocument, options);
       }
-      comments {
-        id
-        content
-        user_task_comments {
-          first_name
-          last_name
+export function useGetSelfTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelfTasksQuery, GetSelfTasksQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelfTasksQuery, GetSelfTasksQueryVariables>(GetSelfTasksDocument, options);
         }
+export type GetSelfTasksQueryHookResult = ReturnType<typeof useGetSelfTasksQuery>;
+export type GetSelfTasksLazyQueryHookResult = ReturnType<typeof useGetSelfTasksLazyQuery>;
+export type GetSelfTasksQueryResult = Apollo.QueryResult<GetSelfTasksQuery, GetSelfTasksQueryVariables>;
+export const GetSingleSelfTasksDocument = gql`
+    query GetSingleSelfTasks($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    title
+    description
+    id
+    status_task
+    total_time_spent
+    start_date
+    end_date
+    created_at
+    user {
+      first_name
+      id
+      last_name
+      email
+      role
+    }
+    comments {
+      id
+      content
+      user_task_comments {
+        first_name
+        last_name
       }
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetSingleSelfTasksQuery__
@@ -6355,37 +6242,14 @@ export const GetSingleSelfTasksDocument = gql`
  *   },
  * });
  */
-export function useGetSingleSelfTasksQuery(
-  baseOptions: Apollo.QueryHookOptions<
-  GetSingleSelfTasksQuery,
-  GetSingleSelfTasksQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-  GetSingleSelfTasksQuery,
-  GetSingleSelfTasksQueryVariables
-  >(GetSingleSelfTasksDocument, options);
-}
-export function useGetSingleSelfTasksLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-  GetSingleSelfTasksQuery,
-  GetSingleSelfTasksQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-  GetSingleSelfTasksQuery,
-  GetSingleSelfTasksQueryVariables
-  >(GetSingleSelfTasksDocument, options);
-}
-export type GetSingleSelfTasksQueryHookResult = ReturnType<
-  typeof useGetSingleSelfTasksQuery
->;
-export type GetSingleSelfTasksLazyQueryHookResult = ReturnType<
-  typeof useGetSingleSelfTasksLazyQuery
->;
-export type GetSingleSelfTasksQueryResult = Apollo.QueryResult<
-GetSingleSelfTasksQuery,
-GetSingleSelfTasksQueryVariables
->;
+export function useGetSingleSelfTasksQuery(baseOptions: Apollo.QueryHookOptions<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>(GetSingleSelfTasksDocument, options);
+      }
+export function useGetSingleSelfTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>(GetSingleSelfTasksDocument, options);
+        }
+export type GetSingleSelfTasksQueryHookResult = ReturnType<typeof useGetSingleSelfTasksQuery>;
+export type GetSingleSelfTasksLazyQueryHookResult = ReturnType<typeof useGetSingleSelfTasksLazyQuery>;
+export type GetSingleSelfTasksQueryResult = Apollo.QueryResult<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>;

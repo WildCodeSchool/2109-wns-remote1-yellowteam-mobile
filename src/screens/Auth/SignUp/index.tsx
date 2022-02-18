@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { View } from 'react-native';
 import {
@@ -8,36 +9,31 @@ import {
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/native';
 import { ProfileAvatar } from './extra/profile-avatar.component';
-import { PlusIcon } from './extra/icons';
 import KeyboardAvoidingView from './extra/3rd-party';
+import { ISigngleNavigationProps } from '../../../../interfaces/global';
 
-export default function SignUp(): React.ReactElement {
-  const navigation = useNavigation();
-
+export default function SignUp({
+  navigation,
+}: ISigngleNavigationProps): React.ReactElement {
   const [userName, setUserName] = React.useState<string>();
   const [email, setEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
   const [termsAccepted, setTermsAccepted] = React.useState<boolean>(false);
-  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
+  const [passwordVisible] = React.useState<boolean>(false);
 
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp2');
+    navigation.navigate('SignUp2');
   };
 
   const onSignInButtonPress = (): void => {
-    navigation && navigation.navigate('SignIn3');
-  };
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
+    navigation.navigate('SignIn3');
   };
 
   const renderEditAvatarButton = (): React.ReactElement => (
-    <Button style={styles.editAvatarButton} status="basic" icon={PlusIcon} />
+    <Button style={styles.editAvatarButton} status="basic" />
   );
 
   return (

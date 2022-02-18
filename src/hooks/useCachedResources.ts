@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable no-console */
 import { FontAwesome } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,7 +12,7 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
+        await SplashScreen.preventAutoHideAsync();
 
         // Load fonts
         await Font.loadAsync({
@@ -22,11 +24,11 @@ export default function useCachedResources() {
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        SplashScreen.hideAsync();
+        await SplashScreen.hideAsync();
       }
     }
 
-    loadResourcesAndDataAsync();
+    loadResourcesAndDataAsync().catch((r) => console.log(r));
   }, []);
 
   return isLoadingComplete;

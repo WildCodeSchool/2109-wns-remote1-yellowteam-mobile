@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
 import React from 'react';
 import { Image, ImageRequireSource } from 'react-native';
 

@@ -6,7 +6,7 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 function TabNavigator() {
   return (
-    <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+    <Navigator tabBar={BottomTabBar}>
       <Screen name="HomeScreen" component={HomeScreen} />
     </Navigator>
   );
