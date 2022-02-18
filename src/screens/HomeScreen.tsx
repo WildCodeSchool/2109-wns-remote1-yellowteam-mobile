@@ -1,5 +1,6 @@
-import { Icon, Spinner } from '@ui-kitten/components';
+import { Card, Icon, Spinner } from '@ui-kitten/components';
 import { Image, StyleSheet } from 'react-native';
+import Pie from '../components/Pie';
 import { Text, View } from '../components/Themed';
 import { useGetSelfTasksStatusQuery } from '../generated/graphql';
 import useReduxUserState from '../hooks/useUserState';
@@ -42,25 +43,31 @@ export default function HomeScreen() {
   });
 
   if (!data || loading) return <Spinner />;
-  // const finishedTasks = () =>
-  //   data?.user.tasks.filter((task) => task.status_task === 'FIHISHED');
-  // const inProgressTasks = () =>
-  //   data?.user.tasks.filter((task) => task.status_task === 'IN_PROGRESS');
-  // const notStartedTasks = () =>
-  //   data?.user.tasks.filter((task) => task.status_task === 'NOT_STARTED');
+  const finishedTasks = () =>
+    data?.user.tasks.filter((task) => task.status_task === 'FIHISHED');
+  const inProgressTasks = () =>
+    data?.user.tasks.filter((task) => task.status_task === 'IN_PROGRESS');
+  const notStartedTasks = () =>
+    data?.user.tasks.filter((task) => task.status_task === 'NOT_STARTED');
 
   return (
     <View style={styles.container}>
       {user.id && (
-        <View style={styles.card}>
-          <Icon name="calendar" style={{ width: 50, height: 50 }} />
-          <Text style={styles.textCard}>
-            {`Welcome back ${user.first_name} ${user.last_name}`}
-          </Text>
-
-          <Image source={{ uri: user.avatar }} style={styles.avatar} />
-        </View>
+        <Card style={styles.card}>
+          <View style={styles.card}>
+            <Image source={{ uri: user.avatar }} style={styles.avatar} />
+            <Text style={styles.textCard}>
+              {`Welcome back ${user.first_name} ${user.last_name}`}
+            </Text>
+          </View>
+        </Card>
       )}
+      <Pie
+        tasksDatas={{
+          complete: finishedTasks().length,
+          total: data.user.tasks.length,
+        }}
+      />
     </View>
   );
 }
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   container: {
-    paddingVertical: 50,
+    paddingTop: 80,
     padding: 15,
     flex: 1,
     alignItems: 'center',
@@ -86,16 +93,17 @@ const styles = StyleSheet.create({
     width: '50%',
   },
   textCard: {
-    padding: 15,
     fontSize: 15,
     fontWeight: 'bold',
   },
   card: {
+    marginVertical: 4,
     width: '100%',
     display: 'flex',
+    padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
   },
   separator: {
     marginVertical: 30,
