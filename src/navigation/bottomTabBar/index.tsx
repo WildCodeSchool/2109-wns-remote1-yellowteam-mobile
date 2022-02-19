@@ -20,8 +20,8 @@ function BottomTabBar({ navigation, state }: BottomTabBarProps) {
       selectedIndex={state.index}
       onSelect={(index) => navigation.navigate(state.routeNames[index])}
     >
-      <BottomNavigationTab icon={PersonIcon} title="HomeScreen" />
-      <BottomNavigationTab icon={ProfileIcon} title="ProfileScreen" />
+      <BottomNavigationTab icon={PersonIcon} title="Home" />
+      <BottomNavigationTab icon={ProfileIcon} title="Profile" />
     </BottomNavigation>
   );
 }

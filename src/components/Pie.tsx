@@ -50,39 +50,22 @@ export default function Pie({ tasksDatas }: Props) {
 }
 
 const styles = StyleSheet.create({
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 100,
-  },
   container: {
     flex: 1,
     width: '100%',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  pie: {
-    width: '50%',
-  },
+
   textCard: {
     fontSize: 15,
     fontWeight: 'bold',
   },
   card: {
-    marginVertical: 4,
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });

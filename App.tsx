@@ -7,7 +7,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppearanceProvider } from 'react-native-appearance';
-import { Platform } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import Constants from 'expo-constants';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import * as Notifications from 'expo-notifications';
@@ -38,21 +38,21 @@ Notifications.setNotificationHandler({
 });
 
 const loadingTasks: Task[] = [
-  // () =>
-  //   LoadFontsTask({
-  //     'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
-  //     'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
-  //   }),
-  // () =>
-  //   AppStorage.getMapping(defaultConfig.mapping).then((result) => [
-  //     'mapping',
-  //     result,
-  //   ]),
-  // () =>
-  //   AppStorage.getTheme(defaultConfig.theme).then((result) => [
-  //     'theme',
-  //     result,
-  //   ]),
+  () =>
+    LoadFontsTask({
+      'opensans-regular': require('./assets/fonts/opensans-regular.ttf'),
+      'roboto-regular': require('./assets/fonts/roboto-regular.ttf'),
+    }),
+  () =>
+    AppStorage.getMapping(defaultConfig.mapping).then((result) => [
+      'mapping',
+      result,
+    ]),
+  () =>
+    AppStorage.getTheme(defaultConfig.theme).then((result) => [
+      'theme',
+      result,
+    ]),
 ];
 
 const defaultConfig: { mapping: Mapping; theme: string } = {
@@ -117,7 +117,7 @@ function App({ mapping, theme }) {
             <Theming.MappingContext.Provider value={mappingContext}>
               <Theming.ThemeContext.Provider value={themeContext}>
                 <SafeAreaProvider>
-                  {/* <StatusBar /> */}
+                  <StatusBar />
                   <AppNavigator />
                 </SafeAreaProvider>
               </Theming.ThemeContext.Provider>

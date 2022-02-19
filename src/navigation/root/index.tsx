@@ -9,12 +9,45 @@ function TabNavigator() {
   return (
     <Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
       tabBar={BottomTabBar}
     >
-      <Screen name="HomeScreen" component={HomeScreen} />
-      <Screen name="ProfileScreen" component={ProfileScreen} />
+      <Screen
+        name="Home"
+        options={{
+          headerStyle: {
+            backgroundColor: '#0A2755',
+            borderBottomLeftRadius: 50,
+            height: 200,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            height: '100%',
+            padding: 30,
+          },
+        }}
+        component={HomeScreen}
+      />
+      <Screen
+        options={{
+          headerStyle: {
+            backgroundColor: '#0A2755',
+            borderBottomLeftRadius: 50,
+            height: 100,
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            height: '100%',
+            padding: 30,
+          },
+        }}
+        name="Profile"
+        component={ProfileScreen}
+      />
     </Navigator>
   );
 }
