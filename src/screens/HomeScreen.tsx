@@ -2,6 +2,7 @@ import { useRoute } from '@react-navigation/native';
 import { Button, Card, Icon, Spinner } from '@ui-kitten/components';
 import { useEffect, useRef } from 'react';
 import { Image, StyleSheet, Animated } from 'react-native';
+import SkeletonContent from 'react-native-skeleton-content';
 import Pie from '../components/Pie';
 import { Text, View } from '../components/Themed';
 import { useGetSelfTasksStatusQuery } from '../generated/graphql';
@@ -16,8 +17,9 @@ export default function HomeScreen({ navigation }) {
         id: user.id ? user.id : '',
       },
     },
+    onError: (err) => console.log(err),
   });
-  const route = useRoute();
+
   const slideIn = () => {
     Animated.timing(slideAnim, {
       toValue: 0,
@@ -42,36 +44,40 @@ export default function HomeScreen({ navigation }) {
     };
   }, [navigation]);
 
-  if (!data || loading) return <Spinner />;
-
   const finishedTasks = () =>
-    data?.user.tasks.filter((task) => task.status_task === 'FIHISHED');
+    data && data?.user.tasks.filter((task) => task.status_task === 'FIHISHED');
 
   return (
     <View style={styles.container}>
-      {user.id && (
-        <Animated.View
-          style={[
-            styles.fadingContainer,
-            {
-              translateY: slideAnim,
-            },
-          ]}
+      <View style={styles.card}>
+        <Image source={{ uri: user.avatar }} style={styles.avatar} />
+        <SkeletonContent
+          isLoading={loading}
+          containerStyle={{ flex: 1, width: '100%' }}
+          layout={[{ key: '1', width: '100%', height: 40, marginVertical: 2 }]}
         >
-          <View style={styles.card}>
-            <Image source={{ uri: user.avatar }} style={styles.avatar} />
-            <Text style={styles.textCard}>
-              {`Welcome back ${user.first_name} ${user.last_name}`}
-            </Text>
-          </View>
-        </Animated.View>
-      )}
-      <Pie
-        tasksDatas={{
-          complete: finishedTasks().length,
-          total: data.user.tasks.length,
-        }}
-      />
+          <Text style={styles.textCard}>
+            {`Welcome back ${user.first_name} ${user.last_name}`}
+          </Text>
+        </SkeletonContent>
+      </View>
+
+      <SkeletonContent
+        isLoading={loading}
+        containerStyle={{ flex: 1, width: '100%' }}
+        layout={[
+          { key: '1', width: '100%', height: 80, marginVertical: 2 },
+          { key: '2', width: '100%', height: 50, marginVertical: 2 },
+          { key: '3', width: '100%', height: 60, marginVertical: 2 },
+        ]}
+      >
+        <Pie
+          tasksDatas={{
+            complete: data && finishedTasks().length,
+            total: data && data.user.tasks.length,
+          }}
+        />
+      </SkeletonContent>
     </View>
   );
 }
@@ -80,18 +86,16 @@ const styles = StyleSheet.create({
   avatar: {
     width: 50,
     height: 50,
-    borderRadius: 100,
+    borderRadius: 10,
   },
   fadingContainer: {
-    zIndex: 999,
     width: '100%',
-    position: 'absolute',
     backgroundColor: 'powderblue',
   },
   container: {
-    position: 'absolute',
-    zIndex: 999,
-    backgroundColor: 'white',
+    width: '100%',
+
+    backgroundColor: '#F3F3F3F3',
     paddingHorizontal: 15,
     flex: 1,
     alignItems: 'center',
@@ -107,14 +111,16 @@ const styles = StyleSheet.create({
   textCard: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
+    marginHorizontal: 15,
   },
   card: {
+    marginVertical: 10,
     borderRadius: 5,
     color: 'white',
-    padding: 10,
-    position: 'absolute',
-    top: -50,
+    paddingHorizontal: 60,
+    paddingVertical: 20,
+    top: 0,
     borderWidth: 0,
     zIndex: 9999,
     width: '100%',
@@ -126,10 +132,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 1,
     shadowRadius: 3.84,
     elevation: 5,
-    backgroundColor: '#DC30FF',
     justifyContent: 'space-around',
   },
   separator: {

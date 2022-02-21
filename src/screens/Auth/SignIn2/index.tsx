@@ -33,6 +33,8 @@ export default function SignIn2({
         data: { email: formData.email, password: formData.password },
       },
       onCompleted: (res) => {
+        console.log(res);
+
         dispatchLogin(res.login);
       },
       onError: (e) => console.log('error', e),

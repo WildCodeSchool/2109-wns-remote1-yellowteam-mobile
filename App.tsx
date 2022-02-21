@@ -82,42 +82,42 @@ function App({ mapping, theme }) {
     theme,
   );
 
-  useEffect(() => {
-    registerForPushNotificationsAsync().then((token) =>
-      setExpoPushToken(token),
-    );
+  // useEffect(() => {
+  //   registerForPushNotificationsAsync().then((token) =>
+  //     setExpoPushToken(token),
+  //   );
 
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
+  //   notificationListener.current =
+  //     Notifications.addNotificationReceivedListener((notification) => {
+  //       setNotification(notification);
+  //     });
 
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
-      });
+  //   responseListener.current =
+  //     Notifications.addNotificationResponseReceivedListener((response) => {
+  //       console.log(response);
+  //     });
 
-    schedulePushNotification("C'est ok ca marche !");
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current,
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
+  //   schedulePushNotification("C'est ok ca marche !");
+  //   return () => {
+  //     Notifications.removeNotificationSubscription(
+  //       notificationListener.current,
+  //     );
+  //     Notifications.removeNotificationSubscription(responseListener.current);
+  //   };
+  // }, []);
 
   if (!isLoadingComplete) return null;
 
   return (
     <ApolloProvider client={client}>
-      <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
       <AppearanceProvider>
+        <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
         <Provider store={store}>
           <ApplicationProvider {...currentMapping} theme={currentTheme}>
             <Theming.MappingContext.Provider value={mappingContext}>
               <Theming.ThemeContext.Provider value={themeContext}>
                 <SafeAreaProvider>
-                  <StatusBar />
+                  {/* <StatusBar /> */}
                   <AppNavigator />
                 </SafeAreaProvider>
               </Theming.ThemeContext.Provider>

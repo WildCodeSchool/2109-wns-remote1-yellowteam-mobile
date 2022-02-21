@@ -1,6 +1,13 @@
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable global-require */
-import { Button, Card, Input, Modal } from '@ui-kitten/components';
+import {
+  Button,
+  Card,
+  Input,
+  Layout,
+  Modal,
+  ViewPager,
+} from '@ui-kitten/components';
 import React, { useState } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import {
@@ -11,39 +18,60 @@ import {
   Text,
   View,
 } from 'react-native';
+import {
+  useChangeSelfPasswordMutation,
+  useGetSelfTasksQuery,
+} from '../../generated/graphql';
+import PagerView from 'react-native-pager-view';
 
 import useReduxUserState from '../../hooks/useUserState';
+import PersonnalInformations from '../../components/Profile/PersonnalInformations';
+import ChangePasswordModal from '../../components/Modals/ChangePasswordModal';
 
 export default function ProfileScreen() {
   const { user, dispatchLogout } = useReduxUserState();
-  const [changePassword, setChangePassord] = useState<boolean>(false);
-  const { handleSubmit, register, control, resetField } = useForm();
+  const [changePassword, setChangePassword] = useState<boolean>(false);
+  const { handleSubmit, control, resetField } = useForm();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const avatarLink = () =>
     user.avatar
       ? { uri: user.avatar }
       : require('../../../assets/images/profilepictureplaceholder.jpeg');
 
-  const handleChangePassword = () => {
-    setChangePassord(true);
-  };
+  const [mutate, { data }] = useChangeSelfPasswordMutation();
 
-  const onSubmit = async (data: FieldValues) => {
-    console.log(data);
+  const onSubmit = async (formData: FieldValues) => {
+    await mutate({
+      variables: {
+        data: {
+          userId: user.id,
+          oldpassword: formData.oldpassword,
+          newPassword: formData.newpassword,
+        },
+      },
+      onCompleted: () => setChangePassord(false),
+    });
   };
-
+  const { data: tasks } = useGetSelfTasksQuery({
+    variables: {
+      where: {
+        id: user.id ? user.id : '',
+      },
+    },
+  });
   return (
     <View style={styles.container}>
-      <View style={{ position: 'absolute', zIndex: 5 }}>
+      <View style={{ position: 'absolute', zIndex: 5, top: -130 }}>
         <ImageBackground
-          resizeMode="stretch"
+          resizeMode="contain"
           style={styles.image}
           source={avatarLink()}
         />
       </View>
       <View
         style={{
-          height: '80%',
+          height: '72%',
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50,
           overflow: 'hidden',
@@ -55,82 +83,20 @@ export default function ProfileScreen() {
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'center',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 11,
+          },
+          shadowOpacity: 0.57,
+          shadowRadius: 15.19,
+          elevation: 23,
         }}
       >
-        <Modal
-          style={{ width: '80%' }}
-          backdropStyle={styles.backdrop}
+        <ChangePasswordModal
           visible={changePassword}
-        >
-          <Card style={{ width: '100%' }} disabled>
-            <Text>Change your password here ⚠️</Text>
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  onChangeText={(v) => onChange(v)}
-                  placeholder="Old Password"
-                  value={value}
-                  onBlur={onBlur}
-                  size="large"
-                  style={styles.input}
-                />
-              )}
-              name="oldpassword"
-              rules={{ required: true }}
-            />
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  onChangeText={(v) => onChange(v)}
-                  placeholder="New Password"
-                  value={value}
-                  onBlur={onBlur}
-                  size="large"
-                  style={styles.input}
-                />
-              )}
-              name="newpassword"
-              rules={{ required: true }}
-            />
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  onChangeText={(v) => onChange(v)}
-                  placeholder="Confiorm Password"
-                  value={value}
-                  onBlur={onBlur}
-                  size="large"
-                  style={styles.input}
-                />
-              )}
-              name="confirmpassword"
-              rules={{ required: true }}
-            />
-
-            <Button
-              style={styles.button}
-              status="primary"
-              onPress={handleSubmit(onSubmit)}
-            >
-              CONFIRMER
-            </Button>
-            <Button
-              style={styles.button}
-              status="danger"
-              onPress={() => {
-                setChangePassord(false);
-                resetField('oldpassword');
-                resetField('newpassword');
-                resetField('confirmpassword');
-              }}
-            >
-              ANNULER
-            </Button>
-          </Card>
-        </Modal>
+          setChangePassword={setChangePassword}
+        />
 
         <View style={{ width: '100%', padding: 30 }}>
           <View
@@ -149,68 +115,118 @@ export default function ProfileScreen() {
             {user.email}
           </Text>
         </View>
-        <Button
-          style={{ width: '100%' }}
-          size="tiny"
-          onPress={() => {
-            AsyncStorage.setItem('x-authorization', '').catch((err) =>
-              console.log(err),
-            );
-            dispatchLogout();
-          }}
-        >
-          Disconect
-        </Button>
-        <ScrollView
+
+        <Card style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+          <Card style={{ width: 50, height: 50, backgroundColor: 'orange' }}>
+            <Text style={{ color: 'white', width: '100%', height: '100%' }}>
+              {tasks?.user.tasks.length}
+            </Text>
+          </Card>
+        </Card>
+
+        <ViewPager
+          swipeEnabled
+          selectedIndex={selectedIndex}
+          onSelect={(index) => setSelectedIndex(index)}
           style={{
             zIndex: 10,
             width: '100%',
             backgroundColor: 'white',
           }}
         >
-          <Card style={{ marginVertical: 2, zIndex: 5, width: '100%' }}>
-            <Text style={{ width: '100%' }}>Change personnal informations</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text onPress={handleChangePassword}>Change Password</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Support</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Change personnal informations</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Change Password</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Support</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Change personnal informations</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Change Password</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Support</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Change personnal informations</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Change Password</Text>
-          </Card>
-          <Card style={{ marginVertical: 2 }}>
-            <Text>Support</Text>
-          </Card>
-        </ScrollView>
+          <Layout level="2" style={styles.tab}>
+            <Card style={{ marginVertical: 2, zIndex: 5, width: '100%' }}>
+              <Text
+                onPress={() => setSelectedIndex(1)}
+                style={{ width: '100%' }}
+              >
+                Change personnal informations
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text onPress={() => setChangePassword(true)}>
+                Change Password
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text>Support</Text>
+            </Card>
+          </Layout>
+          <Layout level="2" style={styles.tab}>
+            <Card
+              onPress={() => setSelectedIndex(1)}
+              style={{ marginVertical: 2, zIndex: 5, width: '100%' }}
+            >
+              <Text style={{ width: '100%' }}>
+                Change personnal informations
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text onPress={() => setChangePassword(true)}>
+                Change Password
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text>Support</Text>
+            </Card>
+          </Layout>
+          <Layout level="2" style={styles.tab}>
+            <Card
+              onPress={() => setSelectedIndex(1)}
+              style={{ marginVertical: 2, zIndex: 5, width: '100%' }}
+            >
+              <Text style={{ width: '100%' }}>
+                Change personnal informations
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text onPress={() => setChangePassword(true)}>
+                Change Password
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text>Support</Text>
+            </Card>
+            <Card
+              onPress={() => {
+                AsyncStorage.setItem('x-authorization', '').catch((err) =>
+                  console.log(err),
+                );
+                dispatchLogout();
+              }}
+              style={{ marginVertical: 2, backgroundColor: 'gray' }}
+            >
+              <Text>disconnect</Text>
+            </Card>
+          </Layout>
+          <PersonnalInformations setSelectedIndex={setSelectedIndex} />
+          <Layout level="2" style={styles.tab}>
+            <Card style={{ marginVertical: 2, zIndex: 5, width: '100%' }}>
+              <Text style={{ width: '100%' }}>
+                Change personnal informations
+              </Text>
+            </Card>
+            <Card style={{ marginVertical: 2 }}>
+              <Text onPress={() => setChangePassword(true)}>
+                Change Password
+              </Text>
+            </Card>
+            {/* <Card style={{ marginVertical: 2 }}>
+              <Text>Support</Text>
+            </Card> */}
+          </Layout>
+        </ViewPager>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  tab: {
+    width: '100%',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
   avatar: {
     width: 50,
     height: 50,
@@ -252,9 +268,9 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'space-around',
   },
   separator: {
     marginVertical: 30,
