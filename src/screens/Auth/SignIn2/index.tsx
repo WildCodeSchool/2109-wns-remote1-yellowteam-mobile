@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-console */
 import React from 'react';
 import { View } from 'react-native';
+import { Controller, FieldValues, useForm } from 'react-hook-form';
 import {
   Button,
   Input,
@@ -17,29 +19,21 @@ import { useSignInMutation } from '../../../generated/graphql';
 export default function SignIn2({
   navigation,
 }: ISigngleNavigationProps): React.ReactElement {
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
   const [passwordVisible] = React.useState<boolean>(false);
   const { dispatchLogin } = useReduxUserState();
+  const { handleSubmit, control } = useForm();
 
-  const [mutate] = useSignInMutation({
-    variables: {
-      data: {
-        email,
-        password,
-      },
-    },
-  });
+  const [mutate] = useSignInMutation();
 
   const styles = useStyleSheet(themedStyles);
 
-  const onSignInButtonPress = async (): Promise<void> => {
-    console.log('signin');
-
+  const onSubmit = async (formData: FieldValues): Promise<void> => {
     await mutate({
-      variables: { data: { email, password } },
-      onCompleted: (data) => {
-        dispatchLogin(data.login);
+      variables: {
+        data: { email: formData.email, password: formData.password },
+      },
+      onCompleted: (res) => {
+        dispatchLogin(res.login);
       },
       onError: (e) => console.log('error', e),
     });
@@ -64,14 +58,39 @@ export default function SignIn2({
       </View>
 
       <Layout style={styles.formContainer} level="1">
-        <Input placeholder="Email" value={email} onChangeText={setEmail} />
-        <Input
-          style={styles.passwordInput}
-          placeholder="Password"
-          value={password}
-          secureTextEntry={!passwordVisible}
-          onChangeText={setPassword}
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              onChangeText={(v) => onChange(v)}
+              placeholder="Email"
+              value={value}
+              onBlur={onBlur}
+              size="large"
+              style={{ marginVertical: 10 }}
+            />
+          )}
+          name="email"
+          rules={{ required: true }}
         />
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              size="large"
+              style={{ marginVertical: 10 }}
+              onChangeText={(v) => onChange(v)}
+              placeholder="Pasword"
+              value={value}
+              onBlur={onBlur}
+              label="Password"
+              secureTextEntry={!passwordVisible}
+            />
+          )}
+          name="password"
+          rules={{ required: true }}
+        />
+
         <View style={styles.forgotPasswordContainer}>
           <Button
             style={styles.forgotPasswordButton}
@@ -84,7 +103,7 @@ export default function SignIn2({
         </View>
       </Layout>
       <Button
-        onPress={onSignInButtonPress}
+        onPress={handleSubmit(onSubmit)}
         style={styles.signInButton}
         size="giant"
       >
