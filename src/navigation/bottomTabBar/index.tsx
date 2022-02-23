@@ -7,7 +7,7 @@ import {
   Icon,
 } from '@ui-kitten/components';
 
-function PersonIcon(props) {
+function PersonIcon(props: T) {
   return <Icon {...props} name="home" />;
 }
 
