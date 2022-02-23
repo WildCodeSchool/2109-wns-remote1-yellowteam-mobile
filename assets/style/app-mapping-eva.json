@@ -1,7 +1,4 @@
 {
-  "strict": {
-    "text-font-family": "opensans-regular"
-  },
   "components": {
     "TopNavigation": {
       "meta": {

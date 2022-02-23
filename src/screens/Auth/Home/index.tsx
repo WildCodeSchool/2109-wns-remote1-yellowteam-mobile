@@ -1,58 +1,81 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable global-require */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from '@ui-kitten/components';
 import { ImageOverlay } from './extra/image-overlay.component';
 import { ISigngleNavigationProps } from '../../../../interfaces/global';
+import Login from '../../../components/Forms/Signin/Login';
+import KeyboardAvoidingView from './extra/3rd-party';
 
 export default function LoginHome({ navigation }: ISigngleNavigationProps) {
-  const onSignInButtonPress = (): void => {
-    navigation.navigate('SignIn');
-  };
-
-  const onSignUpButtonPress = (): void => {
-    navigation.navigate('SignUp');
-  };
   return (
-    <ImageOverlay
-      style={styles.container}
-      source={require('./assets/background2.jpg')}
-    >
-      <View style={styles.headerContainer}>
-        <Text style={{ fontSize: 60 }} category="h1" status="control">
+    <KeyboardAvoidingView style={{ height: '100%', backgroundColor: 'white' }}>
+      <View style={styles.header}>
+        <Text
+          style={{
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            fontSize: 50,
+            fontFamily: 'poppins-bold',
+          }}
+        >
           Y Task
         </Text>
-        <Text style={styles.signInLabel} category="s1" status="control">
-          Sign in to your account
+        <Text
+          style={{
+            color: '#242145',
+
+            fontSize: 25,
+            fontFamily: 'poppins-bold',
+          }}
+        >
+          manager
         </Text>
       </View>
-      <View>
-        <Button
-          style={styles.signInButton}
-          status="control"
-          size="giant"
-          onPress={onSignInButtonPress}
+      <Login />
+
+      <Text
+        style={{
+          color: 'black',
+          fontFamily: 'poppins-regular',
+          width: '100%',
+          textAlign: 'center',
+        }}
+      >
+        No account yet ?
+        <Text
+          onPress={() => navigation.navigate('SignUp')}
+          style={{ color: '#F69826' }}
         >
-          SIGN IN
-        </Button>
-        <Button
-          style={styles.signUpButton}
-          appearance="ghost"
-          status="control"
-          onPress={onSignUpButtonPress}
-        >
-          Don&apos;t have an account? Sign Up
-        </Button>
-      </View>
-    </ImageOverlay>
+          {' '}
+          Signup{' '}
+        </Text>
+        here !
+      </Text>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    flexDirection: 'column',
+  body: {
+    height: '60%',
+    width: '100%',
+  },
+  header: {
+    minHeight: 330,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '40%',
+    width: '100%',
+    backgroundColor: '#F69826',
+  },
+  title: {
+    color: 'white',
+    fontSize: 70,
+    fontWeight: 'bold',
   },
   headerContainer: {
     justifyContent: 'center',

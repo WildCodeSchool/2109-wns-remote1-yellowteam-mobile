@@ -96,12 +96,6 @@ export type BoolWithAggregatesFilter = {
   not?: InputMaybe<NestedBoolWithAggregatesFilter>;
 };
 
-export type ChangePasswordInput = {
-  newPassword: Scalars['String'];
-  oldpassword: Scalars['String'];
-  userId: Scalars['String'];
-};
-
 export type Comment = {
   __typename?: 'Comment';
   content: Scalars['String'];
@@ -1784,7 +1778,6 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  changePassword: Scalars['String'];
   createComment: Comment;
   createFile: File;
   createInvitation: Invitation;
@@ -1838,11 +1831,6 @@ export type Mutation = {
   upsertProject: Project;
   upsertTask: Task;
   upsertUser: User;
-};
-
-
-export type MutationChangePasswordArgs = {
-  data: ChangePasswordInput;
 };
 
 
@@ -2966,7 +2954,7 @@ export type ProjectCreateInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -2983,7 +2971,7 @@ export type ProjectCreateManyInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -2998,7 +2986,7 @@ export type ProjectCreateManyOwnerInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -3089,7 +3077,7 @@ export type ProjectCreateWithoutCommentsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3109,7 +3097,7 @@ export type ProjectCreateWithoutFilesInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3129,7 +3117,7 @@ export type ProjectCreateWithoutInvitationsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3149,7 +3137,7 @@ export type ProjectCreateWithoutOwnerInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3169,7 +3157,7 @@ export type ProjectCreateWithoutTasksInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3190,7 +3178,7 @@ export type ProjectCreateWithoutUsersInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent?: InputMaybe<Scalars['Int']>;
+  total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -4882,6 +4870,7 @@ export type User = {
   notifications: Array<Notification>;
   notifications_sent: Array<Notification>;
   owned_projects: Array<Project>;
+  password: Scalars['String'];
   project_comments: Array<Comment>;
   projects: Array<Project>;
   role: Array<Role>;
@@ -5913,13 +5902,6 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type ChangeSelfPasswordMutationVariables = Exact<{
-  data: ChangePasswordInput;
-}>;
-
-
-export type ChangeSelfPasswordMutation = { __typename?: 'Mutation', changePassword: string };
-
 export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5931,6 +5913,13 @@ export type SignInMutationVariables = Exact<{
 
 
 export type SignInMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
+export type SignUpMutationVariables = Exact<{
+  data: RegisterInput;
+}>;
+
+
+export type SignUpMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetSelfNotificationsQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -5987,37 +5976,6 @@ export type GetSingleSelfTasksQueryVariables = Exact<{
 export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', first_name: string, id: string, last_name: string, email: string, role: Array<Role> }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', first_name: string, last_name: string } }> } };
 
 
-export const ChangeSelfPasswordDocument = gql`
-    mutation ChangeSelfPassword($data: ChangePasswordInput!) {
-  changePassword(data: $data)
-}
-    `;
-export type ChangeSelfPasswordMutationFn = Apollo.MutationFunction<ChangeSelfPasswordMutation, ChangeSelfPasswordMutationVariables>;
-
-/**
- * __useChangeSelfPasswordMutation__
- *
- * To run a mutation, you first call `useChangeSelfPasswordMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useChangeSelfPasswordMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [changeSelfPasswordMutation, { data, loading, error }] = useChangeSelfPasswordMutation({
- *   variables: {
- *      data: // value for 'data'
- *   },
- * });
- */
-export function useChangeSelfPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ChangeSelfPasswordMutation, ChangeSelfPasswordMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<ChangeSelfPasswordMutation, ChangeSelfPasswordMutationVariables>(ChangeSelfPasswordDocument, options);
-      }
-export type ChangeSelfPasswordMutationHookResult = ReturnType<typeof useChangeSelfPasswordMutation>;
-export type ChangeSelfPasswordMutationResult = Apollo.MutationResult<ChangeSelfPasswordMutation>;
-export type ChangeSelfPasswordMutationOptions = Apollo.BaseMutationOptions<ChangeSelfPasswordMutation, ChangeSelfPasswordMutationVariables>;
 export const MutateMeDocument = gql`
     mutation MutateMe {
   me {
@@ -6093,6 +6051,44 @@ export function useSignInMutation(baseOptions?: Apollo.MutationHookOptions<SignI
 export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
 export type SignInMutationResult = Apollo.MutationResult<SignInMutation>;
 export type SignInMutationOptions = Apollo.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
+export const SignUpDocument = gql`
+    mutation SignUp($data: RegisterInput!) {
+  register(data: $data) {
+    id
+    first_name
+    last_name
+    email
+    avatar
+    role
+  }
+}
+    `;
+export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+
+/**
+ * __useSignUpMutation__
+ *
+ * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
+      }
+export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
+export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
+export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const GetSelfNotificationsDocument = gql`
     query GetSelfNotifications($where: UserWhereUniqueInput!) {
   user(where: $where) {

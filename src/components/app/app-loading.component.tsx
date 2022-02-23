@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable object-curly-newline */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable implicit-arrow-linebreak */
@@ -7,6 +8,7 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
+import * as Font from 'expo-font';
 
 type TaskResult = [string, any];
 export type Task = () => Promise<TaskResult | null>;
@@ -18,16 +20,21 @@ export interface ApplicationLoaderProps {
   children: (config: any) => React.ReactElement;
 }
 
-export const LoadFontsTask = (fonts: {
+export const LoadFontsTask = async (fonts: {
   [key: string]: number;
 }): Promise<TaskResult | null> => {
   const message: string = [
     'There is no need to use this task in Bare RN Project.',
-    'Use `react-native.config.js',
+    'Use `react-native.config.js  ',
     'Documentation: https://github.com/react-native-community/cli/blob/master/docs/configuration.md',
   ].join('\n');
-
+  const customFonts = {
+    'poppins-regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
+    'poppins-bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
+  };
+  const customFOnts = await Font.loadAsync(customFonts);
   console.warn(message);
+  console.warn(customFOnts);
 
   return Promise.resolve(null);
 };

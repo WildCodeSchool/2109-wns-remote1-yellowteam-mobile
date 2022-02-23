@@ -7,6 +7,7 @@ const useReduxUserState = () => {
   const dispatch = useDispatch();
 
   const dispatchLogin = (userPayload: IUser) => dispatch(login(userPayload));
+
   const dispatchLogout = () => dispatch(logout());
 
   return {

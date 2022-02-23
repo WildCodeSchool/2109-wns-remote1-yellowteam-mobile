@@ -1,15 +1,12 @@
-import { useRoute } from '@react-navigation/native';
-import { Button, Card, Icon, Spinner } from '@ui-kitten/components';
-import { useEffect, useRef } from 'react';
-import { Image, StyleSheet, Animated } from 'react-native';
+import { Spinner } from '@ui-kitten/components';
+import { Image, StyleSheet } from 'react-native';
 import SkeletonContent from 'react-native-skeleton-content';
 import Pie from '../components/Pie';
 import { Text, View } from '../components/Themed';
 import { useGetSelfTasksStatusQuery } from '../generated/graphql';
 import useReduxUserState from '../hooks/useUserState';
 
-export default function HomeScreen({ navigation }) {
-  const slideAnim = useRef(new Animated.Value(0)).current;
+export default function HomeScreen() {
   const { user } = useReduxUserState();
   const { data, loading } = useGetSelfTasksStatusQuery({
     variables: {
@@ -20,32 +17,10 @@ export default function HomeScreen({ navigation }) {
     onError: (err) => console.log(err),
   });
 
-  const slideIn = () => {
-    Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const slideOut = () => {
-    Animated.timing(slideAnim, {
-      toValue: -9990,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  useEffect(() => {
-    slideIn();
-
-    return function cleanup() {
-      slideOut();
-    };
-  }, [navigation]);
+  if (!data || loading) return <Spinner />;
 
   const finishedTasks = () =>
-    data && data?.user.tasks.filter((task) => task.status_task === 'FIHISHED');
+    data.user.tasks.filter((task) => task.status_task === 'FIHISHED');
 
   return (
     <View style={styles.container}>
@@ -73,8 +48,8 @@ export default function HomeScreen({ navigation }) {
       >
         <Pie
           tasksDatas={{
-            complete: data && finishedTasks().length,
-            total: data && data.user.tasks.length,
+            complete: finishedTasks().length,
+            total: data.user.tasks.length,
           }}
         />
       </SkeletonContent>

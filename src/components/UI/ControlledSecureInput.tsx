@@ -28,6 +28,7 @@ export default function ControlledSecureInput({
           onBlur={onBlur}
           size="large"
           style={styles.input}
+          textStyle={{ color: '#878787' }}
         />
       )}
       name={name}
@@ -38,6 +39,11 @@ export default function ControlledSecureInput({
 
 const styles = StyleSheet.create({
   input: {
-    marginVertical: 7,
+    marginVertical: 5,
+    backgroundColor: 'white',
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor: '#878787',
   },
 });

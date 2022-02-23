@@ -1,11 +1,11 @@
 /* eslint-disable object-curly-newline */
 import { Button, Card, Input, Modal } from '@ui-kitten/components';
 import React, { useState } from 'react';
-import { Controller, FieldValue, FieldValues, useForm } from 'react-hook-form';
+import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { StyleSheet, Text } from 'react-native';
 import { useChangeSelfPasswordMutation } from '../../generated/graphql';
 import useReduxUserState from '../../hooks/useUserState';
-import ControlledSecureInput from '../UI/ControlledSecureInputInput';
+import ControlledSecureInput from '../UI/ControlledSecureInput';
 
 interface IProps {
   visible: boolean;
