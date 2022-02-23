@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   Button,
   CheckBox,
@@ -12,13 +12,11 @@ import {
 import { ProfileAvatar } from './extra/profile-avatar.component';
 import KeyboardAvoidingView from './extra/3rd-party';
 import { ISigngleNavigationProps } from '../../../../interfaces/global';
+import Register from '../../../components/Forms/SignUp/Register';
 
 export default function SignUp({
   navigation,
 }: ISigngleNavigationProps): React.ReactElement {
-  const [userName, setUserName] = React.useState<string>();
-  const [email, setEmail] = React.useState<string>();
-  const [password, setPassword] = React.useState<string>();
   const [termsAccepted, setTermsAccepted] = React.useState<boolean>(false);
   const [passwordVisible] = React.useState<boolean>(false);
 
@@ -38,57 +36,48 @@ export default function SignUp({
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <ProfileAvatar
-          style={styles.profileAvatar}
-          resizeMode="center"
-          source={require('./assets/image-person.png')}
-          editButton={renderEditAvatarButton}
-        />
+      <View style={styles.header}>
+        <Text
+          style={{
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            fontSize: 50,
+            fontFamily: 'poppins-bold',
+          }}
+        >
+          Y Task
+        </Text>
+        <Text
+          style={{
+            color: '#242145',
+
+            fontSize: 25,
+            fontFamily: 'poppins-bold',
+          }}
+        >
+          manager
+        </Text>
       </View>
-      <Layout style={styles.formContainer} level="1">
-        <Input
-          autoCapitalize="none"
-          placeholder="User Name"
-          value={userName}
-          onChangeText={setUserName}
-        />
-        <Input
-          style={styles.emailInput}
-          autoCapitalize="none"
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Input
-          style={styles.passwordInput}
-          autoCapitalize="none"
-          secureTextEntry={!passwordVisible}
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-        />
-        <CheckBox
-          style={styles.termsCheckBox}
-          checked={termsAccepted}
-          onChange={(checked: boolean) => setTermsAccepted(checked)}
-        />
-      </Layout>
-      <Button
-        style={styles.signUpButton}
-        size="giant"
-        onPress={onSignUpButtonPress}
+      <Register />
+      <Text
+        style={{
+          color: 'black',
+          fontFamily: 'poppins-regular',
+          width: '100%',
+          textAlign: 'center',
+        }}
       >
-        SIGN UP
-      </Button>
-      <Button
-        style={styles.signInButton}
-        appearance="ghost"
-        status="basic"
-        onPress={onSignInButtonPress}
-      >
-        Already have an account? Sign In
-      </Button>
+        Allready got an account ?
+        <Text
+          onPress={() => navigation.navigate('Home')}
+          style={{ color: '#F69826' }}
+        >
+          {' '}
+          SignIn{' '}
+        </Text>
+        here !
+      </Text>
     </KeyboardAvoidingView>
   );
 }
@@ -97,11 +86,14 @@ const themedStyles = StyleService.create({
   container: {
     backgroundColor: 'background-basic-color-1',
   },
-  headerContainer: {
+  header: {
+    minHeight: 330,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 216,
-    backgroundColor: 'color-primary-default',
+    height: '40%',
+    width: '100%',
+    backgroundColor: '#F69826',
   },
   profileAvatar: {
     width: 116,

@@ -6,4 +6,5 @@ const { resolver: defaultResolver } = getDefaultConfig.getDefaultValues();
 exports.resolver = {
   ...defaultResolver,
   sourceExts: [...defaultResolver.sourceExts, 'cjs'],
+  customMappingPath: './assets/style/app-mapping-eva.json',
 };
