@@ -1,7 +1,4 @@
 {
-  "strict": {
-    "text-font-family": "roboto-regular"
-  },
   "components": {
     "StatusBar": {
       "meta": {

@@ -8,7 +8,7 @@ import {
 } from '@ui-kitten/components';
 
 function PersonIcon(props) {
-  return <Icon {...props} name="person-outline" />;
+  return <Icon {...props} name="home" />;
 }
 
 function BottomTabBar({ navigation, state }: BottomTabBarProps) {
@@ -17,7 +17,7 @@ function BottomTabBar({ navigation, state }: BottomTabBarProps) {
       selectedIndex={state.index}
       onSelect={(index) => navigation.navigate(state.routeNames[index])}
     >
-      <BottomNavigationTab icon={PersonIcon} title="HomeScreen" />
+      <BottomNavigationTab icon={PersonIcon} title="Home" />
     </BottomNavigation>
   );
 }

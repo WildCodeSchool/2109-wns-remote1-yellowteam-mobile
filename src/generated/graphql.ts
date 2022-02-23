@@ -5914,6 +5914,13 @@ export type SignInMutationVariables = Exact<{
 
 export type SignInMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
+export type SignUpMutationVariables = Exact<{
+  data: RegisterInput;
+}>;
+
+
+export type SignUpMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
 export type GetSelfNotificationsQueryVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
@@ -5932,6 +5939,13 @@ export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, projects: Array<{ __typename?: 'Project', id: string }> }> };
+
+export type GetSelfProfileInformationsQueryVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type GetSelfProfileInformationsQuery = { __typename?: 'Query', user: { __typename?: 'User', first_name: string, last_name: string, email: string } };
 
 export type GetSelfProjectsQueryVariables = Exact<{
   where: InputMaybe<ProjectWhereInput>;
@@ -6037,6 +6051,44 @@ export function useSignInMutation(baseOptions?: Apollo.MutationHookOptions<SignI
 export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
 export type SignInMutationResult = Apollo.MutationResult<SignInMutation>;
 export type SignInMutationOptions = Apollo.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
+export const SignUpDocument = gql`
+    mutation SignUp($data: RegisterInput!) {
+  register(data: $data) {
+    id
+    first_name
+    last_name
+    email
+    avatar
+    role
+  }
+}
+    `;
+export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+
+/**
+ * __useSignUpMutation__
+ *
+ * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
+      }
+export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
+export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
+export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const GetSelfNotificationsDocument = gql`
     query GetSelfNotifications($where: UserWhereUniqueInput!) {
   user(where: $where) {
@@ -6162,6 +6214,43 @@ export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
 export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
 export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAllUsersQueryVariables>;
+export const GetSelfProfileInformationsDocument = gql`
+    query getSelfProfileInformations($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    first_name
+    last_name
+    email
+  }
+}
+    `;
+
+/**
+ * __useGetSelfProfileInformationsQuery__
+ *
+ * To run a query within a React component, call `useGetSelfProfileInformationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSelfProfileInformationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSelfProfileInformationsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetSelfProfileInformationsQuery(baseOptions: Apollo.QueryHookOptions<GetSelfProfileInformationsQuery, GetSelfProfileInformationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelfProfileInformationsQuery, GetSelfProfileInformationsQueryVariables>(GetSelfProfileInformationsDocument, options);
+      }
+export function useGetSelfProfileInformationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelfProfileInformationsQuery, GetSelfProfileInformationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelfProfileInformationsQuery, GetSelfProfileInformationsQueryVariables>(GetSelfProfileInformationsDocument, options);
+        }
+export type GetSelfProfileInformationsQueryHookResult = ReturnType<typeof useGetSelfProfileInformationsQuery>;
+export type GetSelfProfileInformationsLazyQueryHookResult = ReturnType<typeof useGetSelfProfileInformationsLazyQuery>;
+export type GetSelfProfileInformationsQueryResult = Apollo.QueryResult<GetSelfProfileInformationsQuery, GetSelfProfileInformationsQueryVariables>;
 export const GetSelfProjectsDocument = gql`
     query GetSelfProjects($where: ProjectWhereInput) {
   projects(where: $where) {

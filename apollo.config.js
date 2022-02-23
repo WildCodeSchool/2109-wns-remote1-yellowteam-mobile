@@ -3,7 +3,7 @@ module.exports = {
   client: {
     service: {
       name: 'Ytask',
-      url: 'https://ytask.digitalcopilote.re/graphql',
+      url: 'http://localhost:4000/graphql',
     },
   },
 };
