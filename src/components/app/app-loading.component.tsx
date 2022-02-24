@@ -33,8 +33,8 @@ export const LoadFontsTask = async (fonts: {
     'poppins-bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
   };
   const customFOnts = await Font.loadAsync(customFonts);
-  console.warn(message);
-  console.warn(customFOnts);
+  // console.warn(message);
+  // console.warn(customFOnts);
 
   return Promise.resolve(null);
 };
@@ -48,7 +48,7 @@ export const LoadAssetsTask = (
     'Documentation: https://github.com/react-native-community/cli/blob/master/docs/configuration.md',
   ].join('\n');
 
-  console.warn(message);
+  // console.warn(message);
 
   return Promise.resolve(null);
 };
