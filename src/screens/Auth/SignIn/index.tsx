@@ -1,32 +1,35 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable global-require */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Text } from '@ui-kitten/components';
+import { StyleSheet, View, Text } from 'react-native';
 import { ISigngleNavigationProps } from '../../../../interfaces/global';
-import Login from '../../../components/Forms/Signin/Login';
 import KeyboardAvoidingView from './extra/3rd-party';
+import Login from '../../../components/Forms/Signin/Login';
 
 export default function LoginHome({ navigation }: ISigngleNavigationProps) {
   return (
     <KeyboardAvoidingView style={{ height: '100%', backgroundColor: 'white' }}>
       <View style={styles.header}>
+        <View
+          style={{
+            height: 55,
+          }}
+        >
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 50,
+              fontFamily: 'poppins-bold',
+              transform: [{ translateY: 5 }],
+            }}
+          >
+            Y Task
+          </Text>
+        </View>
         <Text
           style={{
             color: 'white',
-            display: 'flex',
-            flexDirection: 'column',
-            fontSize: 50,
-            fontFamily: 'poppins-bold',
-          }}
-        >
-          Y Task
-        </Text>
-        <Text
-          style={{
-            color: '#242145',
-
-            fontSize: 25,
+            fontSize: 32,
             fontFamily: 'poppins-bold',
           }}
         >
@@ -48,8 +51,7 @@ export default function LoginHome({ navigation }: ISigngleNavigationProps) {
           onPress={() => navigation.navigate('SignUp')}
           style={{ color: '#F69826' }}
         >
-          {' '}
-          Signup{' '}
+          Signup
         </Text>
         here !
       </Text>

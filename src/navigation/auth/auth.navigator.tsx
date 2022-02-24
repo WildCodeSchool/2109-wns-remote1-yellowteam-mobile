@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { AsyncStorage } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthTabParamList } from '../../../types';
-import HomeScreen from '../../screens/Auth/Home';
+import HomeScreen from '../../screens/Auth/SignIn';
 import SignUp from '../../screens/Auth/SignUp';
 import useReduxUserState from '../../hooks/useUserState';
 import { useMutateMeMutation } from '../../generated/graphql';

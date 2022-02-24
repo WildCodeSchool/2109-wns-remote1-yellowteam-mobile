@@ -67,8 +67,7 @@ export default function SignUp({
           onPress={() => navigation.navigate('Home')}
           style={{ color: '#F69826', padding: 20 }}
         >
-          {' '}
-          SignIn{' '}
+          SignIn
         </Text>
         here !
       </Text>
