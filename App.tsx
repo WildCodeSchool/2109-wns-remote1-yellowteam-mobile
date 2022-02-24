@@ -41,7 +41,6 @@ Notifications.setNotificationHandler({
     shouldSetBadge: true,
   }),
 });
-
 const loadingTasks: Task[] = [
   () =>
     LoadFontsTask({

@@ -32,7 +32,7 @@ export default function ControlledInput({ control, placeholder, name }: Props) {
 
 const styles = StyleSheet.create({
   input: {
-    marginVertical: 5,
+    marginVertical: 3,
     backgroundColor: 'white',
     borderColor: '#878787',
     borderTopWidth: 0,

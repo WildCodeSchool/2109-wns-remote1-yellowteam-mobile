@@ -1,15 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable global-require */
 import React from 'react';
 import { Text, View } from 'react-native';
-import {
-  Button,
-  CheckBox,
-  Input,
-  Layout,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components';
-import { ProfileAvatar } from './extra/profile-avatar.component';
+import { Button, StyleService, useStyleSheet } from '@ui-kitten/components';
 import KeyboardAvoidingView from './extra/3rd-party';
 import { ISigngleNavigationProps } from '../../../../interfaces/global';
 import Register from '../../../components/Forms/SignUp/Register';
@@ -59,6 +52,7 @@ export default function SignUp({
           manager
         </Text>
       </View>
+
       <Register />
       <Text
         style={{
@@ -71,7 +65,7 @@ export default function SignUp({
         Allready got an account ?
         <Text
           onPress={() => navigation.navigate('Home')}
-          style={{ color: '#F69826' }}
+          style={{ color: '#F69826', padding: 20 }}
         >
           {' '}
           SignIn{' '}

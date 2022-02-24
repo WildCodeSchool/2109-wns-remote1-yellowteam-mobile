@@ -1,9 +1,11 @@
 /* eslint-disable linebreak-style */
-module.exports = {
+import 'dotenv/config';
+
+export default {
   client: {
     service: {
       name: 'Ytask',
-      url: 'http://localhost:4000/graphql',
+      url: process.env.REACT_APP_SERVER_URL,
     },
   },
 };

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { Card, styled, Text } from '@ui-kitten/components';
+import { Card, Text } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { PieChart } from 'react-native-gifted-charts';

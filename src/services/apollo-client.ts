@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 
 const httpLink = createHttpLink({
-  uri: 'http://192.168.1.12:5000/graphql',
+  uri: process.env.REACT_APP_SERVER_URL,
   headers: {
     'platform-auth-user-agent': 'mobile-platform',
   },

@@ -39,7 +39,7 @@ export default function ControlledSecureInput({
 
 const styles = StyleSheet.create({
   input: {
-    marginVertical: 5,
+    marginVertical: 3,
     backgroundColor: 'white',
     borderTopWidth: 0,
     borderLeftWidth: 0,

@@ -2,8 +2,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Text } from '@ui-kitten/components';
-import { ImageOverlay } from './extra/image-overlay.component';
+import { Text } from '@ui-kitten/components';
 import { ISigngleNavigationProps } from '../../../../interfaces/global';
 import Login from '../../../components/Forms/Signin/Login';
 import KeyboardAvoidingView from './extra/3rd-party';
