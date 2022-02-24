@@ -7,8 +7,10 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 
+const { REACT_APP_SERVER_URL } = process.env;
+
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_SERVER_URL,
+  uri: REACT_APP_SERVER_URL,
   headers: {
     'platform-auth-user-agent': 'mobile-platform',
   },
