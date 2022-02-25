@@ -67,6 +67,7 @@
     "react-hook-form": "^7.27.0",
     "react-native": "0.64.3",
     "react-native-appearance": "^0.3.4",
+    "react-native-async-storage": "^0.0.1",
     "react-native-calendar-slider-carousel": "^1.1.0",
     "react-native-calendar-strip": "^2.2.5",
     "react-native-dotenv": "^3.3.1",
@@ -86,7 +87,8 @@
     "react-redux": "^7.2.6",
     "undefined": "@material-ui/core/Paper",
     "universal-cookie": "^4.0.4",
-    "victory-native": "^36.3.0"
+    "victory-native": "^36.3.0",
+    "@react-native-async-storage/async-storage": "~1.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.4",
