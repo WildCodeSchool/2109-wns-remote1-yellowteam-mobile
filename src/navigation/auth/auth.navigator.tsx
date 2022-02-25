@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 /* eslint-disable no-console */
-import { AsyncStorage } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthTabParamList } from '../../../types';
 import HomeScreen from '../../screens/Auth/SignIn';
 import SignUp from '../../screens/Auth/SignUp';
@@ -14,7 +14,9 @@ const Stack = createStackNavigator<AuthTabParamList>();
 export default function AuthNavigator() {
   const { dispatchLogin } = useReduxUserState();
   const [me] = useMutateMeMutation({
-    onCompleted: (data) => dispatchLogin(data.me),
+    onCompleted: (data) => {
+      dispatchLogin(data.me);
+    },
     onError: (e) => {
       console.log(e);
       AsyncStorage.setItem('x-authorization', '').catch((err) =>
