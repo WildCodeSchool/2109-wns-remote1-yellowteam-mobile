@@ -16,15 +16,20 @@ function TabNavigator() {
         name="Home"
         options={{
           headerStyle: {
-            backgroundColor: '#0A2755',
-            borderBottomLeftRadius: 50,
-            height: 120,
+            height: 110,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0,
+              width: 0,
+            },
           },
           headerTintColor: '#fff',
+          headerTitleAlign: 'left',
           headerTitleStyle: {
             fontWeight: 'bold',
-            height: '100%',
-            padding: 30,
+            fontSize: 30,
+            color: '#626262',
+            paddingBottom: 40,
           },
         }}
         component={HomeScreen}
