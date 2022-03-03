@@ -28,6 +28,7 @@
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo/vector-icons": "^12.0.0",
     "@notifee/react-native": "^4.1.0",
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/art": "github:react-native-community/art",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-cookies/cookies": "^6.0.11",
@@ -60,6 +61,7 @@
     "expo-status-bar": "~1.2.0",
     "expo-web-browser": "~10.1.0",
     "graphql": "^16.3.0",
+    "luxon": "^2.3.1",
     "npm": "^8.5.1",
     "npm-force-resolutions": "^0.0.10",
     "react": "17.0.1",
@@ -87,8 +89,7 @@
     "react-redux": "^7.2.6",
     "undefined": "@material-ui/core/Paper",
     "universal-cookie": "^4.0.4",
-    "victory-native": "^36.3.0",
-    "@react-native-async-storage/async-storage": "~1.15.0"
+    "victory-native": "^36.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.4",
@@ -99,6 +100,7 @@
     "@graphql-codegen/typescript": "^2.4.1",
     "@graphql-codegen/typescript-operations": "^2.2.1",
     "@graphql-codegen/typescript-react-apollo": "^3.2.2",
+    "@types/luxon": "^2.0.9",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "@types/react-native-safari-view": "^2.0.5",

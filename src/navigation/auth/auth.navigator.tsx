@@ -15,6 +15,9 @@ export default function AuthNavigator() {
   const { dispatchLogin } = useReduxUserState();
   const [me] = useMutateMeMutation({
     onCompleted: (data) => {
+      console.log('====================================');
+      console.log(data);
+      console.log('====================================');
       dispatchLogin(data.me);
     },
     onError: (e) => {

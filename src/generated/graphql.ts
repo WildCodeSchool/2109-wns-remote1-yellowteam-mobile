@@ -2954,7 +2954,7 @@ export type ProjectCreateInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -2971,7 +2971,7 @@ export type ProjectCreateManyInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -2986,7 +2986,7 @@ export type ProjectCreateManyOwnerInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -3077,7 +3077,7 @@ export type ProjectCreateWithoutCommentsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3097,7 +3097,7 @@ export type ProjectCreateWithoutFilesInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3117,7 +3117,7 @@ export type ProjectCreateWithoutInvitationsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3137,7 +3137,7 @@ export type ProjectCreateWithoutOwnerInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3157,7 +3157,7 @@ export type ProjectCreateWithoutTasksInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3178,7 +3178,7 @@ export type ProjectCreateWithoutUsersInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5928,6 +5928,13 @@ export type GetSelfNotificationsQueryVariables = Exact<{
 
 export type GetSelfNotificationsQuery = { __typename?: 'Query', user: { __typename?: 'User', notifications: Array<{ __typename?: 'Notification', id: string, title: string, content: string, status: Status_Notification, created_at: any, is_disabled: boolean, sender: { __typename?: 'User', first_name: string, last_name: string } }> } };
 
+export type GetAllTasksByProjectQueryVariables = Exact<{
+  where: ProjectWhereInput;
+}>;
+
+
+export type GetAllTasksByProjectQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', tasks: Array<{ __typename?: 'Task', id: string, title: string, description: string, status_task: Status, start_date: any, end_date: any }> }> };
+
 export type GetAllAssignedUserProjectsQueryVariables = Exact<{
   where: InputMaybe<ProjectWhereInput>;
 }>;
@@ -6135,6 +6142,48 @@ export function useGetSelfNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type GetSelfNotificationsQueryHookResult = ReturnType<typeof useGetSelfNotificationsQuery>;
 export type GetSelfNotificationsLazyQueryHookResult = ReturnType<typeof useGetSelfNotificationsLazyQuery>;
 export type GetSelfNotificationsQueryResult = Apollo.QueryResult<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>;
+export const GetAllTasksByProjectDocument = gql`
+    query getAllTasksByProject($where: ProjectWhereInput!) {
+  projects(where: $where) {
+    tasks {
+      id
+      title
+      description
+      status_task
+      start_date
+      end_date
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllTasksByProjectQuery__
+ *
+ * To run a query within a React component, call `useGetAllTasksByProjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllTasksByProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllTasksByProjectQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetAllTasksByProjectQuery(baseOptions: Apollo.QueryHookOptions<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>(GetAllTasksByProjectDocument, options);
+      }
+export function useGetAllTasksByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>(GetAllTasksByProjectDocument, options);
+        }
+export type GetAllTasksByProjectQueryHookResult = ReturnType<typeof useGetAllTasksByProjectQuery>;
+export type GetAllTasksByProjectLazyQueryHookResult = ReturnType<typeof useGetAllTasksByProjectLazyQuery>;
+export type GetAllTasksByProjectQueryResult = Apollo.QueryResult<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>;
 export const GetAllAssignedUserProjectsDocument = gql`
     query GetAllAssignedUserProjects($where: ProjectWhereInput) {
   projects(where: $where) {
