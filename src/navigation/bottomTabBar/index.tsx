@@ -10,6 +10,9 @@ import {
 function PersonIcon(props: unknown) {
   return <Icon {...props} name="home" />;
 }
+function NotificationIcon(props: unknown) {
+  return <Icon {...props} name="bell-outline" />;
+}
 
 function BottomTabBar({ navigation, state }: BottomTabBarProps) {
   return (
@@ -18,6 +21,7 @@ function BottomTabBar({ navigation, state }: BottomTabBarProps) {
       onSelect={(index) => navigation.navigate(state.routeNames[index])}
     >
       <BottomNavigationTab icon={PersonIcon} title="Home" />
+      <BottomNavigationTab icon={NotificationIcon} title="Home" />
     </BottomNavigation>
   );
 }

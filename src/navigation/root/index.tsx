@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../screens/HomeScreen';
+import NotificationsScreen from '../../screens/NotificationsScreen';
 import BottomTabBar from '../bottomTabBar';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -16,18 +17,33 @@ function TabNavigator() {
         name="Home"
         options={{
           headerStyle: {
-            backgroundColor: '#0A2755',
-            borderBottomLeftRadius: 50,
-            height: 120,
+            borderBottomColor: 'white',
           },
-          headerTintColor: '#fff',
           headerTitleStyle: {
+            width: '100%',
+            color: 'black',
             fontWeight: 'bold',
             height: '100%',
-            padding: 30,
+            padding: 3,
           },
         }}
         component={HomeScreen}
+      />
+      <Screen
+        name="Notifications"
+        options={{
+          headerStyle: {
+            borderBottomColor: 'white',
+          },
+          headerTitleStyle: {
+            width: '100%',
+            color: 'black',
+            fontWeight: 'bold',
+            height: '100%',
+            padding: 3,
+          },
+        }}
+        component={NotificationsScreen}
       />
     </Navigator>
   );

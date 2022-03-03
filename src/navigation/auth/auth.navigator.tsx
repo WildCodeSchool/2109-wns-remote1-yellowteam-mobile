@@ -15,11 +15,12 @@ export default function AuthNavigator() {
   const { dispatchLogin } = useReduxUserState();
   const [me] = useMutateMeMutation({
     onCompleted: (data) => {
+      console.log(data);
       dispatchLogin(data.me);
     },
     onError: (e) => {
       console.log(e);
-      AsyncStorage.setItem('x-authorization', '').catch((err) =>
+      AsyncStorage.removeItem('x-authorization').catch((err) =>
         console.log(err),
       );
     },
