@@ -10,7 +10,7 @@ const DateCard = ({ item, index, selectedDay }) => {
           { color: selectedDay.index === index ? 'orange' : 'gray' })
         }
       >
-        {item.day.split(' ')[2]}
+        {item.day.split(' ')[0]}
       </Text>
       <Text
         style={{
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 57,
+    marginHorizontal: 4,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Layout } from '@ui-kitten/components';
 import React from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
 import { useSignInMutation } from '../../../generated/graphql';
 import useReduxUserState from '../../../hooks/useUserState';
-import ControlledInput from '../../UI/ControlledInput';
-import ControlledSecureInput from '../../UI/ControlledSecureInput';
+import ControlledInput from '../../UI/FormControls/ControlledInput';
+import ControlledSecureInput from '../../UI/FormControls/ControlledSecureInput';
 
 export default function Login() {
   const { handleSubmit, control } = useForm();
@@ -20,7 +21,12 @@ export default function Login() {
         data: { email: formData.email, password: formData.password },
       },
       onCompleted: (res) => {
+        console.log(res);
         dispatchLogin(res.login);
+        AsyncStorage.setItem(
+          'x-authorization',
+          res.headers['x-authorization'],
+        ).catch((err) => console.log(err));
       },
       onError: (e) => console.log('error', e),
     });

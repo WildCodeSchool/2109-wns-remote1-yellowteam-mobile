@@ -1,28 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 /* eslint-disable no-console */
 import { createStackNavigator } from '@react-navigation/stack';
+import { Spinner } from '@ui-kitten/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthTabParamList } from '../../../types';
 import HomeScreen from '../../screens/Auth/Home';
-import SignUp from '../../screens/Auth/SignUp';
 import useReduxUserState from '../../hooks/useUserState';
 import { useMutateMeMutation } from '../../generated/graphql';
 
 const Stack = createStackNavigator<AuthTabParamList>();
 
 export default function AuthNavigator() {
-  const { dispatchLogin } = useReduxUserState();
+  const { dispatchLogin, isAuth } = useReduxUserState();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [me] = useMutateMeMutation({
     onCompleted: (data) => {
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
+      setIsLoading(false);
       dispatchLogin(data.me);
     },
     onError: (e) => {
-      console.log(e);
-      AsyncStorage.setItem('x-authorization', '').catch((err) =>
+      setIsLoading(false);
+      AsyncStorage.removeItem('x-authorization').catch((err) =>
         console.log(err),
       );
     },
@@ -32,6 +31,8 @@ export default function AuthNavigator() {
     me().catch((err) => console.log(err));
   }, []);
 
+  if (isLoading && !isAuth) return <Spinner />;
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -39,7 +40,7 @@ export default function AuthNavigator() {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="SignUp" component={SignUp} />
+      {/* <Stack.Screen name="SignUp" component={SignUp} /> */}
     </Stack.Navigator>
   );
 }

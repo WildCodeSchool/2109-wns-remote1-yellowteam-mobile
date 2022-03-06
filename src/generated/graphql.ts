@@ -4147,6 +4147,11 @@ export type StringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  newNotification: Scalars['String'];
+};
+
 export type Task = {
   __typename?: 'Task';
   _count: Maybe<TaskCount>;
@@ -5982,6 +5987,11 @@ export type GetSingleSelfTasksQueryVariables = Exact<{
 
 export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', first_name: string, id: string, last_name: string, email: string, role: Array<Role> }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', first_name: string, last_name: string } }> } };
 
+export type TestSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestSubscription = { __typename?: 'Subscription', newNotification: string };
+
 
 export const MutateMeDocument = gql`
     mutation MutateMe {
@@ -6477,3 +6487,30 @@ export function useGetSingleSelfTasksLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type GetSingleSelfTasksQueryHookResult = ReturnType<typeof useGetSingleSelfTasksQuery>;
 export type GetSingleSelfTasksLazyQueryHookResult = ReturnType<typeof useGetSingleSelfTasksLazyQuery>;
 export type GetSingleSelfTasksQueryResult = Apollo.QueryResult<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>;
+export const TestDocument = gql`
+    subscription test {
+  newNotification
+}
+    `;
+
+/**
+ * __useTestSubscription__
+ *
+ * To run a query within a React component, call `useTestSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useTestSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTestSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTestSubscription(baseOptions?: Apollo.SubscriptionHookOptions<TestSubscription, TestSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<TestSubscription, TestSubscriptionVariables>(TestDocument, options);
+      }
+export type TestSubscriptionHookResult = ReturnType<typeof useTestSubscription>;
+export type TestSubscriptionResult = Apollo.SubscriptionResult<TestSubscription>;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { DateTime } from 'luxon';
 import { Spinner } from '@ui-kitten/components';
 
-const DateDisplay = ({ selectedDay }) => {
+function DateDisplay({ selectedDay }) {
   if (!selectedDay || !selectedDay.item)
     return <Spinner style={styles.container} />;
 
@@ -23,7 +23,7 @@ const DateDisplay = ({ selectedDay }) => {
       </View>
     </View>
   );
-};
+}
 
 export default DateDisplay;
 

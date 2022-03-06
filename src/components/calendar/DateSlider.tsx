@@ -5,13 +5,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import DateCard from './dateCard';
 import { Spinner } from '@ui-kitten/components';
 
-const Drange = new Array(30).fill('').map((item, index) => ({
+const Drange = new Array(4000).fill('').map((item, index) => ({
   day: DateTime.local()
     .plus({ days: index })
     .toLocaleString(DateTime.DATE_HUGE),
+  isoDay: DateTime.local().plus({ days: index }),
 }));
 
-const DateSlider = ({ selectedDay, setSelectedDay }) => {
+function DateSlider({ selectedDay, setSelectedDay }): JSX.Element {
   const [selectedDate, setSelectedDate] = useState(new Date(Date.now()));
   const date = DateTime.fromISO(selectedDate.toISOString());
   const [itemsInView, setItemsInView] = useState([]);
@@ -19,12 +20,12 @@ const DateSlider = ({ selectedDay, setSelectedDay }) => {
 
   useEffect(() => {
     setDateRange(Drange);
-    setSelectedDay(Drange[3]);
+    setSelectedDay(Drange[0]);
   }, []);
 
   const onViewRef = React.useRef((viewableItems) => {
     setItemsInView(viewableItems.viewableItems);
-    setSelectedDay(viewableItems.viewableItems[3]);
+    setSelectedDay(viewableItems.viewableItems[0]);
   });
 
   const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 100 });
@@ -32,8 +33,7 @@ const DateSlider = ({ selectedDay, setSelectedDay }) => {
   if (!dateRange.length || !selectedDay) return <Spinner />;
   return (
     <FlatList
-      horizontal={true}
-      pagingEnabled={true}
+      horizontal
       showsHorizontalScrollIndicator={false}
       onViewableItemsChanged={onViewRef.current}
       viewabilityConfig={viewConfigRef.current}
@@ -45,12 +45,14 @@ const DateSlider = ({ selectedDay, setSelectedDay }) => {
       )}
     />
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
     width: '100%',
+    flexShrink: 1,
+    flexGrow: 1,
   },
   text: {
     color: 'gray',

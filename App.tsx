@@ -141,7 +141,7 @@ export async function schedulePushNotification(content: string) {
   });
 }
 
-const registerForPushNotificationsAsync = async (): Promise<
+export const registerForPushNotificationsAsync = async (): Promise<
   string | undefined
 > => {
   let token;

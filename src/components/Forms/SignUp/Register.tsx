@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { Button, Layout } from '@ui-kitten/components';
-import ControlledInput from '../../UI/ControlledInput';
-import ControlledSecureInput from '../../UI/ControlledSecureInput';
+import ControlledInput from '../../UI/FormControls/ControlledInput';
+import ControlledSecureInput from '../../UI/FormControls/ControlledSecureInput';
 import useReduxUserState from '../../../hooks/useUserState';
 import { useSignUpMutation } from '../../../generated/graphql';
 

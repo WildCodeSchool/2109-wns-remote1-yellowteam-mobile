@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { useGetAllTasksByProjectQuery } from '../../../generated/graphql';
 import { Spinner } from '@ui-kitten/components';
-import { DateTime } from 'luxon';
+import { FlatList } from 'react-native-gesture-handler';
 
-export default function TasksView({ selectedDay }) {
-  console.log(selectedDay);
+import { useGetAllTasksByProjectQuery } from '../../../generated/graphql';
+import TaskCard from './TaskCard';
+
+export default function TasksView({ selectedDay }: IProps) {
   const { data, loading } = useGetAllTasksByProjectQuery({
     variables: {
       where: {
@@ -20,16 +21,42 @@ export default function TasksView({ selectedDay }) {
     },
   });
   if (!selectedDay || !selectedDay.item || loading) return <Spinner />;
+  if (!data) return <Text>Error getting datas</Text>;
 
-  // const selectedDayFilter = () => data?.projects.map(i => i.tasks.filter(item => item.))
+  const selectedDayFilter = () =>
+    data?.projects.map((i) =>
+      i.tasks.filter(
+        (item) =>
+          new Date(item.end_date).toISOString() >
+          new Date(selectedDay.item.isoDay).toISOString(),
+      ),
+    );
+
+  const flatFilter = () => selectedDayFilter().flat().flat();
 
   if (loading) return <Spinner />;
 
   return (
-    <View>
-      <Text>TasksList</Text>
+    <View style={{ width: '100%', height: '50%' }}>
+      <FlatList
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        data={flatFilter()}
+        renderItem={({ item, index }) => <TaskCard item={item} />}
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 5,
+    backgroundColor: 'white',
+    width: '100%',
+  },
+  contentContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+  },
+});

@@ -13,6 +13,9 @@ function PersonIcon(props: unknown) {
 function Calendar(props: unknown) {
   return <Icon {...props} name="calendar" />;
 }
+function NotificationIcon(props: unknown) {
+  return <Icon {...props} name="bell-outline" />;
+}
 
 function BottomTabBar({ navigation, state }: BottomTabBarProps) {
   return (
@@ -22,6 +25,7 @@ function BottomTabBar({ navigation, state }: BottomTabBarProps) {
     >
       <BottomNavigationTab icon={PersonIcon} title="Home" />
       <BottomNavigationTab icon={Calendar} title="Calendar" />
+      <BottomNavigationTab icon={NotificationIcon} title="Home" />
     </BottomNavigation>
   );
 }
