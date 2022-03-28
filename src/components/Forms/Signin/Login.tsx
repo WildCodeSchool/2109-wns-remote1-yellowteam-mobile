@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable no-console */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Layout } from '@ui-kitten/components';

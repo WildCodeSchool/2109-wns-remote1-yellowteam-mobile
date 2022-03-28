@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 
-const DateCard = ({ item, index, selectedDay }) => {
+function DateCard({ item, index, selectedDay }) {
   return (
     <View key={index} style={styles.dateCard}>
       <Text
@@ -22,7 +22,7 @@ const DateCard = ({ item, index, selectedDay }) => {
       </Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   text: {

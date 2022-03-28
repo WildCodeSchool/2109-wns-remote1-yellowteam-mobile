@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { StyleSheet, FlatList } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
 import { DateTime } from 'luxon';
-import { ScrollView } from 'react-native-gesture-handler';
-import DateCard from './dateCard';
 import { Spinner } from '@ui-kitten/components';
+import DateCard from './dateCard';
 
 const Drange = new Array(4000).fill('').map((item, index) => ({
   day: DateTime.local()
@@ -12,7 +12,12 @@ const Drange = new Array(4000).fill('').map((item, index) => ({
   isoDay: DateTime.local().plus({ days: index }),
 }));
 
-function DateSlider({ selectedDay, setSelectedDay }): JSX.Element {
+interface IProps {
+  selectedDay: { day: string };
+  setSelectedDay: (day: { day: string }) => void;
+}
+
+function DateSlider({ selectedDay, setSelectedDay }: IProps): JSX.Element {
   const [selectedDate, setSelectedDate] = useState(new Date(Date.now()));
   const date = DateTime.fromISO(selectedDate.toISOString());
   const [itemsInView, setItemsInView] = useState([]);
@@ -23,12 +28,12 @@ function DateSlider({ selectedDay, setSelectedDay }): JSX.Element {
     setSelectedDay(Drange[0]);
   }, []);
 
-  const onViewRef = React.useRef((viewableItems) => {
+  const onViewRef = useRef((viewableItems) => {
     setItemsInView(viewableItems.viewableItems);
     setSelectedDay(viewableItems.viewableItems[0]);
   });
 
-  const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 100 });
+  const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 100 });
 
   if (!dateRange.length || !selectedDay) return <Spinner />;
   return (

@@ -1,9 +1,13 @@
+/* eslint-disable react/require-default-props */
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-export default function StatusIndicator({ status, isAlert }) {
-  console.log('alert', isAlert);
+interface IProps {
+  isAlert?: boolean;
+  status: string;
+}
 
+export default function StatusIndicator({ status, isAlert }: IProps) {
   const bgColor = () => {
     if (status === 'READ') {
       return '#F69826';

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import { Spinner } from '@ui-kitten/components';
 
@@ -17,5 +17,3 @@ export default function FullWidthSpinner() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

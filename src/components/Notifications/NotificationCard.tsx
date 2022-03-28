@@ -1,16 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {
-  GetSelfNotificationsQuery,
-  Notification,
-} from '../../generated/graphql';
+import { GetSelfNotificationsQuery } from '../../generated/graphql';
 import StatusIndicator from './Status.indicator';
 
 interface IProps {
   notification: GetSelfNotificationsQuery['user']['notifications'][number];
 }
 
-const NoficationCard = ({ notification }: IProps) => {
+function NoficationCard({ notification }: IProps) {
   const bgColor = (status: string) => {
     if (status === 'READ') {
       return '#F69826';
@@ -36,7 +33,7 @@ const NoficationCard = ({ notification }: IProps) => {
       <Text style={styles.content}>{notification.content}</Text>
     </View>
   );
-};
+}
 
 export default NoficationCard;
 

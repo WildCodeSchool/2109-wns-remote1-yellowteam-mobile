@@ -6,7 +6,7 @@ import TasksView from '../components/calendar/Tasks/TasksView';
 
 export default function CalendarScreen() {
   const [selectedDay, setSelectedDay] = useState<Date>();
-
+  console.log(selectedDay);
   return (
     <View style={styles.container}>
       <DateDisplay selectedDay={selectedDay} />

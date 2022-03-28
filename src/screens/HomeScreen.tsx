@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { StyleSheet } from 'react-native';
-import { View } from '../components/Themed';
+import { StyleSheet, View } from 'react-native';
+
 import { useTestSubscription } from '../generated/graphql';
 
 export default function HomeScreen() {

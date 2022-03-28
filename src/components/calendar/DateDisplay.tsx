@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
-import { DateTime } from 'luxon';
+import React from 'react';
 import { Spinner } from '@ui-kitten/components';
 
-function DateDisplay({ selectedDay }) {
-  if (!selectedDay || !selectedDay.item)
+interface IProps {
+  selectedDay: unknown;
+}
+
+function DateDisplay({ selectedDay }: IProps) {
+  if (!selectedDay || !selectedDay.item) {
     return <Spinner style={styles.container} />;
+  }
 
   const today =
     selectedDay.item.day.split(' ')[0].charAt(0).toUpperCase() +

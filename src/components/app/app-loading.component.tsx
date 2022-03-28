@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable global-require */
 /* eslint-disable object-curly-newline */
 /* eslint-disable prefer-destructuring */

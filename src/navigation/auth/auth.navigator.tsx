@@ -19,7 +19,7 @@ export default function AuthNavigator() {
       setIsLoading(false);
       dispatchLogin(data.me);
     },
-    onError: (e) => {
+    onError: () => {
       setIsLoading(false);
       AsyncStorage.removeItem('x-authorization').catch((err) =>
         console.log(err),

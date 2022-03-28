@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
 import { FieldValues, useForm } from 'react-hook-form';

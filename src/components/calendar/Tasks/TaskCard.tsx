@@ -1,4 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+/* eslint-disable operator-linebreak */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Card } from '@ui-kitten/components';
 import { DateTime } from 'luxon';
@@ -49,5 +51,3 @@ export default function TaskCard({ item }) {
     </Card>
   );
 }
-
-const styles = StyleSheet.create({});

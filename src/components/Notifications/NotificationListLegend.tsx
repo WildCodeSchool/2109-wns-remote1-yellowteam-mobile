@@ -1,53 +1,49 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 
 export default function NotificationListLegend() {
   return (
-    <>
-      <View
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Text
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          width: '100%',
-          justifyContent: 'space-between',
+          color: 'white',
+          padding: 3,
+          width: '33.3%',
+          textAlign: 'center',
+          backgroundColor: 'orange',
         }}
       >
-        <Text
-          style={{
-            color: 'white',
-            padding: 3,
-            width: '33.3%',
-            textAlign: 'center',
-            backgroundColor: 'orange',
-          }}
-        >
-          Read
-        </Text>
-        <Text
-          style={{
-            color: 'white',
-            padding: 3,
-            width: '33.3%',
-            textAlign: 'center',
-            backgroundColor: 'blue',
-          }}
-        >
-          Unread
-        </Text>
-        <Text
-          style={{
-            color: 'white',
-            padding: 3,
-            width: '33.3%',
-            textAlign: 'center',
-            backgroundColor: 'red',
-          }}
-        >
-          Alert
-        </Text>
-      </View>
-    </>
+        Read
+      </Text>
+      <Text
+        style={{
+          color: 'white',
+          padding: 3,
+          width: '33.3%',
+          textAlign: 'center',
+          backgroundColor: 'blue',
+        }}
+      >
+        Unread
+      </Text>
+      <Text
+        style={{
+          color: 'white',
+          padding: 3,
+          width: '33.3%',
+          textAlign: 'center',
+          backgroundColor: 'red',
+        }}
+      >
+        Alert
+      </Text>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({});

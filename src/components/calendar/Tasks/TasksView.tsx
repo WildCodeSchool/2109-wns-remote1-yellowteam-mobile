@@ -6,6 +6,10 @@ import { FlatList } from 'react-native-gesture-handler';
 import { useGetAllTasksByProjectQuery } from '../../../generated/graphql';
 import TaskCard from './TaskCard';
 
+interface IProps {
+  selectedDay: string;
+}
+
 export default function TasksView({ selectedDay }: IProps) {
   const { data, loading } = useGetAllTasksByProjectQuery({
     variables: {
@@ -42,7 +46,7 @@ export default function TasksView({ selectedDay }: IProps) {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
         data={flatFilter()}
-        renderItem={({ item, index }) => <TaskCard item={item} />}
+        renderItem={({ item }) => <TaskCard key={item.id} item={item} />}
       />
     </View>
   );
