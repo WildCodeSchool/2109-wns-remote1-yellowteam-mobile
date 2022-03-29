@@ -1,20 +1,15 @@
-import * as React from 'react'
+import * as React from 'react';
+import Svg, { Path, Circle, Rect } from 'react-native-svg';
 
 interface ISignOut {
-  color: string
+  color: string;
 }
 
 const DeleteIcon = ({ color }: ISignOut): JSX.Element => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 15 15"
-    fill={color}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="15" height="15" fill="white" />
-    <circle cx="7.5" cy="7.5" r="5.625" fill="#4E4F54" />
-    <path
+  <Svg width="15" height="15" viewBox="0 0 15 15" fill={color}>
+    <Rect width="15" height="15" fill="white" />
+    <Circle cx="7.5" cy="7.5" r="5.625" fill="#4E4F54" />
+    <Path
       d="M10 5L5 10"
       stroke="white"
       strokeWidth="1.2"
@@ -22,7 +17,7 @@ const DeleteIcon = ({ color }: ISignOut): JSX.Element => (
       strokeLinejoin="round"
       fill={color}
     />
-    <path
+    <Path
       d="M5 5L10 10"
       stroke="white"
       strokeWidth="1.2"
@@ -30,7 +25,7 @@ const DeleteIcon = ({ color }: ISignOut): JSX.Element => (
       strokeLinejoin="round"
       fill={color}
     />
-  </svg>
-)
+  </Svg>
+);
 
-export default DeleteIcon
+export default DeleteIcon;

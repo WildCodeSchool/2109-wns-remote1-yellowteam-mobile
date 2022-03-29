@@ -20,6 +20,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               HomeScreen: 'home',
             },
           },
+          Profile: {
+            screens: {
+              HomeScreen: 'profile',
+            },
+          },
         },
       },
       AuthNavigator: {

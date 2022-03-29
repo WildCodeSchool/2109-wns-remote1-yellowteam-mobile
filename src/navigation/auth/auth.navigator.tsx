@@ -17,11 +17,19 @@ export default function AuthNavigator() {
     onCompleted: (data) => {
       dispatchLogin(data.me);
     },
-    onError: (e) => {
+    onError: async (e) => {
       console.log(e);
-      AsyncStorage.setItem('x-authorization', '').catch((err) =>
-        console.log(err),
-      );
+      // try {
+      //   await AsyncStorage.removeItem('x-authorization');
+      //   return true;
+      // } catch (exception) {
+      //   return false;
+      // }
+
+      //   () =>
+      //     AsyncStorage.removeItem('x-authorization', (err) =>
+      //       console.log('ERROR ASYNCSTORAGE', err),
+      //     ).catch((err) => console.log(err));
     },
   });
 

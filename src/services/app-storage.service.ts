@@ -1,5 +1,7 @@
 /* eslint-disable import/no-cycle */
-import { AsyncStorage, LogBox } from 'react-native';
+import { LogBox } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { Mapping, Theme } from './theme.service';
 
 const MAPPING_KEY = 'mapping';

@@ -38,6 +38,7 @@ export type AuthTabParamList = {
 
 export type RootTabParamList = {
   Home: undefined;
+  Profile: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
