@@ -3,10 +3,15 @@ query GetSelfProjects($where: ProjectWhereInput) {
     id
     title
     description
+    users {
+      avatar
+      id
+    }
     owner {
       first_name
       avatar
       last_name
+      id
     }
   }
 }

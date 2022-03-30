@@ -7,19 +7,13 @@ import TasksIcon from '../../static/svg/TasksIcon';
 import UserIcon from '../../static/svg/UserIcon';
 import HomeScreen from '../../screens/HomeScreen';
 import { View } from 'react-native';
-import BottomTabBar from '../bottomTabBar';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 type NavObj = {
-  name: string;
-  svg: React.FC<{ color: string }>;
-};
-
-type NavRoute = {
-  key: string;
   name: Navigation;
-  params: string;
+  svg: React.FC<{ color: string }>;
 };
 
 export type Navigation = 'Home' | 'Profile' | 'Tasks' | 'Projects';
@@ -45,8 +39,8 @@ const categories: NavigationMap = {
   },
 };
 
-const screenOptions = (route: NavRoute) => {
-  const Svg = categories[route.name].svg;
+const screenOptions = (route: RouteProp<ParamListBase, string>) => {
+  const Svg = categories[route.name as Navigation].svg;
   return (
     <View>
       <Svg color="#FF9200" />
@@ -66,6 +60,7 @@ function TabNavigator() {
         name="Home"
         options={{
           headerStyle: {
+            backgroundColor: '#F4F6F8',
             height: 110,
             shadowRadius: 0,
             shadowOffset: {
@@ -88,6 +83,7 @@ function TabNavigator() {
         name="Profile"
         options={{
           headerStyle: {
+            backgroundColor: '#F4F6F8',
             height: 110,
             shadowRadius: 0,
             shadowOffset: {
@@ -110,6 +106,7 @@ function TabNavigator() {
         name="Tasks"
         options={{
           headerStyle: {
+            backgroundColor: '#F4F6F8',
             height: 110,
             shadowRadius: 0,
             shadowOffset: {
@@ -132,6 +129,7 @@ function TabNavigator() {
         name="Projects"
         options={{
           headerStyle: {
+            backgroundColor: '#F4F6F8',
             height: 110,
             shadowRadius: 0,
             shadowOffset: {

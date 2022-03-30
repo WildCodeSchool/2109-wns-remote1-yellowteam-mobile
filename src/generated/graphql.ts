@@ -1807,6 +1807,7 @@ export type Mutation = {
   deleteTask: Maybe<Task>;
   deleteUser: Maybe<User>;
   login: User;
+  logout: Scalars['String'];
   me: User;
   register: User;
   updateComment: Maybe<Comment>;
@@ -2954,7 +2955,7 @@ export type ProjectCreateInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -2971,7 +2972,7 @@ export type ProjectCreateManyInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -2986,7 +2987,7 @@ export type ProjectCreateManyOwnerInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -3077,7 +3078,7 @@ export type ProjectCreateWithoutCommentsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3097,7 +3098,7 @@ export type ProjectCreateWithoutFilesInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3117,7 +3118,7 @@ export type ProjectCreateWithoutInvitationsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3137,7 +3138,7 @@ export type ProjectCreateWithoutOwnerInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3157,7 +3158,7 @@ export type ProjectCreateWithoutTasksInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3178,7 +3179,7 @@ export type ProjectCreateWithoutUsersInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5952,14 +5953,14 @@ export type GetSelfProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetSelfProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description: string, owner: { __typename?: 'User', first_name: string, avatar: string, last_name: string } }> };
+export type GetSelfProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description: string, users: Array<{ __typename?: 'User', avatar: string, id: string }>, owner: { __typename?: 'User', first_name: string, avatar: string, last_name: string, id: string } }> };
 
 export type GetSelfTasksQueryVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type GetSelfTasksQuery = { __typename?: 'Query', user: { __typename?: 'User', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, description: string, start_date: any }> } };
+export type GetSelfTasksQuery = { __typename?: 'Query', user: { __typename?: 'User', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, description: string, start_date: any, user: { __typename?: 'User', avatar: string, id: string } }> } };
 
 export type GetSelfTasksStatusQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -6257,10 +6258,15 @@ export const GetSelfProjectsDocument = gql`
     id
     title
     description
+    users {
+      avatar
+      id
+    }
     owner {
       first_name
       avatar
       last_name
+      id
     }
   }
 }
@@ -6302,6 +6308,10 @@ export const GetSelfTasksDocument = gql`
       status_task
       description
       start_date
+      user {
+        avatar
+        id
+      }
     }
   }
 }
