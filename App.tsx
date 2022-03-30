@@ -19,7 +19,7 @@ import * as Notifications from 'expo-notifications';
 import { ApolloProvider } from '@apollo/client';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { Provider } from 'react-redux';
-import Theme from './assets/style/app-theme.json'; // <-- Import app theme
+import AppTheme from './assets/style/app-theme.json'; // <-- Import app theme
 import { appMappings, appThemes } from './assets/style/app-theming';
 import useCachedResources from './src/hooks/useCachedResources';
 import { AppIconsPack } from './src/components/app/app-icons-pack';
@@ -33,6 +33,7 @@ import AppNavigator from './src/navigation/navigation.component';
 import { Mapping, Theming } from './src/services/theme.service';
 import store from './src/redux/store';
 import { client } from './src/services/apollo-client';
+import { Theme } from './src/services/theme.service';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -107,7 +108,7 @@ function App({ mapping, theme }: { mapping: Mapping; theme: Theme }) {
       <AppearanceProvider>
         <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
         <Provider store={store}>
-          <ApplicationProvider {...eva} theme={{ ...eva.light, ...Theme }}>
+          <ApplicationProvider {...eva} theme={{ ...eva.light, ...AppTheme }}>
             <Theming.MappingContext.Provider value={mappingContext}>
               <Theming.ThemeContext.Provider value={themeContext}>
                 <SafeAreaProvider>
