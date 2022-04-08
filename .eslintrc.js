@@ -17,7 +17,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
 
   parserOptions: {
-    project: './tsconfig.json',
+    ecmaVersion: 2017,
+    sourceType: 'script',
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
 
@@ -34,6 +35,7 @@ module.exports = {
     'linebreak-style': 0,
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
+    'react/prop-types': 0,
     '@typescript-eslint/no-empty-function': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',

@@ -1,23 +1,47 @@
 /* eslint-disable no-console */
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ApolloClient,
   ApolloLink,
   createHttpLink,
   InMemoryCache,
+  split,
 } from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 
-const { REACT_APP_SERVER_URL } = process.env;
+const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
 const httpLink = createHttpLink({
-  uri: REACT_APP_SERVER_URL,
+  uri: serverUrl,
   headers: {
     'platform-auth-user-agent': 'mobile-platform',
   },
 });
 
+const wsLink = new WebSocketLink(
+  new SubscriptionClient('ws://192.168.1.26:4000/subscriptions', {
+    connectionCallback: (params) => {
+      console.log(params);
+    },
+  }),
+);
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+
 const afterwareLink = new ApolloLink(async (operation, forward) => {
   const token = (await AsyncStorage.getItem('x-authorization')) || null;
+  console.log('ici token', token);
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
@@ -35,10 +59,7 @@ const afterwareLink = new ApolloLink(async (operation, forward) => {
 });
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([
-    // place any other links before the line below
-    afterwareLink.concat(httpLink),
-  ]),
+  link: ApolloLink.from([afterwareLink.concat(httpLink), splitLink]),
   credentials: 'include',
   headers: {
     'platform-auth-user-agent': 'mobile-platform',

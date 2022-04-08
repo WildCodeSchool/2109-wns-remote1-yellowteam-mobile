@@ -1,13 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ProfileScreen from '../../screens/ProfileScreen';
-import ProjectsScreen from '../../screens/ProjectsScreen';
-import TasksScreen from '../../screens/TasksScreen';
+import { View } from 'react-native';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
 import ProjectIcon from '../../static/svg/ProjectIcon';
 import TasksIcon from '../../static/svg/TasksIcon';
 import UserIcon from '../../static/svg/UserIcon';
+import CalendarScreen from '../../screens/CalendarScreen';
 import HomeScreen from '../../screens/HomeScreen';
-import { View } from 'react-native';
-import { ParamListBase, RouteProp } from '@react-navigation/native';
+import NotificationsScreen from '../../screens/NotificationsScreen';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -16,7 +15,13 @@ type NavObj = {
   svg: React.FC<{ color: string }>;
 };
 
-export type Navigation = 'Home' | 'Profile' | 'Tasks' | 'Projects';
+export type Navigation =
+  | 'Home'
+  | 'Profile'
+  | 'Tasks'
+  | 'Projects'
+  | 'Calendar'
+  | 'Notifications';
 
 type NavigationMap = Record<Navigation, NavObj>;
 
@@ -37,10 +42,19 @@ const categories: NavigationMap = {
     name: 'Projects',
     svg: ProjectIcon,
   },
+  Calendar: {
+    name: 'Calendar',
+    svg: TasksIcon,
+  },
+  Notifications: {
+    name: 'Notifications',
+    svg: TasksIcon,
+  },
 };
 
 const screenOptions = (route: RouteProp<ParamListBase, string>) => {
   const Svg = categories[route.name as Navigation].svg;
+
   return (
     <View>
       <Svg color="#FF9200" />
@@ -60,93 +74,49 @@ function TabNavigator() {
         name="Home"
         options={{
           headerStyle: {
-            backgroundColor: '#F4F6F8',
-            height: 110,
-            shadowRadius: 0,
-            shadowOffset: {
-              height: 0,
-              width: 0,
-            },
+            borderBottomColor: 'white',
           },
-          headerTintColor: '#fff',
-          headerTitleAlign: 'left',
           headerTitleStyle: {
+            width: '100%',
+            color: 'black',
             fontWeight: 'bold',
-            fontSize: 30,
-            color: '#626262',
-            paddingBottom: 40,
+            height: '100%',
+            padding: 3,
           },
         }}
         component={HomeScreen}
       />
       <Screen
-        name="Profile"
+        name="Calendar"
         options={{
           headerStyle: {
-            backgroundColor: '#F4F6F8',
-            height: 110,
-            shadowRadius: 0,
-            shadowOffset: {
-              height: 0,
-              width: 0,
-            },
+            borderBottomColor: 'white',
           },
-          headerTintColor: '#fff',
-          headerTitleAlign: 'left',
           headerTitleStyle: {
+            width: '100%',
+            color: 'black',
             fontWeight: 'bold',
-            fontSize: 30,
-            color: '#626262',
-            paddingBottom: 40,
+            height: '100%',
+            padding: 3,
           },
         }}
-        component={ProfileScreen}
+        component={CalendarScreen}
       />
       <Screen
-        name="Tasks"
+        name="Notifications"
         options={{
           headerStyle: {
-            backgroundColor: '#F4F6F8',
-            height: 110,
-            shadowRadius: 0,
-            shadowOffset: {
-              height: 0,
-              width: 0,
-            },
+            borderBottomColor: 'white',
           },
-          headerTintColor: '#fff',
-          headerTitleAlign: 'left',
           headerTitleStyle: {
+            width: '100%',
+            color: 'black',
             fontWeight: 'bold',
-            fontSize: 30,
-            color: '#626262',
-            paddingBottom: 40,
+            height: '100%',
+            padding: 3,
           },
         }}
-        component={TasksScreen}
-      />
-      <Screen
-        name="Projects"
-        options={{
-          headerStyle: {
-            backgroundColor: '#F4F6F8',
-            height: 110,
-            shadowRadius: 0,
-            shadowOffset: {
-              height: 0,
-              width: 0,
-            },
-          },
-          headerTintColor: '#fff',
-          headerTitleAlign: 'left',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 30,
-            color: '#626262',
-            paddingBottom: 40,
-          },
-        }}
-        component={ProjectsScreen}
+        component={NotificationsScreen}
       />
     </Navigator>
   );

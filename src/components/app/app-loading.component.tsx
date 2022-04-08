@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable global-require */
 /* eslint-disable object-curly-newline */
 /* eslint-disable prefer-destructuring */
@@ -32,9 +33,7 @@ export const LoadFontsTask = async (fonts: {
     'poppins-regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
     'poppins-bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
   };
-  const customFOnts = await Font.loadAsync(customFonts);
-  // console.warn(message);
-  // console.warn(customFOnts);
+  await Font.loadAsync(customFonts);
 
   return Promise.resolve(null);
 };
@@ -47,8 +46,6 @@ export const LoadAssetsTask = (
     'Use `react-native.config.js',
     'Documentation: https://github.com/react-native-community/cli/blob/master/docs/configuration.md',
   ].join('\n');
-
-  // console.warn(message);
 
   return Promise.resolve(null);
 };

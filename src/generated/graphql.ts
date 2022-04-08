@@ -4148,6 +4148,11 @@ export type StringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  newNotification: Scalars['String'];
+};
+
 export type Task = {
   __typename?: 'Task';
   _count: Maybe<TaskCount>;
@@ -5929,6 +5934,13 @@ export type GetSelfNotificationsQueryVariables = Exact<{
 
 export type GetSelfNotificationsQuery = { __typename?: 'Query', user: { __typename?: 'User', notifications: Array<{ __typename?: 'Notification', id: string, title: string, content: string, status: Status_Notification, created_at: any, is_disabled: boolean, sender: { __typename?: 'User', first_name: string, last_name: string } }> } };
 
+export type GetAllTasksByProjectQueryVariables = Exact<{
+  where: ProjectWhereInput;
+}>;
+
+
+export type GetAllTasksByProjectQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', tasks: Array<{ __typename?: 'Task', id: string, title: string, description: string, status_task: Status, start_date: any, end_date: any }> }> };
+
 export type GetAllAssignedUserProjectsQueryVariables = Exact<{
   where: InputMaybe<ProjectWhereInput>;
 }>;
@@ -5975,6 +5987,11 @@ export type GetSingleSelfTasksQueryVariables = Exact<{
 
 
 export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', first_name: string, id: string, last_name: string, email: string, role: Array<Role> }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', first_name: string, last_name: string } }> } };
+
+export type TestSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestSubscription = { __typename?: 'Subscription', newNotification: string };
 
 
 export const MutateMeDocument = gql`
@@ -6136,6 +6153,48 @@ export function useGetSelfNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type GetSelfNotificationsQueryHookResult = ReturnType<typeof useGetSelfNotificationsQuery>;
 export type GetSelfNotificationsLazyQueryHookResult = ReturnType<typeof useGetSelfNotificationsLazyQuery>;
 export type GetSelfNotificationsQueryResult = Apollo.QueryResult<GetSelfNotificationsQuery, GetSelfNotificationsQueryVariables>;
+export const GetAllTasksByProjectDocument = gql`
+    query getAllTasksByProject($where: ProjectWhereInput!) {
+  projects(where: $where) {
+    tasks {
+      id
+      title
+      description
+      status_task
+      start_date
+      end_date
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllTasksByProjectQuery__
+ *
+ * To run a query within a React component, call `useGetAllTasksByProjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllTasksByProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllTasksByProjectQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetAllTasksByProjectQuery(baseOptions: Apollo.QueryHookOptions<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>(GetAllTasksByProjectDocument, options);
+      }
+export function useGetAllTasksByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>(GetAllTasksByProjectDocument, options);
+        }
+export type GetAllTasksByProjectQueryHookResult = ReturnType<typeof useGetAllTasksByProjectQuery>;
+export type GetAllTasksByProjectLazyQueryHookResult = ReturnType<typeof useGetAllTasksByProjectLazyQuery>;
+export type GetAllTasksByProjectQueryResult = Apollo.QueryResult<GetAllTasksByProjectQuery, GetAllTasksByProjectQueryVariables>;
 export const GetAllAssignedUserProjectsDocument = gql`
     query GetAllAssignedUserProjects($where: ProjectWhereInput) {
   projects(where: $where) {
@@ -6438,3 +6497,30 @@ export function useGetSingleSelfTasksLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type GetSingleSelfTasksQueryHookResult = ReturnType<typeof useGetSingleSelfTasksQuery>;
 export type GetSingleSelfTasksLazyQueryHookResult = ReturnType<typeof useGetSingleSelfTasksLazyQuery>;
 export type GetSingleSelfTasksQueryResult = Apollo.QueryResult<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>;
+export const TestDocument = gql`
+    subscription test {
+  newNotification
+}
+    `;
+
+/**
+ * __useTestSubscription__
+ *
+ * To run a query within a React component, call `useTestSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useTestSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTestSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTestSubscription(baseOptions?: Apollo.SubscriptionHookOptions<TestSubscription, TestSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<TestSubscription, TestSubscriptionVariables>(TestDocument, options);
+      }
+export type TestSubscriptionHookResult = ReturnType<typeof useTestSubscription>;
+export type TestSubscriptionResult = Apollo.SubscriptionResult<TestSubscription>;
