@@ -2,29 +2,32 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Spinner } from '@ui-kitten/components';
 import { FlatList } from 'react-native-gesture-handler';
-
 import { useGetAllTasksByProjectQuery } from '../../../generated/graphql';
 import TaskCard from './TaskCard';
+import useReduxUserState from '../../../hooks/useUserState';
+import { ISelectedDate } from '../../../screens/CalendarScreen';
 
 interface IProps {
-  selectedDay: string;
+  selectedDay: ISelectedDate;
 }
 
 export default function TasksView({ selectedDay }: IProps) {
+  const { user } = useReduxUserState();
   const { data, loading } = useGetAllTasksByProjectQuery({
     variables: {
       where: {
         users: {
           some: {
             id: {
-              equals: 'afe878e4-7000-4e23-aaa8-05bdd8e90536',
+              equals: user.id,
             },
           },
         },
       },
     },
   });
-  if (!selectedDay || !selectedDay.item || loading) return <Spinner />;
+
+  if (!selectedDay || loading) return <Spinner />;
   if (!data) return <Text>Error getting datas</Text>;
 
   const selectedDayFilter = () =>
@@ -32,7 +35,7 @@ export default function TasksView({ selectedDay }: IProps) {
       i.tasks.filter(
         (item) =>
           new Date(item.end_date).toISOString() >
-          new Date(selectedDay.item.isoDay).toISOString(),
+          new Date(selectedDay.item.isoDay as unknown as Date).toISOString(),
       ),
     );
 

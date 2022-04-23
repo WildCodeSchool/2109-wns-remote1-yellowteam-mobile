@@ -1,9 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { StyleSheet, FlatList } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  Ref,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { DateTime } from 'luxon';
 import { Spinner } from '@ui-kitten/components';
 import DateCard from './dateCard';
+import { ISelectedDate } from '../../screens/CalendarScreen';
 
 const Drange = new Array(4000).fill('').map((item, index) => ({
   day: DateTime.local()
@@ -13,8 +21,8 @@ const Drange = new Array(4000).fill('').map((item, index) => ({
 }));
 
 interface IProps {
-  selectedDay: { day: string };
-  setSelectedDay: (day: { day: string }) => void;
+  selectedDay: ISelectedDate;
+  setSelectedDay: Dispatch<SetStateAction<ISelectedDate>>;
 }
 
 function DateSlider({ selectedDay, setSelectedDay }: IProps): JSX.Element {
@@ -25,7 +33,7 @@ function DateSlider({ selectedDay, setSelectedDay }: IProps): JSX.Element {
 
   useEffect(() => {
     setDateRange(Drange);
-    setSelectedDay(Drange[0]);
+    setSelectedDay({ item: Drange[0], index: 0, isViewable: true });
   }, []);
 
   const onViewRef = useRef((viewableItems) => {

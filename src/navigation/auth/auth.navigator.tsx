@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 /* eslint-disable no-console */
 import { createStackNavigator } from '@react-navigation/stack';
 import { Spinner } from '@ui-kitten/components';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthTabParamList } from '../../../types';
 import SignUp from '../../screens/Auth/SignUp';
 import useReduxUserState from '../../hooks/useUserState';
@@ -22,9 +21,6 @@ export default function AuthNavigator() {
     },
     onError: () => {
       setIsLoading(false);
-      AsyncStorage.removeItem('x-authorization').catch((err) =>
-        console.log(err),
-      );
     },
   });
 

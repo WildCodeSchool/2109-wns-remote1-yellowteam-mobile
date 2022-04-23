@@ -21,12 +21,13 @@ export default function Login() {
       variables: {
         data: { email: formData.email, password: formData.password },
       },
-      onCompleted: (res) => {
+      onCompleted: async (res) => {
         dispatchLogin(res.login);
-        AsyncStorage.setItem(
-          'x-authorization',
-          res.headers['x-authorization'],
-        ).catch((err) => console.log(err));
+        // console.log(res);
+        // await AsyncStorage.setItem(
+        //   'x-authorization',
+        //   res.headers['x-authorization'],
+        // ).catch((err) => console.log(err));
       },
       onError: (e) => console.log('error', e),
     });

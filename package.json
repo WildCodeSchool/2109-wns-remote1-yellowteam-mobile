@@ -88,7 +88,8 @@
     "react-native-video": "^5.2.0",
     "react-native-web": "0.17.1",
     "react-navigation": "^4.4.4",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "expo-secure-store": "~11.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.4",
