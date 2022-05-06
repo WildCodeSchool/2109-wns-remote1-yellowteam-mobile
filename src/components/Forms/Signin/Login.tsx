@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable no-console */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Layout } from '@ui-kitten/components';
+import { Button, Layout, Spinner } from '@ui-kitten/components';
 import React from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
@@ -14,7 +14,7 @@ export default function Login() {
   const { handleSubmit, control } = useForm();
   const { dispatchLogin } = useReduxUserState();
   const [passwordVisible] = React.useState<boolean>(false);
-  const [mutateSignIn] = useSignInMutation();
+  const [mutateSignIn, { loading }] = useSignInMutation();
 
   const onSubmit = async (formData: FieldValues): Promise<void> => {
     await mutateSignIn({
@@ -23,11 +23,6 @@ export default function Login() {
       },
       onCompleted: async (res) => {
         dispatchLogin(res.login);
-        // console.log(res);
-        // await AsyncStorage.setItem(
-        //   'x-authorization',
-        //   res.headers['x-authorization'],
-        // ).catch((err) => console.log(err));
       },
       onError: (e) => console.log('error', e),
     });
@@ -43,7 +38,7 @@ export default function Login() {
         passwordVisible={passwordVisible}
       />
       <Button onPress={handleSubmit(onSubmit)} style={styles.button}>
-        Sign In
+        {loading ? <Spinner /> : 'Login'}
       </Button>
     </Layout>
   );

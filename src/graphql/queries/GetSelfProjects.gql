@@ -3,6 +3,7 @@ query GetSelfProjects($where: ProjectWhereInput) {
     id
     title
     description
+    status_project
     users {
       avatar
       id

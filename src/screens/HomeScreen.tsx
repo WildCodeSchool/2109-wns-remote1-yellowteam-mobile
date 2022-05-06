@@ -1,4 +1,11 @@
-import { FlatList, SectionList, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  ScrollViewBase,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import HomepageCardProject from '../components/Cards/HomepageCardProject';
 import HomepageCardTask from '../components/Cards/HomepageCardTask';
@@ -10,6 +17,7 @@ import useReduxUserState from '../hooks/useUserState';
 
 export default function HomeScreen() {
   const { user } = useReduxUserState();
+
   const { data: projectsData } = useGetSelfProjectsQuery({
     variables: { where: { project_owner_id: { equals: user.id } } },
   });
@@ -18,49 +26,46 @@ export default function HomeScreen() {
   });
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.textHeader}>Welcome {user.first_name} 👋🏻</Text>
-      <ScrollView>
-        <View>
-          <Text style={styles.title}>Recent projects</Text>
-          {projectsData && projectsData.projects.length >= 1 ? (
-            projectsData.projects.map((project) => {
-              return <HomepageCardProject key={project.id} project={project} />;
-            })
-          ) : (
-            <Text style={styles.text}>You have no project</Text>
-          )}
-        </View>
-        <Text style={styles.title}>Recent tasks</Text>
-        <View style={styles.listContainer}>
-          {tasksData && tasksData.user.tasks ? (
-            tasksData.user.tasks.map((task) => {
-              return <HomepageCardTask key={task.id} task={task} />;
-            })
-          ) : (
-            <Text style={styles.text}>You have no task</Text>
-          )}
-        </View>
-      </ScrollView>
-    </View>
+      <Text style={styles.title}>Recent projects</Text>
+      <FlatList
+        contentContainerStyle={styles.contentContainer}
+        data={projectsData?.projects}
+        renderItem={({ item }) => <HomepageCardProject project={item} />}
+      />
+
+      <Text style={styles.title}>Recent tasks</Text>
+      <View style={styles.listContainer}>
+        <FlatList
+          contentContainerStyle={styles.contentContainer}
+          data={tasksData?.user.tasks}
+          renderItem={({ item }) => <HomepageCardTask task={item} />}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F4F6F8',
+    backgroundColor: '#FFFFFF',
+    padding: 5,
+  },
+  contentContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'stretch',
   },
   textHeader: {
     fontFamily: 'Avenir-Heavy',
     fontSize: 20,
-    marginLeft: 15,
-    marginBottom: 18,
+    marginVertical: 20,
   },
   title: {
     fontFamily: 'Avenir-Heavy',
     fontSize: 18,
-    marginLeft: 15,
+
     marginBottom: 8,
   },
   text: {

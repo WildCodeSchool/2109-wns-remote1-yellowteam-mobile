@@ -6,27 +6,43 @@ import {
   InMemoryCache,
   split,
 } from '@apollo/client';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { WebSocketLink } from '@apollo/client/link/ws';
+import * as SecureStore from 'expo-secure-store';
+
 import { getMainDefinition } from '@apollo/client/utilities';
 
-const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
+const serverUrl =
+  process.env.REACT_APP_SERVER_URL || 'http://192.168.1.26:4000/graphql';
+
+const webSocketUrl =
+  process.env.REACT_APP_WEBSOCKET_URL || 'ws://localhost:4000/websocket';
+
+let tokenSession = '';
+
+const setSession = async (): Promise<void> => {
+  const token = await SecureStore.getItemAsync('token');
+  tokenSession = token;
+};
+
+setSession();
 
 const httpLink = createHttpLink({
   uri: serverUrl,
   headers: {
     'platform-auth-user-agent': 'mobile-platform',
+    authorization: tokenSession,
   },
 });
 
 const wsLink = new WebSocketLink(
-  new SubscriptionClient('ws://192.168.1.26:4000/subscriptions', {
+  new SubscriptionClient(webSocketUrl, {
     connectionCallback: (params) => {
       console.log(params);
     },
   }),
 );
+
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
@@ -39,27 +55,26 @@ const splitLink = split(
   httpLink,
 );
 
-const afterwareLink = new ApolloLink(async (operation, forward) => {
-  const token = (await AsyncStorage.getItem('x-authorization')) || null;
-  console.log('ici token', token);
+const afterwareLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
-      ...headers,
-      authorization: token || null,
+      authorization: tokenSession,
     },
   }));
   return forward(operation).map((response) => {
     const context = operation.getContext();
-    const authHeader = context.response.headers.get('x-authorization');
-    AsyncStorage.setItem('x-authorization', authHeader).catch((err) =>
-      console.log(err),
-    );
+    const authHeader = context.response.headers.get('authorization');
+
+    SecureStore.setItemAsync('token', authHeader);
+
+    const token = setSession();
+
     return response;
   });
 });
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([afterwareLink.concat(httpLink), splitLink]),
+  link: afterwareLink.concat(splitLink),
   credentials: 'include',
   headers: {
     'platform-auth-user-agent': 'mobile-platform',

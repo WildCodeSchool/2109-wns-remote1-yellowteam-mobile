@@ -145,7 +145,7 @@ export async function schedulePushNotification(content: string) {
 export const registerForPushNotificationsAsync = async (): Promise<
   string | undefined
 > => {
-  let token;
+  let token: string | undefined;
   if (Constants.isDevice) {
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();

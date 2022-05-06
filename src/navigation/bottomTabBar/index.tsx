@@ -102,15 +102,16 @@ import {
   BottomNavigation,
   BottomNavigationTab,
   Icon,
+  IconProps,
 } from '@ui-kitten/components';
 
-function PersonIcon(props: unknown) {
+function PersonIcon(props: IconProps) {
   return <Icon {...props} name="home" />;
 }
-function Calendar(props: unknown) {
+function Calendar(props: IconProps) {
   return <Icon {...props} name="calendar" />;
 }
-function NotificationIcon(props: unknown) {
+function NotificationIcon(props: IconProps) {
   return <Icon {...props} name="bell-outline" />;
 }
 

@@ -6,6 +6,7 @@ import TabNavigator from './root';
 
 export default function AppNavigator() {
   const { isAuth } = useReduxUserState();
+  console.log(isAuth);
   return (
     <NavigationContainer>
       {isAuth ? <TabNavigator /> : <AuthNavigator />}
