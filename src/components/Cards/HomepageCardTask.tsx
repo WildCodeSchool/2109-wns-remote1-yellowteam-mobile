@@ -10,22 +10,20 @@ interface Props {
 
 const HomepageCardTask = ({ task }: Props) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.listContainer}>
-        <Text style={styles.title}> {task?.title} </Text>
-        <View style={styles.logos}>
-          <Image
-            key={task?.id}
-            style={styles.logo}
-            source={{
-              uri: task?.user.avatar,
-            }}
-          />
-        </View>
-        <Text numberOfLines={2} style={styles.text}>
-          {task?.description}
-        </Text>
+    <View style={styles.listContainer}>
+      <Text style={styles.title}> {task?.title} </Text>
+      <View style={styles.logos}>
+        <Image
+          key={task?.id}
+          style={styles.logo}
+          source={{
+            uri: task?.user.avatar,
+          }}
+        />
       </View>
+      <Text numberOfLines={2} style={styles.text}>
+        {task?.description}
+      </Text>
     </View>
   );
 };
@@ -33,18 +31,26 @@ const HomepageCardTask = ({ task }: Props) => {
 export default HomepageCardTask;
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   listContainer: {
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    marginHorizontal: 5,
+    zIndex: 5,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    backgroundColor: '#FFFF',
+    borderColor: '#E0E0E0',
+    borderStyle: 'solid',
+    borderWidth: 1,
     display: 'flex',
     flexDirection: 'column',
-    width: '90%',
+    width: '95%',
     borderRadius: 12,
     padding: 14,
-    margin: 6,
-    backgroundColor: '#FFF',
+    marginVertical: 6,
   },
   title: {
     fontFamily: 'Avenir-Heavy',

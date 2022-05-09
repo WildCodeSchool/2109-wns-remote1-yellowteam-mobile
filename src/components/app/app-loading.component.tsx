@@ -74,9 +74,7 @@ export function AppLoading(props: ApplicationLoaderProps): React.ReactElement {
 
   React.useEffect(() => {
     if (loading) {
-      startTasks()
-        .then(onTasksFinish)
-        .catch((er) => console.log(er));
+      startTasks().then(onTasksFinish);
     }
   }, [loading]);
 

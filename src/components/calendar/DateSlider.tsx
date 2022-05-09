@@ -13,7 +13,7 @@ import { Spinner } from '@ui-kitten/components';
 import DateCard from './dateCard';
 import { ISelectedDate } from '../../screens/CalendarScreen';
 
-const Drange = new Array(4000).fill('').map((item, index) => ({
+const Drange = new Array(100).fill('').map((item, index) => ({
   day: DateTime.local()
     .plus({ days: index })
     .toLocaleString(DateTime.DATE_HUGE),

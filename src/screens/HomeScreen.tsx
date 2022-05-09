@@ -1,21 +1,15 @@
-import {
-  FlatList,
-  ScrollViewBase,
-  SectionList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import HomepageCardProject from '../components/Cards/HomepageCardProject';
-import HomepageCardTask from '../components/Cards/HomepageCardTask';
+import RecentProjects from '../components/Projects/RecentProjects';
+import RecentProjectsHeader from '../components/Projects/RecentProjects.header';
+import RecentTasks from '../components/Tasks/RecentTasks';
 import {
   useGetSelfProjectsQuery,
   useGetSelfTasksQuery,
 } from '../generated/graphql';
 import useReduxUserState from '../hooks/useUserState';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigate }) {
   const { user } = useReduxUserState();
 
   const { data: projectsData } = useGetSelfProjectsQuery({
@@ -28,21 +22,10 @@ export default function HomeScreen() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.textHeader}>Welcome {user.first_name} 👋🏻</Text>
-      <Text style={styles.title}>Recent projects</Text>
-      <FlatList
-        contentContainerStyle={styles.contentContainer}
-        data={projectsData?.projects}
-        renderItem={({ item }) => <HomepageCardProject project={item} />}
-      />
-
+      <RecentProjectsHeader />
+      <RecentProjects />
       <Text style={styles.title}>Recent tasks</Text>
-      <View style={styles.listContainer}>
-        <FlatList
-          contentContainerStyle={styles.contentContainer}
-          data={tasksData?.user.tasks}
-          renderItem={({ item }) => <HomepageCardTask task={item} />}
-        />
-      </View>
+      <RecentTasks />
     </ScrollView>
   );
 }
@@ -55,7 +38,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
   },
   textHeader: {
     fontFamily: 'Avenir-Heavy',
@@ -65,7 +48,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Avenir-Heavy',
     fontSize: 18,
-
     marginBottom: 8,
   },
   text: {

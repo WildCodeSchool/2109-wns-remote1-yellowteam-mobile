@@ -1,6 +1,5 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import { View } from '../components/Themed';
 import useReduxAppState from '../hooks/useAppState';
 import useReduxUserState from '../hooks/useUserState';
 

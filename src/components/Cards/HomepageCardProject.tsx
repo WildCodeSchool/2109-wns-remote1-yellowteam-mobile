@@ -1,5 +1,9 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { GetSelfProjectsQuery } from '../../generated/graphql';
+import {
+  GetSelfProjectsQuery,
+  useGetAllTasksByProjectQuery,
+} from '../../generated/graphql';
+import Pie from '../Pie';
 
 interface Props {
   project?: GetSelfProjectsQuery['projects'][number];
@@ -18,6 +22,16 @@ const HomepageCardProject = ({ project }: Props) => {
     }
     return 'white';
   };
+
+  const { data, loading } = useGetAllTasksByProjectQuery({
+    variables: {
+      where: {
+        id: {
+          equals: project.id,
+        },
+      },
+    },
+  });
 
   return (
     <View

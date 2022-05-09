@@ -88,9 +88,7 @@ function App({ mapping, theme }: { mapping: Mapping; theme: Theme }) {
       });
 
     responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
-      });
+      Notifications.addNotificationResponseReceivedListener((response) => {});
 
     schedulePushNotification("C'est ok ca marche !");
     return () => {
@@ -105,9 +103,9 @@ function App({ mapping, theme }: { mapping: Mapping; theme: Theme }) {
 
   return (
     <ApolloProvider client={client}>
-      <AppearanceProvider>
-        <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
-        <Provider store={store}>
+      <Provider store={store}>
+        <AppearanceProvider>
+          <IconRegistry icons={[EvaIconsPack, AppIconsPack]} />
           <ApplicationProvider {...eva} theme={{ ...eva.light, ...AppTheme }}>
             <Theming.MappingContext.Provider value={mappingContext}>
               <Theming.ThemeContext.Provider value={themeContext}>
@@ -117,8 +115,8 @@ function App({ mapping, theme }: { mapping: Mapping; theme: Theme }) {
               </Theming.ThemeContext.Provider>
             </Theming.MappingContext.Provider>
           </ApplicationProvider>
-        </Provider>
-      </AppearanceProvider>
+        </AppearanceProvider>
+      </Provider>
     </ApolloProvider>
   );
 }

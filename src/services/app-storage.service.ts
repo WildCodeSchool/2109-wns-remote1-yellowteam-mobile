@@ -8,9 +8,9 @@ const MAPPING_KEY = 'mapping';
 const THEME_KEY = 'theme';
 
 export default class AppStorage {
-  static getMapping = (fallback?: Mapping): Promise<Mapping> =>
+  static getMapping = (fallback?: string): Promise<string> =>
     AsyncStorage.getItem(MAPPING_KEY).then(
-      (mapping: Mapping) => mapping || fallback,
+      (mapping: string) => mapping || fallback,
     );
 
   static getTheme = (fallback?: string): Promise<string | null | undefined> =>

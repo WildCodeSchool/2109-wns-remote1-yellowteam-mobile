@@ -7,6 +7,7 @@ import UserIcon from '../../static/svg/UserIcon';
 import CalendarScreen from '../../screens/CalendarScreen';
 import HomeScreen from '../../screens/HomeScreen';
 import NotificationsScreen from '../../screens/NotificationsScreen';
+import ProjectsScreen from '../../screens/ProjectsScreen';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -117,6 +118,22 @@ function TabNavigator() {
           },
         }}
         component={NotificationsScreen}
+      />
+      <Screen
+        name="Projects"
+        options={{
+          headerStyle: {
+            borderBottomColor: 'white',
+          },
+          headerTitleStyle: {
+            width: '100%',
+            color: 'black',
+            fontWeight: 'bold',
+            height: '100%',
+            padding: 3,
+          },
+        }}
+        component={ProjectsScreen}
       />
     </Navigator>
   );

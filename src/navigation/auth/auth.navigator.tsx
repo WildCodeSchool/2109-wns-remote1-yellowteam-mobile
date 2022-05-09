@@ -15,7 +15,7 @@ const Stack = createStackNavigator<AuthTabParamList>();
 
 const getTokenFromSecureStore = async () => {
   const token = await SecureStore.getItemAsync('token');
-  console.log(token);
+  return token;
 };
 
 export default function AuthNavigator() {
@@ -24,20 +24,16 @@ export default function AuthNavigator() {
 
   const [me] = useMutateMeMutation({
     onCompleted: (data) => {
-      console.log('me', data);
       setIsLoading(false);
       dispatchLogin(data.me);
     },
     onError: (err) => {
-      console.log(err);
       setIsLoading(false);
     },
   });
 
   useEffect(() => {
-    console.log('ici auth');
-    getTokenFromSecureStore();
-    me().catch((err) => console.log(err));
+    me();
   }, []);
 
   if (isLoading && !isAuth) return <Spinner status="danger" />;

@@ -2,6 +2,7 @@
 import {
   ApolloClient,
   ApolloLink,
+  applyNextFetchPolicy,
   createHttpLink,
   InMemoryCache,
   split,
@@ -11,24 +12,25 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import * as SecureStore from 'expo-secure-store';
 
 import { getMainDefinition } from '@apollo/client/utilities';
+import appConfig from '../../app.config';
 
 const serverUrl =
-  process.env.REACT_APP_SERVER_URL || 'http://192.168.1.26:4000/graphql';
+  process.env.REACT_APP_SERVER_URL || 'http://192.168.1.13.:4000/graphql';
 
 const webSocketUrl =
   process.env.REACT_APP_WEBSOCKET_URL || 'ws://localhost:4000/websocket';
 
-let tokenSession = '';
-
+let tokenSession = 'token';
+console.log(appConfig.extra.serverUrl);
 const setSession = async (): Promise<void> => {
   const token = await SecureStore.getItemAsync('token');
-  tokenSession = token;
+  tokenSession = token || 'token';
 };
 
 setSession();
 
 const httpLink = createHttpLink({
-  uri: serverUrl,
+  uri: appConfig.extra.serverUrl,
   headers: {
     'platform-auth-user-agent': 'mobile-platform',
     authorization: tokenSession,
@@ -38,7 +40,7 @@ const httpLink = createHttpLink({
 const wsLink = new WebSocketLink(
   new SubscriptionClient(webSocketUrl, {
     connectionCallback: (params) => {
-      console.log(params);
+      console.log('websocket params', params);
     },
   }),
 );
@@ -65,7 +67,9 @@ const afterwareLink = new ApolloLink((operation, forward) => {
     const context = operation.getContext();
     const authHeader = context.response.headers.get('authorization');
 
-    SecureStore.setItemAsync('token', authHeader);
+    if (authHeader) {
+      SecureStore.setItemAsync('token', authHeader);
+    }
 
     const token = setSession();
 
