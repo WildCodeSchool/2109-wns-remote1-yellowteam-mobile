@@ -1,0 +1,12 @@
+query getAllTasksByProject($where: ProjectWhereInput!) {
+  projects(where: $where) {
+    tasks {
+      id
+      title
+      description
+      status_task
+      start_date
+      end_date
+    }
+  }
+}

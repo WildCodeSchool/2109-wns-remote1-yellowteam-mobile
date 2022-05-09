@@ -1,14 +1,16 @@
 /* eslint-disable import/no-cycle */
-import { AsyncStorage, LogBox } from 'react-native';
+import { LogBox } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { Mapping, Theme } from './theme.service';
 
 const MAPPING_KEY = 'mapping';
 const THEME_KEY = 'theme';
 
 export default class AppStorage {
-  static getMapping = (fallback?: Mapping): Promise<Mapping> =>
+  static getMapping = (fallback?: string): Promise<string> =>
     AsyncStorage.getItem(MAPPING_KEY).then(
-      (mapping: Mapping) => mapping || fallback,
+      (mapping: string) => mapping || fallback,
     );
 
   static getTheme = (fallback?: string): Promise<string | null | undefined> =>

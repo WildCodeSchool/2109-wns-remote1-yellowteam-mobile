@@ -1,25 +1,27 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable no-console */
-import { Button, Layout } from '@ui-kitten/components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button, Layout, Spinner } from '@ui-kitten/components';
 import React from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
 import { useSignInMutation } from '../../../generated/graphql';
 import useReduxUserState from '../../../hooks/useUserState';
-import ControlledInput from '../../UI/ControlledInput';
-import ControlledSecureInput from '../../UI/ControlledSecureInput';
+import ControlledInput from '../../UI/FormControls/ControlledInput';
+import ControlledSecureInput from '../../UI/FormControls/ControlledSecureInput';
 
 export default function Login() {
   const { handleSubmit, control } = useForm();
   const { dispatchLogin } = useReduxUserState();
   const [passwordVisible] = React.useState<boolean>(false);
-  const [mutateSignIn] = useSignInMutation();
+  const [mutateSignIn, { loading }] = useSignInMutation();
 
   const onSubmit = async (formData: FieldValues): Promise<void> => {
     await mutateSignIn({
       variables: {
         data: { email: formData.email, password: formData.password },
       },
-      onCompleted: (res) => {
+      onCompleted: async (res) => {
         dispatchLogin(res.login);
       },
       onError: (e) => console.log('error', e),
@@ -36,7 +38,7 @@ export default function Login() {
         passwordVisible={passwordVisible}
       />
       <Button onPress={handleSubmit(onSubmit)} style={styles.button}>
-        Sign In
+        {loading ? <Spinner /> : 'Login'}
       </Button>
     </Layout>
   );

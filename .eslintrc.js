@@ -17,7 +17,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
 
   parserOptions: {
-    project: './tsconfig.json',
+    ecmaVersion: 2017,
+    sourceType: 'script',
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
 
@@ -28,12 +29,10 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unsafe-argument': 'off',
-    'no-empty-function': 'off',
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['off'],
     'linebreak-style': 0,
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
+    'react/prop-types': 0,
     '@typescript-eslint/no-empty-function': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',

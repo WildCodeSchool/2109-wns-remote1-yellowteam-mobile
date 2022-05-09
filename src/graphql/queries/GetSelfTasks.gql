@@ -6,6 +6,10 @@ query GetSelfTasks($where: UserWhereUniqueInput!) {
       status_task
       description
       start_date
+      user {
+        avatar
+        id
+      }
     }
   }
 }

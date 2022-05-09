@@ -1,14 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-props-no-spreading */
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import {
   BottomNavigation,
   BottomNavigationTab,
   Icon,
+  IconProps,
 } from '@ui-kitten/components';
 
-function PersonIcon(props: unknown) {
+function PersonIcon(props: IconProps) {
   return <Icon {...props} name="home" />;
+}
+function CalendarIcon(props: IconProps) {
+  return <Icon {...props} name="calendar" />;
+}
+function NotificationIcon(props: IconProps) {
+  return <Icon {...props} name="bell-outline" />;
 }
 
 function BottomTabBar({ navigation, state }: BottomTabBarProps) {
@@ -18,6 +23,9 @@ function BottomTabBar({ navigation, state }: BottomTabBarProps) {
       onSelect={(index) => navigation.navigate(state.routeNames[index])}
     >
       <BottomNavigationTab icon={PersonIcon} title="Home" />
+      <BottomNavigationTab icon={CalendarIcon} title="Calendar" />
+      <BottomNavigationTab icon={NotificationIcon} title="Home" />
+      <BottomNavigationTab icon={NotificationIcon} title="Projects" />
     </BottomNavigation>
   );
 }
