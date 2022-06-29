@@ -12,6 +12,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppearanceProvider } from 'react-native-appearance';
 import { Platform } from 'react-native';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 import * as eva from '@eva-design/eva';
 import Constants from 'expo-constants';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
@@ -162,6 +164,10 @@ export const registerForPushNotificationsAsync = async (): Promise<
   }
 
   if (Platform.OS === 'android') {
+    if (typeof (Intl as any).__disableRegExpRestore === 'function') {
+      (Intl as any).__disableRegExpRestore();
+    }
+
     await Notifications.setNotificationChannelAsync('default', {
       name: 'default',
       importance: Notifications.AndroidImportance.MAX,
